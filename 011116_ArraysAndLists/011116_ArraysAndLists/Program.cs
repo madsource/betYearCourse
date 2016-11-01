@@ -16,23 +16,68 @@ namespace _011116_ArraysAndLists
             madList.Add("xBaba2");
             madList.Add("Baba3");
 
-            Visualize(madList);
+            VisualizeList(madList);
 
             madList.Sort();
 
-            Visualize(madList);
-        }
+            VisualizeList(madList);
 
-        static void Visualize(List<string> list)
+            // Start reading size of array
+            Console.Write("Give me size: ");
+            int size;
+            while(!int.TryParse(Console.ReadLine(), out size));
+            var ar = CreateTwoDimArray(size);
+            Console.Write("Give me coords to increment: ");
+            string[] coords = Console.ReadLine().Trim().Split(' ');
+            int coord0 = int.Parse(coords[0]);
+            int coord1 = int.Parse(coords[1]);
+            ar[coord0][coord1]++;
+            PrintTwoDimArray(ar);
+        }
+        
+        static void VisualizeList(List<string> list)
         {
-            System.Console.WriteLine("Start =========\n");
+            Console.WriteLine("Start =========\n");
 
             foreach (var l in list)
             {
                 System.Console.WriteLine(l);
             }
 
-            System.Console.WriteLine("\nEnd   =========\n");
+            Console.WriteLine("\nEnd   =========\n");
+        }
+
+        static int[][] CreateTwoDimArray(int size)
+        {
+            int[][] theArray = new int[size][];
+            int counter = 1;
+
+            for (int i = 0; i < size; i++)
+            {
+                theArray[i] = new int[size];
+                Console.WriteLine();
+
+                for (int j = 0; j < size; j++)
+                {
+                    theArray[i][j] = counter++;
+                    Console.Write(theArray[i][j] + " ");
+                }
+            }
+
+            return theArray;          
+        }
+
+        static void PrintTwoDimArray(int[][] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine();
+
+                for (int j = 0; j < array.Length; j++)
+                {
+                    Console.Write(array[i][j] + " ");
+                }
+            }
         }
     }
 }
