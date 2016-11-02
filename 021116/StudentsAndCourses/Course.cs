@@ -12,7 +12,7 @@ namespace StudentsAndCourses
         private List<Student> _students;
         private string _name;
         private int _durationInHours;
-        private int _id;
+        private static int _id = 0;
 
         public int Capacity {
             get { return _capacity; }

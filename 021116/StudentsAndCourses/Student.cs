@@ -31,6 +31,11 @@ namespace StudentsAndCourses
             _id++;
         }
 
+        public Student(string name, int age):base(name, age)
+        {
+            _id++;
+        }
+
         public override string ToString()
         {
             return base.Name;
