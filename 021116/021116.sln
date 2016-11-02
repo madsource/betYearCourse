@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "021116", "021116\021116.csproj", "{210B9A2E-1DFE-46AE-8A8A-1486913B1F48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputWordLettersCheck", "InputWordLettersCheck\InputWordLettersCheck.csproj", "{94A47B7D-BC68-435D-AC6E-68C09F15C733}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{210B9A2E-1DFE-46AE-8A8A-1486913B1F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{210B9A2E-1DFE-46AE-8A8A-1486913B1F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{210B9A2E-1DFE-46AE-8A8A-1486913B1F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{210B9A2E-1DFE-46AE-8A8A-1486913B1F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A47B7D-BC68-435D-AC6E-68C09F15C733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A47B7D-BC68-435D-AC6E-68C09F15C733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A47B7D-BC68-435D-AC6E-68C09F15C733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A47B7D-BC68-435D-AC6E-68C09F15C733}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
