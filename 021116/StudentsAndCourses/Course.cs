@@ -12,7 +12,7 @@ namespace StudentsAndCourses
         private List<Student> _students;
         private string _name;
         private int _durationInHours;
-        private static int _id = 0;
+        private static int _uniqueId = 0;
 
         public int Capacity {
             get { return _capacity; }
@@ -36,15 +36,13 @@ namespace StudentsAndCourses
             set { _durationInHours = value; }
         }
 
-        public int Id
-        {
-            get { return _id; }
-            private set { _id = value; }
-        }
+        public int Id { get; private set; }
 
         public Course()
         {
-            Id = GetNextId();
+            Id = _uniqueId++;
+            Console.WriteLine($"CourseID: {Id}");
+
             _students = new List<Student>();
         }
 
@@ -73,11 +71,6 @@ namespace StudentsAndCourses
         public override string ToString()
         {
             return _name;
-        }
-
-        private int GetNextId()
-        {
-            return _id + 1;
         }
     }
 }

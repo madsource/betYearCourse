@@ -10,7 +10,7 @@ namespace StudentsAndCourses
     class Student : Person
     {
         private Course _course;
-        private static int _id = 0;
+        private static int _uniqueId = 0;
 
         public Course Course
         {
@@ -26,19 +26,12 @@ namespace StudentsAndCourses
             }
         }
 
-        public int Id
-        {
-            get { return _id; }
-            private set
-            {
-                _id = value;
-            }
-        }
+        public int Id { get; private set; }
 
         public Student(string name, int age):base(name, age)
         {
-            Id = _id;
-            _id++;
+            Id = _uniqueId++;
+            Console.WriteLine($"StudentID: {Id}");
         }
 
         public override string ToString()
