@@ -9,8 +9,8 @@ namespace StudentsAndCourses
 {
     class Student : Person
     {
-        private int _id;
         private Course _course;
+        private static int _id = 0;
 
         public Course Course
         {
@@ -26,13 +26,18 @@ namespace StudentsAndCourses
             }
         }
 
-        public Student()
+        public int Id
         {
-            _id++;
+            get { return _id; }
+            private set
+            {
+                _id = value;
+            }
         }
 
         public Student(string name, int age):base(name, age)
         {
+            Id = _id;
             _id++;
         }
 

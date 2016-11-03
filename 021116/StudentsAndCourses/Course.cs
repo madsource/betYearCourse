@@ -39,11 +39,12 @@ namespace StudentsAndCourses
         public int Id
         {
             get { return _id; }
+            private set { _id = value; }
         }
 
         public Course()
         {
-            _id++;
+            Id = GetNextId();
             _students = new List<Student>();
         }
 
@@ -72,6 +73,11 @@ namespace StudentsAndCourses
         public override string ToString()
         {
             return _name;
+        }
+
+        private int GetNextId()
+        {
+            return _id + 1;
         }
     }
 }

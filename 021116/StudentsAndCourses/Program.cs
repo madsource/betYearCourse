@@ -13,18 +13,53 @@ namespace StudentsAndCourses
             Console.Write("Enter number of courses: ");
             int coursesCount;
             int.TryParse(Console.ReadLine(), out coursesCount);
-            List<Course> coursesList = CreateCoursesList(coursesCount);
+            CreateCoursesList(coursesCount);
 
-            Console.Write("Enter number of students: ");
+            Console.Write("\nEnter number of students: ");
             int studentsCount;
             int.TryParse(Console.ReadLine(), out studentsCount);
-            List<Student> studentsList = CreateStudentsList(studentsCount);
+            CreateStudentsList(studentsCount);
+
+            Console.WriteLine("\nPlease, assign students to courses. Format: <studentID courseId> \nTo finish write \"quit\"");
+
+            while(Console.ReadLine() != "quit")
+            {
+                string[] line = Console.ReadLine().Split(' ');
+                int studentId = int.Parse(line[0]);
+                int courseId = int.Parse(line[1]);
+                try
+                {
+                    Academy.signupStudentToCourse(studentId, courseId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }                
+            }
+
+            printAcademyInfo();
+
         }
 
-        public static List<Course> CreateCoursesList(int count)
+        public static void printAcademyInfo()
         {
-            List<Course> courses = new List<Course>();
+            List < Course > orderedCourses = Academy.Courses.OrderBy(p => p.Name).ToList();
 
+            foreach (var c in orderedCourses)
+            {
+                Console.WriteLine($"{c.Name} - {c.DurationInHours} hours");
+                List < Student > orderedStudents = c.Students.OrderBy(s => s.Age).ToList();
+
+                foreach (var s in orderedStudents)
+                {
+                    Console.WriteLine($"##{s.Name} - {s.Age} years old");
+                }
+
+            }
+        }
+
+        public static void CreateCoursesList(int count)
+        {            
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nCourse " + (i + 1) + "\n");
@@ -32,18 +67,13 @@ namespace StudentsAndCourses
                 string cName = courseInfos[0];
                 int cDuration = int.Parse(courseInfos[1]);
                 int cCapacity = int.Parse(courseInfos[2]);
-
-                Course course = new Course(cName, cDuration, cCapacity);
-                courses.Add(course);
+                
+                Academy.AddCourse(cName, cDuration, cCapacity);
             }
-
-            return courses;
         }
 
-        public static List<Student> CreateStudentsList(int count)
+        public static void CreateStudentsList(int count)
         {
-            List<Student> students = new List<Student>();
-
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nStudent " + (i + 1) + "\n");
@@ -51,11 +81,8 @@ namespace StudentsAndCourses
                 string cName = studentsInfo[0];
                 int cAge = int.Parse(studentsInfo[1]);
 
-                Student student = new Student(cName, cAge);
-                students.Add(student);
+                Academy.AddStudent(cName, cAge);
             }
-
-            return students;
         }
     }
 }

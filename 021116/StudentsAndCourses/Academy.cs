@@ -8,12 +8,76 @@ namespace StudentsAndCourses
 {
     class Academy
     {
-        public List<Course> Courses { get; set; }
-        public List<Student> Student { get; set; }
+        private static List<Course> _courses = new List<Course>();
+        private static List<Student> _students = new List<Student>();
 
-        public void signupStudentToCourse(Student student, Course course)
+        public static List<Course> Courses
         {
-            course.Students.Add(student);
+            get
+            {
+                return _courses;
+            }
+            private set
+            {
+                _courses = value;
+            }
+        }
+
+        public static List<Student> Students
+        {
+            get
+            {
+                return _students;
+            }
+            private set
+            {
+                _students = value;  
+            }
+        }
+
+        public static void signupStudentToCourse(int studentId, int courseId)
+        {
+            foreach (var c in _courses)
+            {
+                if(courseId == c.Id)
+                {                    
+                    c.Students.Add(_students.Find( s => s.Id == studentId));
+                    foreach (var s in _students)
+                    {
+                        if (studentId == s.Id)
+                        {
+                            try
+                            {                                
+                                s.Course = _courses.Find( co => co.Id == courseId);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            break;
+                        }
+                    }
+                    break;
+
+                } else
+                {
+                    throw new Exception("Not existing course!");
+                }
+            }
+        }
+
+        public static void AddCourse(string name, int duration, int capacity)
+        {
+            Course course = new Course(name, duration, capacity);
+            _courses.Add(course);
+            //course.Id = Courses.IndexOf(course);
+        }
+
+        public static void AddStudent(string name, int age)
+        {
+            Student student = new Student(name, age);
+            _students.Add(student);
+            //student.Id = Students.IndexOf(student);
         }
     }
 }
