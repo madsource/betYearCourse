@@ -9,19 +9,19 @@ namespace StudentsAndCourses
 {
     class Student : Person
     {
-        private Course _course;
-        private static int _uniqueId = 0;
+        private int _courseId;
+        private static int _id = 0;
 
-        public Course Course
+        public int CourseId
         {
-            get {  return _course; }
+            get {  return _courseId; }
             set {
-                if (_course.Equals(null))
+                if (_courseId < 0)
                 {
-                    _course = value;
+                    _courseId = value;
                 } else
                 {
-                    throw new Exception("Student is already signed up!");
+                    throw new Exception($"{this.ToString()} is already signed for course id{_courseId}!");
                 }
             }
         }
@@ -30,8 +30,9 @@ namespace StudentsAndCourses
 
         public Student(string name, int age):base(name, age)
         {
-            Id = _uniqueId++;
-            Console.WriteLine($"StudentID: {Id}");
+            _courseId = -1;
+            Id = _id++;
+            Console.WriteLine($"StudentID: {Id}\n");
         }
 
         public override string ToString()

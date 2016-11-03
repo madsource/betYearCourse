@@ -12,7 +12,7 @@ namespace StudentsAndCourses
         private List<Student> _students;
         private string _name;
         private int _durationInHours;
-        private static int _uniqueId = 0;
+        private static int _id = 0;
 
         public int Capacity {
             get { return _capacity; }
@@ -40,8 +40,8 @@ namespace StudentsAndCourses
 
         public Course()
         {
-            Id = _uniqueId++;
-            Console.WriteLine($"CourseID: {Id}");
+            Id = _id++;
+            Console.WriteLine($"CourseID: {Id}\n");
 
             _students = new List<Student>();
         }
@@ -58,14 +58,16 @@ namespace StudentsAndCourses
             _students.Add(student);
         }
 
-        public void removeStudent(Student student)
+        public void removeStudent(int studentId)
         {
+
+            var student = _students.Find(s => s.Id == studentId);
             _students.Remove(student);
         }
 
-        public bool checkStudentExists(Student student)
+        public bool checkStudentExists(int studentId)
         {
-            return _students.Exists(s => s.Name == student.Name);
+            return _students.Exists(s => s.Id == studentId);
         }
 
         public override string ToString()

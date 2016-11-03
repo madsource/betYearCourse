@@ -17,37 +17,41 @@ namespace StudentsAndCourses
             {
                 if(courseId == c.Id)
                 {
-                    Student student = Students.Find(s => s.Id == studentId);
-
-                    if (!c.checkStudentExists(student))
-                    {
-                        c.addStudent(student);
-                    }else
-                    {
-                        Console.WriteLine("This student is already in that course!");
-                    }
-
-                    // Assign course to the given student's instance
+                    // Assign course to the given Student's instance
                     foreach (var s in Students)
                     {
                         if (studentId == s.Id)
                         {
                             try
                             {                                
-                                s.Course = Courses.Find( co => co.Id == courseId);
+                                s.CourseId = courseId;
+                                if (!c.checkStudentExists(studentId))
+                                {
+                                    c.addStudent(s);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("This student is already in that course!");
+                                }
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine(ex.Message);
+                                Console.WriteLine("Error: " + ex.Message);
                             }
                             break;
+
+                        } else if (Students.FindIndex(ls => ls.Id == s.Id) == Students.Count - 1)
+                        {
+                            // last entry reached and id not found
+                            throw new Exception("Student with that id is NOT FOUND!");
                         }
                     }
                     break;
 
-                } else
+                } else if( Courses.FindIndex(lc => lc.Id == c.Id) == Courses.Count - 1 )
                 {
-                    throw new Exception("Not existing course!");
+                    // last entry reached and id not found
+                    throw new Exception("Course with that id is NOT FOUND!");
                 }
             }
         }
@@ -56,14 +60,12 @@ namespace StudentsAndCourses
         {
             Course course = new Course(name, duration, capacity);
             Courses.Add(course);
-            //course.Id = Courses.IndexOf(course);
         }
 
         public static void AddStudent(string name, int age)
         {
             Student student = new Student(name, age);
             Students.Add(student);
-            //student.Id = Students.IndexOf(student);
         }
     }
 }
