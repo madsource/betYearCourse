@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsAndCourses
+namespace StudentsAndCourses.Education
 {
     class Student : Person
     {

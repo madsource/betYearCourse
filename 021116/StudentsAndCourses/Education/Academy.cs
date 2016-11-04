@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsAndCourses
+namespace StudentsAndCourses.Education
 {
     class Academy
     {
@@ -24,7 +24,7 @@ namespace StudentsAndCourses
                         {
                             try
                             {
-                                c.addStudent(s);
+                                c.AddStudent(s);
                             }
                             catch (Exception ex)
                             {

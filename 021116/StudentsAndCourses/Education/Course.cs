@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsAndCourses
+namespace StudentsAndCourses.Education
 {
     class Course
     {
         private int _capacity;
-        private List<Student> _students;
+        private readonly List<Student> _students;
         private string _name;
         private int _durationInHours;
         private static int _id = 0;
@@ -53,11 +53,11 @@ namespace StudentsAndCourses
             _capacity = capacity;            
         }
 
-        public void addStudent(Student student)
+        public void AddStudent(Student student)
         {
             if(_students.Count() < _capacity )
             {
-                if(!checkStudentExists(student.Id))
+                if(!CheckStudentExists(student.Id))
                 {                                        
                      student.CourseId = this.Id;
                      _students.Add(student);                                         
@@ -73,14 +73,14 @@ namespace StudentsAndCourses
             }
         }
 
-        public void removeStudent(int studentId)
+        public void RemoveStudent(int studentId)
         {
 
             var student = _students.Find(s => s.Id == studentId);
             _students.Remove(student);
         }
 
-        public bool checkStudentExists(int studentId)
+        public bool CheckStudentExists(int studentId)
         {
             return _students.Exists(s => s.Id == studentId);
         }

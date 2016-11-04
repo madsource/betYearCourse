@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentsAndCourses.Education;
 
 namespace StudentsAndCourses
 {
@@ -38,11 +39,11 @@ namespace StudentsAndCourses
                 }                
             }
 
-            printAcademyInfo();
+            PrintAcademyInfo();
 
         }
 
-        public static void printAcademyInfo()
+        public static void PrintAcademyInfo()
         {
             List < Course > orderedCourses = Academy.Courses.OrderBy(c => c.Name).ToList();
 
