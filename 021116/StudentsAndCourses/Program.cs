@@ -23,7 +23,7 @@ namespace StudentsAndCourses
             while(true)
             {
                 string input = Console.ReadLine();
-                if (input.Equals("quit")) break;
+                if (input.ToLower().Equals("quit")) break;
 
                 string[] line = input.Split(new char[0]);
                 int studentId = int.TryParse(line[0], out studentId) ? studentId : -1;
@@ -59,7 +59,8 @@ namespace StudentsAndCourses
         }
 
         public static void CreateCoursesList(int count)
-        {            
+        {
+            Console.WriteLine($"\nPlease, add {count} courses. Format: <name>//<duration>//<capacity>");
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nCourse " + (i + 1) + "\n");
@@ -74,6 +75,8 @@ namespace StudentsAndCourses
 
         public static void CreateStudentsList(int count)
         {
+            Console.WriteLine($"\nPlease, add {count} students. Format: <name>//<age>");
+
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nStudent " + (i + 1) + "\n");

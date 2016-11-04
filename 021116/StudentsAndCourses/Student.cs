@@ -21,7 +21,7 @@ namespace StudentsAndCourses
                     _courseId = value;
                 } else
                 {
-                    throw new Exception($"{this.ToString()} is already signed for course id{_courseId}!");
+                    throw new Exception($"{this.ToString()} is already signed for a course with id {_courseId}!");
                 }
             }
         }

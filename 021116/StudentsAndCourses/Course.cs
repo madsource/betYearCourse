@@ -55,7 +55,22 @@ namespace StudentsAndCourses
 
         public void addStudent(Student student)
         {
-            _students.Add(student);
+            if(_students.Count() < _capacity )
+            {
+                if(!checkStudentExists(student.Id))
+                {                                        
+                     student.CourseId = this.Id;
+                     _students.Add(student);                                         
+                }
+                else
+                {
+                    throw new ArgumentException($"{student} is already in that course!");
+                }
+            }
+            else
+            {
+                throw new Exception($"{this.ToString()} is already full!");
+            }
         }
 
         public void removeStudent(int studentId)

@@ -23,16 +23,8 @@ namespace StudentsAndCourses
                         if (studentId == s.Id)
                         {
                             try
-                            {                                
-                                s.CourseId = courseId;
-                                if (!c.checkStudentExists(studentId))
-                                {
-                                    c.addStudent(s);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("This student is already in that course!");
-                                }
+                            {
+                                c.addStudent(s);
                             }
                             catch (Exception ex)
                             {
