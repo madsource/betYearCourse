@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudentsAndCourses.Education.ExceptionTypes;
+﻿using StudentsAndCourses.Education.ExceptionTypes;
 
-namespace StudentsAndCourses.Education
+namespace StudentTasksGrades.Education
 {
     class Person
     {
@@ -24,7 +19,7 @@ namespace StudentsAndCourses.Education
         public Person()
         {
             _name = "No name";
-            _age = 1;
+            _age = 0;
         }
 
         public Person(string name):this()
@@ -34,7 +29,7 @@ namespace StudentsAndCourses.Education
 
         public Person(string name, int age):this(name)
         {
-            if(age > 0)
+            if(age >= 0)
             {
                 _age = age;
 

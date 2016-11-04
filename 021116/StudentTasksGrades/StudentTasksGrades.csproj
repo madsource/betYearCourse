@@ -50,8 +50,10 @@
     <Compile Include="Education\ExceptionTypes\PersonAgeException.cs" />
     <Compile Include="Education\ExceptionTypes\StudentIsBusyException.cs" />
     <Compile Include="Education\ExceptionTypes\StudentNotFoundException.cs" />
+    <Compile Include="Education\ExceptionTypes\TaskTakenNameException.cs" />
     <Compile Include="Education\Person.cs" />
     <Compile Include="Education\Student.cs" />
+    <Compile Include="Education\AcademyTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

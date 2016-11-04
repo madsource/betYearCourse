@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentTasksGrades.Education;
 
-namespace StudentsAndCourses.Education
+namespace StudentTasksGrades.Education
 {
     class Course
     {
@@ -44,13 +45,20 @@ namespace StudentsAndCourses.Education
             Console.WriteLine($"CourseID: {Id}\n");
 
             _students = new List<Student>();
+            _name = "NoName";
+            _capacity = 0;
+            _durationInHours = 0;
         }
 
-        public Course(string name, int durationInHours, int capacity):this()
+        public Course(string name, int capacity): this()
         {
             _name = name;
+            _capacity = capacity;
+        }
+
+        public Course(string name, int durationInHours, int capacity) : this(name, capacity)
+        {
             _durationInHours = durationInHours;
-            _capacity = capacity;            
         }
 
         public void AddStudent(Student student)

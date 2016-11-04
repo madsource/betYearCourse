@@ -1,16 +1,15 @@
-﻿using StudentsAndCourses.Education.ExceptionTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentsAndCourses.Education;
+using StudentsAndCourses.Education.ExceptionTypes;
 
-namespace StudentsAndCourses.Education
+namespace StudentTasksGrades.Education
 {
     class Student : Person
     {
         private int _courseId;
         private static int _id = 0;
+        public List<AcademyTask> Tasks { get; set; }
         
         public int CourseId
         {
@@ -28,11 +27,20 @@ namespace StudentsAndCourses.Education
 
         public int Id { get; private set; }
 
-        public Student(string name, int age):base(name, age)
+        public Student()
         {
             _courseId = -1;
             Id = _id++;
             Console.WriteLine($"StudentID: {Id}\n");
+            Tasks = new List<AcademyTask>();
+        }
+
+        public Student(string name, int age) : base(name, age)
+        {
+        }
+
+        public Student(string name) : base(name)
+        {
         }
 
         public override string ToString()
@@ -40,6 +48,15 @@ namespace StudentsAndCourses.Education
             return base.Name;
         }
 
+        internal float GetTotalScore()
+        {
+            float sumOfGrades = 0;
+            Tasks.ForEach(delegate(AcademyTask task)
+            {
+                sumOfGrades += task.Grade;
+            });
 
+            return sumOfGrades / Tasks.Count;
+        }
     }
 }
