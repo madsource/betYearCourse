@@ -68,18 +68,18 @@ namespace StudentTasksGrades
             List<Student> studentsGradesList = new List<Student>();
             Dictionary<Student, float> scoreDictionary = Academy.Students.ToDictionary(s => s, s => s.GetTotalScore());
    
-            Console.WriteLine($"TOP STUDENTS: -------------\n ");
+            Console.WriteLine($"\nTOP STUDENTS: -------------\n ");
 
-            //foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value)
-            //    .Where(s => s.Value >= 95).OrderBy(s => s.Key.Name).ThenBy(s => s.Value))
-            //{
-            //    Console.WriteLine($"{stud.Key.Name} - {stud.Value}");
-            //}
-
-            foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value))
+            foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value)
+                .Where(s => s.Value >= 95).OrderBy(s => s.Key.Name).ThenBy(s => s.Value))
             {
-                Console.WriteLine($"{stud.Key.Name} - {stud.Value}%");
+                Console.WriteLine($"{stud.Key.Name} - {stud.Value}");
             }
+
+            //foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value))
+            //{
+            //    Console.WriteLine($"{stud.Key.Name} - {stud.Value}%");
+            //}
 
         }
 

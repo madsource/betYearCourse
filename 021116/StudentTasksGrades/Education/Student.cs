@@ -37,10 +37,18 @@ namespace StudentTasksGrades.Education
 
         public Student(string name, int age) : base(name, age)
         {
+            _courseId = -1;
+            Id = _id++;
+            Console.WriteLine($"StudentID: {Id}\n");
+            Tasks = new List<AcademyTask>();
         }
 
         public Student(string name) : base(name)
         {
+            _courseId = -1;
+            Id = _id++;
+            Console.WriteLine($"StudentID: {Id}\n");
+            Tasks = new List<AcademyTask>();
         }
 
         public override string ToString()
