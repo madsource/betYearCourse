@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Education\Academy.cs" />
+    <Compile Include="Education\AcademyHelper\AcademyHelper.cs" />
     <Compile Include="Education\Course.cs" />
     <Compile Include="Education\Person.cs" />
     <Compile Include="Program.cs" />
