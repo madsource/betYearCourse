@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentsAndCourses.Education.ExceptionTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,10 @@ namespace StudentsAndCourses.Education
                             {
                                 c.AddStudent(s);
                             }
+                            catch (StudentIsBusyException e)
+                            {
+                                Console.WriteLine("Student is busy: " + e.Message);
+                            }
                             catch (Exception ex)
                             {
                                 Console.WriteLine("Error: " + ex.Message);
@@ -35,7 +40,7 @@ namespace StudentsAndCourses.Education
                         } else if (Students.FindIndex(ls => ls.Id == s.Id) == Students.Count - 1)
                         {
                             // last entry reached and id not found
-                            throw new Exception("Student with that id is NOT FOUND!");
+                            throw new StudentNotFoundException("Wrong student id!");
                         }
                     }
                     break;
@@ -43,7 +48,7 @@ namespace StudentsAndCourses.Education
                 } else if( Courses.FindIndex(lc => lc.Id == c.Id) == Courses.Count - 1 )
                 {
                     // last entry reached and id not found
-                    throw new Exception("Course with that id is NOT FOUND!");
+                    throw new CourseNotFoundException("Wrong course id!");
                 }
             }
         }
@@ -55,9 +60,9 @@ namespace StudentsAndCourses.Education
         }
 
         public static void AddStudent(string name, int age)
-        {
+        {          
             Student student = new Student(name, age);
-            Students.Add(student);
+            Students.Add(student);                 
         }
     }
 }

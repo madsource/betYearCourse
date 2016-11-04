@@ -1,4 +1,4 @@
-﻿using PersonTask;
+﻿using StudentsAndCourses.Education.ExceptionTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace StudentsAndCourses.Education
                     _courseId = value;
                 } else
                 {
-                    throw new Exception($"{this.ToString()} is already signed for a course with id {_courseId}!");
+                    throw new StudentIsBusyException($"{this.ToString()} is already signed for a course with id {_courseId}!");
                 }
             }
         }

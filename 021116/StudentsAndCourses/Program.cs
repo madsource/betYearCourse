@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StudentsAndCourses.Education;
+using StudentsAndCourses.Education.ExceptionTypes;
 
 namespace StudentsAndCourses
 {
@@ -19,9 +20,10 @@ namespace StudentsAndCourses
             int studentsCount = int.TryParse(Console.ReadLine(), out studentsCount) ? studentsCount : 0;
             CreateStudentsList(studentsCount);
 
-            Console.WriteLine("\nPlease, assign students to courses. Format: <studentID courseId> \nTo finish write \"quit\"");
-            
-            while(true)
+            Console.WriteLine(
+                "\nPlease, assign students to courses. Format: <studentID courseId> \nTo finish write \"quit\"");
+
+            while (true)
             {
                 string input = Console.ReadLine();
                 if (input.ToLower().Equals("quit")) break;
@@ -33,10 +35,18 @@ namespace StudentsAndCourses
                 {
                     Academy.signupStudentToCourse(studentId, courseId);
                 }
+                catch (StudentNotFoundException se)
+                {
+                    Console.WriteLine("Student not found: " + se.Message);
+                }
+                catch (CourseNotFoundException ce)
+                {
+                    Console.WriteLine("Course not found: " + ce.Message);
+                }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                }                
+                }
             }
 
             PrintAcademyInfo();
@@ -45,18 +55,18 @@ namespace StudentsAndCourses
 
         public static void PrintAcademyInfo()
         {
-            List < Course > orderedCourses = Academy.Courses.OrderBy(c => c.Name).ToList();
+            List<Course> orderedCourses = Academy.Courses.OrderBy(c => c.Name).ToList();
 
             foreach (var c in orderedCourses)
             {
                 Console.WriteLine($"\n---{c.Name} - {c.DurationInHours} hours");
-                List < Student > orderedStudents = c.Students.OrderBy(s => s.Age).ToList();
+                List<Student> orderedStudents = c.Students.OrderBy(s => s.Age).ToList();
 
                 foreach (var s in orderedStudents)
                 {
                     Console.WriteLine($"## {s.Name} - {s.Age} years old");
-                }                
-            }            
+                }
+            }
         }
 
         public static void CreateCoursesList(int count)
@@ -65,11 +75,11 @@ namespace StudentsAndCourses
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nCourse " + (i + 1) + "\n");
-                string[] courseInfos = Console.ReadLine().Split(new string[] { "//" }, StringSplitOptions.None);
+                string[] courseInfos = Console.ReadLine().Split(new string[] {"//"}, StringSplitOptions.None);
                 string cName = courseInfos[0];
                 int cDuration = int.TryParse(courseInfos[1], out cDuration) ? cDuration : 0;
                 int cCapacity = int.TryParse(courseInfos[2], out cCapacity) ? cCapacity : 0;
-                
+
                 Academy.AddCourse(cName, cDuration, cCapacity);
             }
         }
@@ -81,11 +91,19 @@ namespace StudentsAndCourses
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nStudent " + (i + 1) + "\n");
-                string[] studentsInfo = Console.ReadLine().Split(new string[] { "//" }, StringSplitOptions.None);
+                string[] studentsInfo = Console.ReadLine().Split(new string[] {"//"}, StringSplitOptions.None);
                 string sName = studentsInfo[0];
-                int sAge = int.TryParse(studentsInfo[1], out sAge) ? sAge: 0;
+                int sAge = int.TryParse(studentsInfo[1], out sAge) ? sAge : 0;
 
-                Academy.AddStudent(sName, sAge);
+                try
+                {
+                    Academy.AddStudent(sName, sAge);
+                }
+                catch (PersonAgeException pe)
+                {
+                    Console.WriteLine(pe.Message);
+                    i--;
+                } 
             }
         }
     }

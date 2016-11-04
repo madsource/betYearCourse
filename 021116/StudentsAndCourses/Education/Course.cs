@@ -75,7 +75,6 @@ namespace StudentsAndCourses.Education
 
         public void RemoveStudent(int studentId)
         {
-
             var student = _students.Find(s => s.Id == studentId);
             _students.Remove(student);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentsAndCourses.Education.ExceptionTypes;
 
 namespace StudentsAndCourses.Education
 {
@@ -39,7 +40,7 @@ namespace StudentsAndCourses.Education
 
             } else
             {
-                throw new FormatException("Age of person can not be negative!");
+                throw new PersonAgeException("Age of person can not be negative!");
             }
         }
     }

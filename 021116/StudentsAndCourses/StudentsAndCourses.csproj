@@ -46,6 +46,10 @@
     <Compile Include="Education\Academy.cs" />
     <Compile Include="Education\AcademyHelper\AcademyHelper.cs" />
     <Compile Include="Education\Course.cs" />
+    <Compile Include="Education\ExceptionTypes\CourseNotFoundException.cs" />
+    <Compile Include="Education\ExceptionTypes\PersonAgeException.cs" />
+    <Compile Include="Education\ExceptionTypes\StudentIsBusyException.cs" />
+    <Compile Include="Education\ExceptionTypes\StudentNotFoundException.cs" />
     <Compile Include="Education\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
