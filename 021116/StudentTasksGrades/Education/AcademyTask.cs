@@ -11,9 +11,9 @@ namespace StudentTasksGrades.Education
     {
         private static readonly List<string> TakenNames = new List<string>();
 
-        public float Grade { get; set; }
+        public float Score { get; private set; }
         public string Name { get; set; }
-        public DateTime AddedOn { get; set; }
+        public DateTime AddedOn { get; private set; }
 
         public AcademyTask()
         {
@@ -21,7 +21,7 @@ namespace StudentTasksGrades.Education
             AddedOn = DateTime.Now;
         }
 
-        public AcademyTask(string name, float grade) : this()
+        public AcademyTask(string name, float score) : this()
         {
             if (!TakenNames.Contains(name))
             {
@@ -33,7 +33,7 @@ namespace StudentTasksGrades.Education
                 throw new TaskTakenNameException($"\"{name}\" is taken name!");
             }
 
-            Grade = grade;
+            Score = score;
         }
     }
 

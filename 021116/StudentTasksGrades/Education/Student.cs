@@ -61,7 +61,7 @@ namespace StudentTasksGrades.Education
             float sumOfGrades = 0;
             Tasks.ForEach(delegate(AcademyTask task)
             {
-                sumOfGrades += task.Grade;
+                sumOfGrades += task.Score;
             });
 
             return sumOfGrades / Tasks.Count;

@@ -30,7 +30,13 @@ namespace StudentTasksGrades.Education
                             }
                             catch (StudentIsBusyException e)
                             {
-                                Console.WriteLine("Student is busy: " + e.Message);
+                                //Console.WriteLine("Student is busy: " + e.Message);
+                                throw new AcademySignupException($"Student is busy: {e.Message}", e);
+
+                            } catch (CourseFullException ce)
+                            {
+                                //Console.WriteLine($"{ce.Message} Try again with different course.");
+                                throw new AcademySignupException($"{ce.Message} Try again with different course.", ce);
                             }
                             catch (Exception ex)
                             {
@@ -79,14 +85,20 @@ namespace StudentTasksGrades.Education
             return student.Id;
         }
 
-        internal static void AddTaskToStudent(int courseId, int studentId, AcademyTask task)
+        internal static void AddTaskToStudent(int courseId, int studentId, string taskName, float score)
         {
             var student = Students.Find(s => s.Id == studentId);
             var course = Courses.Find(c => c.Id == courseId);
 
+            if (student == null)
+                throw new StudentNotFoundException($"Student with id {studentId} is not found.");
+
+            if (course == null)
+                throw new CourseNotFoundException($"Course id {courseId} is not found.");
+
             if (student.CourseId == courseId)
             {
-                student.Tasks.Add(task);
+                student.Tasks.Add(new AcademyTask(taskName, score));
             }
             else
             {

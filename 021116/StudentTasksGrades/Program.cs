@@ -26,37 +26,53 @@ namespace StudentTasksGrades
             Console.WriteLine(
                 "\nPlease, add tasks to students. Format: <studentId> <courseId> <taskName>//<score> \nTo finish write \"quit\"");
 
+            Regex pattern = new Regex(@"^\d+\s\d+\s(\w|\-)+\/\/(\d{1,2}|\d{1,2}[.,]\d{1,2}|100)$");
+
             while (true)
             {
                 string input = Console.ReadLine();
 
                 if (input.ToLower().Equals("quit")) break;
                 
-                string pattern = @"(\s)|(\//)";
-                string[] line = Regex.Split(input, pattern);
+                if (pattern.IsMatch(input))
+                {
+                    string splitPattern = @"(\s)|(\//)";
+                    string[] line = Regex.Split(input, splitPattern);
 
-                int studentId = int.TryParse(line[0], out studentId) ? studentId : -1;
-                int courseId = int.TryParse(line[2], out courseId) ? courseId : -1;
+                    int studentId = int.TryParse(line[0], out studentId) ? studentId : -1;
+                    int courseId = int.TryParse(line[2], out courseId) ? courseId : -1;
 
-                string taskName = line[4];
-                float taskGrade = float.Parse(line[6]);
+                    string taskName = line[4];
+
+                    double taskGrade;
+                    if (Double.TryParse(line[6], out taskGrade))
+                    {
+                        try
+                        {
+                            Academy.AddTaskToStudent(courseId, studentId, taskName, (float)taskGrade);
+                        }
+                        catch (StudentNotFoundException se)
+                        {
+                            Console.WriteLine("Student not found: " + se.Message);
+                        }
+                        catch (CourseNotFoundException ce)
+                        {
+                            Console.WriteLine("Course not found: " + ce.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    } else
+                    {
+                        Console.WriteLine("Wrong score input! Try again.");
+                    }                
+                    
+                } else
+                {
+                    Console.WriteLine("Invalid format! Please, try again.");
+                }
                 
-                try
-                {
-                    Academy.AddTaskToStudent(courseId, studentId, new AcademyTask(taskName, taskGrade));
-                }
-                catch (StudentNotFoundException se)
-                {
-                    Console.WriteLine("Student not found: " + se.Message);
-                }
-                catch (CourseNotFoundException ce)
-                {
-                    Console.WriteLine("Course not found: " + ce.Message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
             }
 
             PrintAcademyInfo();
@@ -70,10 +86,10 @@ namespace StudentTasksGrades
    
             Console.WriteLine($"\nTOP STUDENTS: -------------\n ");
 
-            foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value)
+            foreach (var rec in scoreDictionary.OrderByDescending(r => r.Value)
                 .Where(s => s.Value >= 95).OrderBy(s => s.Key.Name).ThenBy(s => s.Value))
             {
-                Console.WriteLine($"{stud.Key.Name} - {stud.Value}");
+                Console.WriteLine($"{rec.Key.Name} - {rec.Value}");
             }
 
             //foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value))
@@ -86,38 +102,86 @@ namespace StudentTasksGrades
         public static void CreateCoursesList(int count)
         {
             Console.WriteLine($"\nPlease, add {count} courses. Format: <name>//<capacity>");
-            for (int i = 0; i < count; i++)
-            {
-                Console.Write("\nCourse " + (i + 1) + "\n");
-                string[] courseInfos = Console.ReadLine().Split(new string[] { "//" }, StringSplitOptions.None);
-                string cName = courseInfos[0];
-                int cCapacity = int.TryParse(courseInfos[1], out cCapacity) ? cCapacity : 0;
+            Regex pattern = new Regex(@"^[\w\-\#]+\/\/\d{1,5}$");
 
-                Academy.AddCourse(cName, cCapacity);
+            for (int i = 0; i < count; i++)
+            {                                                
+                Console.Write("\nCourse " + (i + 1) + "\n");
+                var input = Console.ReadLine();
+
+                if (pattern.IsMatch(input))
+                {
+                    string[] courseInfos = input.Split(new string[] { "//" }, StringSplitOptions.None);
+                    string cName = courseInfos[0];
+                    int cCapacity = int.TryParse(courseInfos[1], out cCapacity) ? cCapacity : 0;
+
+                    Academy.AddCourse(cName, cCapacity);
+                } else
+                {
+                    Console.WriteLine("Wrong format! Please, try again.");
+                    i--;
+                }                
+                
             }
         }
 
         public static void CreateStudentsList(int count)
         {
             Console.WriteLine($"\nPlease, subscribe {count} students to courses. Format: <student name>//<course id>");
+            Regex pattern = new Regex(@"^[A-Za-z\-\s]+\/\/\d+$");
 
             for (int i = 0; i < count; i++)
             {
                 Console.Write("\nStudent " + (i + 1) + "\n");
-                string[] studentsInfo = Console.ReadLine().Split(new string[] { "//" }, StringSplitOptions.None);
-                string sName = studentsInfo[0];
-                int courseId = int.TryParse(studentsInfo[1], out courseId) ? courseId : 0;
+                var input = Console.ReadLine();
 
-                try
+                if(pattern.IsMatch(input))
                 {
-                    var studentId = Academy.AddStudent(sName);
-                    Academy.SignupStudentToCourse(studentId, courseId);
-                }
-                catch (PersonAgeException pe)
+                    string[] studentsInfo = input.Split(new string[] { "//" }, StringSplitOptions.None);
+                    string sName = studentsInfo[0];
+                    int courseId = int.TryParse(studentsInfo[1], out courseId) ? courseId : 0;
+
+                    try
+                    {
+                        if(Academy.Courses.Exists(c => c.Id == courseId))
+                        {
+                            var studentId = Academy.AddStudent(sName);
+                            try
+                            {
+                                Academy.SignupStudentToCourse(studentId, courseId);
+                            }
+                            catch (AcademySignupException ae)
+                            {
+
+                                Console.WriteLine(ae.Message);
+                                if(ae.InnerException is CourseFullException || ae.InnerException is StudentIsBusyException)
+                                {
+                                    i--;
+                                }
+                            }
+                            
+                        } else
+                        {
+                            Console.WriteLine("Enter a valid course id!");
+                            i--;
+                        }                       
+                        
+                    }
+                    catch (PersonAgeException pe)
+                    {
+                        Console.WriteLine(pe.Message);
+                        i--;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        i--;
+                    }
+                } else
                 {
-                    Console.WriteLine(pe.Message);
+                    Console.WriteLine("Wrong format! Please, try again.");
                     i--;
-                }
+                }                
             }
         }
     }

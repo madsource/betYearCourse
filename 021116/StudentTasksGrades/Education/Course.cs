@@ -77,7 +77,7 @@ namespace StudentTasksGrades.Education
             }
             else
             {
-                throw new Exception($"{this.ToString()} is already full!");
+                throw new CourseFullException($"{this.ToString()} is already full!");
             }
         }
 

@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Education\Academy.cs" />
     <Compile Include="Education\AcademyHelper\AcademyHelper.cs" />
+    <Compile Include="Education\ExceptionTypes\AcademySignupException.cs" />
     <Compile Include="Education\Course.cs" />
+    <Compile Include="Education\ExceptionTypes\CourseFullException.cs" />
     <Compile Include="Education\ExceptionTypes\CourseNotFoundException.cs" />
     <Compile Include="Education\ExceptionTypes\PersonAgeException.cs" />
     <Compile Include="Education\ExceptionTypes\StudentIsBusyException.cs" />
