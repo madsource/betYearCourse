@@ -25,7 +25,7 @@ namespace PolymorphicVehicles
         {
             // Every truck has a hole in the tank :D
             FuelInLitres += litres * 0.95f;
-            Console.WriteLine($"Truck has been refueled. It has {FuelInLitres} now!");
+            Console.WriteLine($"Truck has been refueled. It has {FuelInLitres} now!\n");
         }
     }
 }
