@@ -1,10 +1,6 @@
 ﻿using StudentsAndCourses.Education.ExceptionTypes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StudentTasksGrades.Education;
 
 namespace StudentTasksGrades.Education
 {
@@ -30,12 +26,10 @@ namespace StudentTasksGrades.Education
                             }
                             catch (StudentIsBusyException e)
                             {
-                                //Console.WriteLine("Student is busy: " + e.Message);
                                 throw new AcademySignupException($"Student is busy: {e.Message}", e);
 
                             } catch (CourseFullException ce)
                             {
-                                //Console.WriteLine($"{ce.Message} Try again with different course.");
                                 throw new AcademySignupException($"{ce.Message} Try again with different course.", ce);
                             }
                             catch (Exception ex)

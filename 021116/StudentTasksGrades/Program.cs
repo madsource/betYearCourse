@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using StudentsAndCourses.Education;
 using StudentsAndCourses.Education.ExceptionTypes;
 using StudentTasksGrades.Education;
-using StudentTasksGrades.Education;
+using StudentsAndCourses.Education.AcademyHelper;
 
 namespace StudentTasksGrades
 {
@@ -81,21 +76,20 @@ namespace StudentTasksGrades
 
         public static void PrintAcademyInfo()
         {
-            List<Student> studentsGradesList = new List<Student>();
-            Dictionary<Student, float> scoreDictionary = Academy.Students.ToDictionary(s => s, s => s.GetTotalScore());
-   
-            Console.WriteLine($"\nTOP STUDENTS: -------------\n ");
+         
+            Console.WriteLine($"\nTOP STUDENTS (score >= 95%) : -------------\n ");
 
-            foreach (var rec in scoreDictionary.OrderByDescending(r => r.Value)
-                .Where(s => s.Value >= 95).OrderBy(s => s.Key.Name).ThenBy(s => s.Value))
+            foreach (var rec in AcademyHelper.GetTopStudents())
             {
                 Console.WriteLine($"{rec.Key.Name} - {rec.Value}");
             }
 
-            //foreach (var stud in scoreDictionary.OrderByDescending(s => s.Value))
-            //{
-            //    Console.WriteLine($"{stud.Key.Name} - {stud.Value}%");
-            //}
+            Console.WriteLine($"\nTOP COURSES (score >= 95%) : -------------\n ");
+
+            foreach (var course in AcademyHelper.GetTopCourses(3))
+            {
+                Console.WriteLine($"{course.Name}");
+            }
 
         }
 
