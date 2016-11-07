@@ -11,11 +11,12 @@ namespace SortingArrays
     {
         public BubleSorter(int[] array, ILogger logger):base(array, logger)
         {
-            
+            SortType = SortType.Buble;
         }
         internal override int[] SortArray()
         {
-            throw new NotImplementedException();
+            Logger.WriteLine($"\ninfo :: Sorted by {SortType} sorter.\n");
+            return null;
         }
     }
 }

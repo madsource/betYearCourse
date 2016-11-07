@@ -13,6 +13,8 @@ namespace SortingArrays
         public int[] SortedArray { get; set; }
         public ILogger Logger { get; set; }
 
+        public SortType SortType { get; protected set; }
+
         public Sorter(int[] array, ILogger logger)
         {
             this.UnsortedArray = array;

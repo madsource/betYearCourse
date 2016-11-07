@@ -11,7 +11,9 @@ namespace SortingArrays
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter number of elements: ");
+            ILogger logger = new ConsoleLogger();
+
+            logger.Write("Enter number of elements: ");
             int count = int.Parse(Console.ReadLine());
 
             
@@ -19,12 +21,43 @@ namespace SortingArrays
 
             for (int i = 0; i < count; i++)
             {
-                Console.Write($"Enter element {i}: ");
+                logger.Write($"Enter element {i}: ");
                 array[i] = int.Parse(Console.ReadLine().Trim());
             }
 
-            ILogger logger = new ConsoleLogger();
-            Sorter sorter = new LinqSort(array, logger);
+            Console.Write("\nEnter sort type: ");
+            string sortTypeInput = Console.ReadLine().ToLower();
+
+            Sorter sorter = null;
+            var sortType = SortType.Selection;
+
+            switch (sortTypeInput)
+            {
+                case "selection":
+                    sortType = SortType.Selection;
+                    break;
+                case "buble":
+                    sortType = SortType.Buble;
+                    break;
+                case "linq":
+                    sortType = SortType.Linq;
+                    break;
+                default: break;
+            }
+
+            switch (sortType)
+            {
+                case SortType.Selection:
+                    sorter = new SelectionSorter(array, logger);
+                    break;
+                case SortType.Buble:
+                    sorter = new BubleSorter(array, logger);
+                    break;
+                case SortType.Linq:
+                    sorter = new LinqSort(array, logger);
+                    break;
+                default: break;
+            }
 
             var sortedArray = sorter.SortArray();
 

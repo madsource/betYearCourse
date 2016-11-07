@@ -12,7 +12,7 @@ namespace SortingArrays
 
         public SelectionSorter(int[] array, ILogger logger) : base(array, logger)
         {
-
+            SortType = SortType.Selection;
         }
 
         internal override int[] SortArray()
@@ -38,6 +38,7 @@ namespace SortingArrays
             }
 
             Logger.WriteLine($"Sorted at: {DateTime.Now}" );
+            Logger.WriteLine($"\ninfo :: Sorted by {SortType} sorter.\n");
 
             return sortedArray;
         }
