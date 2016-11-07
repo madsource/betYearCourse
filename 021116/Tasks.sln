@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolymorphicVehicles", "Poly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingArrays", "SortingArrays\SortingArrays.csproj", "{719EF071-0231-4F3A-B4AF-D404725CCF76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delegates", "Delegates\Delegates.csproj", "{8E034923-A76B-4224-AB35-80BE7946A34C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{719EF071-0231-4F3A-B4AF-D404725CCF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719EF071-0231-4F3A-B4AF-D404725CCF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719EF071-0231-4F3A-B4AF-D404725CCF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E034923-A76B-4224-AB35-80BE7946A34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E034923-A76B-4224-AB35-80BE7946A34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E034923-A76B-4224-AB35-80BE7946A34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E034923-A76B-4224-AB35-80BE7946A34C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

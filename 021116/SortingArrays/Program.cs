@@ -27,8 +27,7 @@ namespace SortingArrays
 
             Console.Write("\nEnter sort type: ");
             string sortTypeInput = Console.ReadLine().ToLower();
-
-            Sorter sorter = null;
+            
             var sortType = SortType.Selection;
 
             switch (sortTypeInput)
@@ -45,19 +44,7 @@ namespace SortingArrays
                 default: break;
             }
 
-            switch (sortType)
-            {
-                case SortType.Selection:
-                    sorter = new SelectionSorter(array, logger);
-                    break;
-                case SortType.Buble:
-                    sorter = new BubleSorter(array, logger);
-                    break;
-                case SortType.Linq:
-                    sorter = new LinqSort(array, logger);
-                    break;
-                default: break;
-            }
+            Sorter sorter = SortingFactory.Create(sortType, array, logger);
 
             var sortedArray = sorter.SortArray();
 
