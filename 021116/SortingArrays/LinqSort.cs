@@ -7,15 +7,15 @@ using SortingArrays.Contracts;
 
 namespace SortingArrays
 {
-    class BubleSorter : Sorter
+    class LinqSort : Sorter
     {
-        public BubleSorter(int[] array, ILogger logger):base(array, logger)
+        public LinqSort(int[] array, ILogger logger) : base(array, logger)
         {
-            
         }
+
         internal override int[] SortArray()
         {
-            throw new NotImplementedException();
+            return this.UnsortedArray.OrderBy(x => x).ToArray();
         }
     }
 }

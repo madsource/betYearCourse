@@ -7,15 +7,16 @@ using SortingArrays.Contracts;
 
 namespace SortingArrays
 {
-    class BubleSorter : Sorter
+    class ConsoleLogger : ILogger
     {
-        public BubleSorter(int[] array, ILogger logger):base(array, logger)
+        public void Write(string text)
         {
-            
+            Console.Write(text);
         }
-        internal override int[] SortArray()
+
+        public void WriteLine(string text)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(text);
         }
     }
 }
