@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Delegates
 {
-    public  enum OperationTypes
+    public enum OperationTypes
     {
         substract,
         add,
         multiply,
-        devide
+        divide
     }
 }

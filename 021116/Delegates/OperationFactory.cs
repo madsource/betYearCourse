@@ -26,7 +26,7 @@ namespace Delegates
                     execOperations = Multiply;
                     break;
                 case OperationTypes.devide:
-                    execOperations = Devide;
+                    execOperations = Divide;
                     break;
                 default:
                     execOperations = Add;
@@ -51,7 +51,7 @@ namespace Delegates
             return x * y;
         }
 
-        public static float Devide(int x, int y)
+        public static float Divide(int x, int y)
         {
             return (float)x / y;
         }

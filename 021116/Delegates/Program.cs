@@ -33,7 +33,7 @@ namespace Delegates
                     operation = OperationTypes.multiply;
                     break;
                 case "/":
-                    operation = OperationTypes.devide;
+                    operation = OperationTypes.divide;
                     break;
                 default:
                     operation = OperationTypes.add;
