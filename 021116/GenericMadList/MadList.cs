@@ -6,49 +6,49 @@ using System.Threading.Tasks;
 
 namespace GenericMadList
 {
-    class MadList
+    class MadList<T> where T : struct
     {
-        private string[] array;
-        private static int currentIndex;
+        private T[] array;
+        private int currentIndex;
 
-        public event ChangeDelegate OnAdd;
-        public event ChangeDelegate OnRemove;
+        public event Action OnAddEvent;
+        public event Action OnRemoveEvent;
 
         public MadList()
         {
-            array = new string[2];
+            array = new T[2];
             currentIndex = 0;
-            OnAdd += showAddInfo;
-            OnRemove += showRemoveInfo;
+            OnAddEvent += showAddInfo;
+            OnRemoveEvent += showRemoveInfo;
         }
 
-        public MadList(ChangeDelegate onAdd, ChangeDelegate onRemove) : this()
+        public MadList(Action onAddEvent, Action onRemoveEvent) : this()
         {
-            OnAdd += onAdd;
-            OnRemove += onRemove;
+            OnAddEvent += onAddEvent;
+            OnRemoveEvent += onRemoveEvent;
         }
 
-        public void Add(string element)
+        public void Add(T element)
         {
             if (currentIndex >= array.Length)
             {
-                var doubledArray = new string[currentIndex*2];
+                var doubledArray = new T[currentIndex*2];
                 array.CopyTo(doubledArray, 0);
                 this.array = doubledArray;
             }
             
             array[currentIndex] = element;
             currentIndex++;
-            this.OnAdd(this, new ChangeDelegateArgs());
+            this.OnAddEvent?.Invoke();
         }
 
-        public void Remove(string element)
+        public void Remove(T element)
         {
             int elementIndex = Array.IndexOf(array, element);
             
             if (elementIndex > 0)
             {
-                var newArray = new string[array.Length - 1];
+                var newArray = new T[array.Length - 1];
                 int index = 0;
                 for (int i = 0; i < array.Length; i++)
                 {
@@ -66,25 +66,25 @@ namespace GenericMadList
                 }
             }
 
-            this.OnRemove(this, new ChangeDelegateArgs());
+            this.OnRemoveEvent?.Invoke();
         }
 
-        public bool Contains(string element)
+        public bool Contains(T element)
         {
             return Array.IndexOf(array, element) != -1;
         }
 
-        public string GetElementAt(int index)
+        public T GetElementAt(int index)
         {
             return array[index];
         }
 
-        static void showAddInfo(object sender, ChangeDelegateArgs args)
+        static void showAddInfo()
         {
             Console.WriteLine("\nAdded");
         }
 
-        static void showRemoveInfo(object sender, ChangeDelegateArgs args)
+        static void showRemoveInfo()
         {
             Console.WriteLine("\nRemoved");
         }

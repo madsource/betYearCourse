@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadListTask", "MadListTask\MadListTask.csproj", "{E9C4B4FD-CE56-401F-A8AB-0D6A616886A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMadList", "GenericMadList\GenericMadList.csproj", "{9DB360FD-3474-4314-954B-E7058AA70FB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{E9C4B4FD-CE56-401F-A8AB-0D6A616886A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C4B4FD-CE56-401F-A8AB-0D6A616886A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C4B4FD-CE56-401F-A8AB-0D6A616886A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
