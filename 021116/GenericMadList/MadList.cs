@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenericMadList
 {
-    class MadList<T> where T : struct
+    class MadList<T> : IEnumerable<T> where T : struct
     {
         private T[] array;
         private int currentIndex;
@@ -26,6 +27,12 @@ namespace GenericMadList
         {
             OnAddEvent += onAddEvent;
             OnRemoveEvent += onRemoveEvent;
+        }
+        // Indexer
+        public T this[int index]
+        {
+            get { return this.GetElementAt(index); }
+            set { this.SetElementAt(index, value); }
         }
 
         public void Add(T element)
@@ -76,7 +83,20 @@ namespace GenericMadList
 
         public T GetElementAt(int index)
         {
-            return array[index];
+            CheckIndexValid(index);
+            return this.array[index];
+        }
+
+        public void SetElementAt(int index, T value)
+        {
+            CheckIndexValid(index);
+            this.array[index] = value;
+        }
+
+        private void CheckIndexValid(int index)
+        {
+            if (index >= this.currentIndex || index < 0)
+                throw new IndexOutOfRangeException();
         }
 
         static void showAddInfo()
@@ -87,6 +107,20 @@ namespace GenericMadList
         static void showRemoveInfo()
         {
             Console.WriteLine("\nRemoved");
+        }
+
+        // yield - only for enumerators. Return without ending in foreach.
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                yield return array[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 

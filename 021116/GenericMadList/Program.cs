@@ -15,6 +15,8 @@ namespace GenericMadList
 
             list.Add(666);
             list.Add(999);
+            list.Add(888);
+            list.Add(777);
             //list.Add("Qga");
             //list.Add("Dqdo");
             //list.Add("Qg");
@@ -24,6 +26,10 @@ namespace GenericMadList
             Console.WriteLine(list.Contains(7));
             Console.WriteLine(list.Contains(666));
 
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
