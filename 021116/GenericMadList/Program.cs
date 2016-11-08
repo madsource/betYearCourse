@@ -21,7 +21,12 @@ namespace GenericMadList
             //list.Add("Dqdo");
             //list.Add("Qg");
 
-            list.Remove(999);
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            list.Remove2(999);
 
             Console.WriteLine(list.Contains(7));
             Console.WriteLine(list.Contains(666));

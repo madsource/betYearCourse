@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenericMadList
 {
-    class MadList<T> : IEnumerable<T> where T : struct
+    class MadList<T> : IEnumerable<T> where T : struct, IComparable<T>
     {
         private T[] array;
         private int currentIndex;
@@ -62,7 +62,6 @@ namespace GenericMadList
                     if (i != elementIndex)
                     {
                         newArray[index] = array[i];
-                        Console.Write(newArray[index] + " ");
                         index++;
                     }
                     else
@@ -70,6 +69,30 @@ namespace GenericMadList
                         index = i - 1;
                         continue;
                     }
+                }
+            }
+
+            this.OnRemoveEvent?.Invoke();
+        }
+
+        public void Remove2(T element)
+        {
+            bool isRemoved = false;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (isRemoved)
+                {
+                    var temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+
+                if (array[i].CompareTo(element) == 0)
+                {
+                    isRemoved = true;
+                    currentIndex--;
+                    array[i] = default(T); // Sets default value of the given type. e.g. Int = 0
                 }
             }
 
