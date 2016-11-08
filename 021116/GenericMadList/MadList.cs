@@ -135,7 +135,7 @@ namespace GenericMadList
         // yield - only for enumerators. Return without ending in foreach.
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < currentIndex; i++)
             {
                 yield return array[i];
             }
