@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueuesAndStacks", "QueuesAn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "Files\Files.csproj", "{E7A572EF-41EA-4744-9F77-45798D1328FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlStudents", "XmlStudents\XmlStudents.csproj", "{17B8243B-AA61-4270-8E5A-FB51D047C19B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17B8243B-AA61-4270-8E5A-FB51D047C19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17B8243B-AA61-4270-8E5A-FB51D047C19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17B8243B-AA61-4270-8E5A-FB51D047C19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17B8243B-AA61-4270-8E5A-FB51D047C19B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
