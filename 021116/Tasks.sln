@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMadList", "GenericMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionaries", "Dictionaries\Dictionaries.csproj", "{E8E1ECA4-ADEA-4B43-9139-959D981F912F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashSets", "HashSets\HashSets.csproj", "{A176D16E-3861-4F47-80DD-606460BD5734}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A176D16E-3861-4F47-80DD-606460BD5734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A176D16E-3861-4F47-80DD-606460BD5734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A176D16E-3861-4F47-80DD-606460BD5734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A176D16E-3861-4F47-80DD-606460BD5734}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
