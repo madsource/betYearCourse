@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortedSets", "SortedSets\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueuesAndStacks", "QueuesAndStacks\QueuesAndStacks.csproj", "{11638527-BCFA-4E45-8B3A-8A75FD5855EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "Files\Files.csproj", "{E7A572EF-41EA-4744-9F77-45798D1328FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{11638527-BCFA-4E45-8B3A-8A75FD5855EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11638527-BCFA-4E45-8B3A-8A75FD5855EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11638527-BCFA-4E45-8B3A-8A75FD5855EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A572EF-41EA-4744-9F77-45798D1328FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
