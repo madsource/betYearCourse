@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadListTask", "MadListTask\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMadList", "GenericMadList\GenericMadList.csproj", "{9DB360FD-3474-4314-954B-E7058AA70FB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionaries", "Dictionaries\Dictionaries.csproj", "{E8E1ECA4-ADEA-4B43-9139-959D981F912F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB360FD-3474-4314-954B-E7058AA70FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E1ECA4-ADEA-4B43-9139-959D981F912F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
