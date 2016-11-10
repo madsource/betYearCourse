@@ -69,6 +69,7 @@ namespace Dictionaries
                     }
                 }
 
+
                 using (writer)
                 {
                     foreach (var i in wordsDictionary.OrderByDescending(x => x.Value))
