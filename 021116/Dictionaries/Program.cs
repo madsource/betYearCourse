@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,30 +30,55 @@ namespace Dictionaries
             //    Console.WriteLine(student.Value);
             //}
 
-            Console.WriteLine("Enter big text: ");
-            string text = Console.ReadLine();
+            //Console.WriteLine("Enter big text: ");
+            //string text = Console.ReadLine();
 
-            char[] separators = {',', ' ', '.', '!', '?', ';'};
+            //Read write from file
+            string filePathSource = "../../words.txt";
 
-            string[] textArray = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-
-            Dictionary<string, int> wordsDictionary = new Dictionary<string, int>();
-
-            foreach (var s in textArray)
+            if (!File.Exists(filePathSource))
             {
-                if (!wordsDictionary.ContainsKey(s))
-                {
-                    wordsDictionary.Add(s, 1);
-                }
-                else
-                {
-                    wordsDictionary[s]++;
-                }
+                Console.WriteLine("Source file words.txt does not exist!");
             }
-
-            foreach (var i in wordsDictionary)
+            else
             {
-                Console.WriteLine($"{i.Key} - {i.Value} times.");
+                StreamReader reader = new StreamReader(filePathSource);
+                StreamWriter writer = new StreamWriter("../../wordsCount.txt");
+                string text;
+
+                using (reader)
+                {
+                    text = reader.ReadToEnd();
+                }
+
+                char[] separators = { ',', ' ', '.', '!', '?', ';', '\r', '\n', '\t' };
+
+                string[] textArray = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                Dictionary<string, int> wordsDictionary = new Dictionary<string, int>();
+
+                foreach (var s in textArray)
+                {
+                    if (!wordsDictionary.ContainsKey(s))
+                    {
+                        wordsDictionary.Add(s, 1);
+                    }
+                    else
+                    {
+                        wordsDictionary[s]++;
+                    }
+                }
+
+                using (writer)
+                {
+                    foreach (var i in wordsDictionary.OrderByDescending(x => x.Value))
+                    {
+                        //Console.WriteLine($"{i.Key} - {i.Value} times.");
+                        writer.WriteLine($"{i.Key} - {i.Value} times.");
+                    }
+
+                    Console.WriteLine("File: wordsCount.txt is created!");
+                }
             }
         }
     }
