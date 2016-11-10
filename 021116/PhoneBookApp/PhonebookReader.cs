@@ -11,14 +11,12 @@ namespace PhoneBookApp
     class PhonebookReader : IPhoneBookReader
     {
         private StreamReader _reader;
-        private int nextLine;
 
         public string FilePath { get; set; }
 
         public PhonebookReader(string filePath)
         {
             this._reader = new StreamReader(filePath);
-            this.nextLine = 0;
         }
 
         public List<Person> ReadRecords()
@@ -48,7 +46,14 @@ namespace PhoneBookApp
 
         public Person CreatePerson(string personLine)
         {
-            throw new NotImplementedException();
+            string[] personInfo = personLine.Split('|');
+
+            string name = personInfo[0].Trim();
+            string city = personInfo[1].Trim();
+            string phone = personInfo[2].Trim();
+
+            Person person = new Person(name, city, phone);
+            return person;
         }
     }
 }
