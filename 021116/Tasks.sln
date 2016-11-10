@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCasino.Models", "GameCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookApp", "PhoneBookApp\PhoneBookApp.csproj", "{C2B10BD5-ACBE-4B5E-A866-8100BEA70F4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCasino.Tests", "GameCasino.Tests\GameCasino.Tests.csproj", "{B0DB3DDE-4271-48D6-8B43-7039EAE0A85F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{C2B10BD5-ACBE-4B5E-A866-8100BEA70F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B10BD5-ACBE-4B5E-A866-8100BEA70F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2B10BD5-ACBE-4B5E-A866-8100BEA70F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DB3DDE-4271-48D6-8B43-7039EAE0A85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DB3DDE-4271-48D6-8B43-7039EAE0A85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DB3DDE-4271-48D6-8B43-7039EAE0A85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DB3DDE-4271-48D6-8B43-7039EAE0A85F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

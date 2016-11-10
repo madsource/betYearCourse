@@ -25,7 +25,7 @@ namespace Delegates
                 case OperationTypes.multiply:
                     execOperations = Multiply;
                     break;
-                case OperationTypes.devide:
+                case OperationTypes.divide:
                     execOperations = Divide;
                     break;
                 default:
