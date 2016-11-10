@@ -35,10 +35,12 @@ namespace PhoneBookApp
             else
             {
                 PhonebookReader reader = new PhonebookReader("../../phonebook.txt");
+                List<Person> contacts = reader.ReadRecords();
 
-                foreach (var person in book)
+                foreach (var person in contacts)
                 {
                     Console.WriteLine(person);
+                    book.Add(person);
                 }
             }
         }

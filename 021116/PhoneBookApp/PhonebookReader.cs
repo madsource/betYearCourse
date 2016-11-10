@@ -17,6 +17,7 @@ namespace PhoneBookApp
         public PhonebookReader(string filePath)
         {
             this._reader = new StreamReader(filePath);
+            this.FilePath = filePath;
         }
 
         public List<Person> ReadRecords()
