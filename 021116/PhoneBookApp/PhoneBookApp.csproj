@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands.cs" />
+    <Compile Include="ICommandReader.cs" />
+    <Compile Include="PhonebookCommand.cs" />
+    <Compile Include="PhonebookCommandReader.cs" />
     <Compile Include="PhonebookReader.cs" />
     <Compile Include="Contracts\IPhoneBookReader.cs" />
     <Compile Include="PhoneBook.cs" />

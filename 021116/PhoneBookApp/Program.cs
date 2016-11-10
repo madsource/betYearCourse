@@ -42,6 +42,20 @@ namespace PhoneBookApp
                     Console.WriteLine(person);
                     book.Add(person);
                 }
+
+                PhonebookCommandReader commandReader = new PhonebookCommandReader("../../commands.txt");
+
+                List<PhonebookCommand> commands = commandReader.GetCommands();
+
+                foreach (var phonebookCommand in commands)
+                {
+                    Console.WriteLine($"\n\nCommand: {phonebookCommand.CommandType}:");
+                    for (int i = 0; i < phonebookCommand.Arguments.Length; i++)
+                    {
+                        Console.WriteLine($"\n - argument{i}: {phonebookCommand.Arguments[i]}");
+                    }
+                    
+                }
             }
         }
     }

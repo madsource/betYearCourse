@@ -29,7 +29,7 @@ namespace PhoneBookApp
             {
                 text = _reader.ReadToEnd();
 
-                string[] lines = text.Split(new char[] {'\n', '\r'});
+                string[] lines = text.Split(new char[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var line in lines)
                 {
