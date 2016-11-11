@@ -54,7 +54,40 @@ namespace PhoneBookApp
                     {
                         Console.WriteLine($"\n - argument{i}: {phonebookCommand.Arguments[i]}");
                     }
-                    
+
+                    if (phonebookCommand.CommandType == Commands.Serialize)
+                    {
+                        string name = phonebookCommand.Arguments[0];
+                        string fileName = phonebookCommand.Arguments[1];
+                        string serializationType = phonebookCommand.Arguments[2];
+
+
+                        Serializator serializator;
+
+                        switch (serializationType.ToLower())
+                        {
+                            case "json": serializator = new JsonSerializator(fileName); break;
+                            case "xml": serializator = new XmlSerializator(fileName); break;
+                            default: serializator = new JsonSerializator(fileName); break;
+                        }
+
+                        List<Person> personsFound = contacts.Where(p => p.Name == name).ToList();
+                        serializator.Serialize(personsFound);
+
+                        StreamReader jsonReader = new StreamReader(fileName);
+
+                        using (jsonReader)
+                        {
+                            string json = jsonReader.ReadToEnd().Trim();
+                            List<Person> newList = serializator.Deserialize(json);
+
+                            foreach (var person in newList)
+                            {
+                                Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
+                            }
+                        }
+                        
+                    }
                 }
             }
         }

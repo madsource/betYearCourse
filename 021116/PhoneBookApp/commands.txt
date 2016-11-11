@@ -1,6 +1,3 @@
-find("Ivan")
-serialize("Ivo", ivo.json, "json")
-
-serialize("Ivan", ivo.xml, "xml")
-
-add("Bobo", "Sofia", "08568755252")
+find(Ivan)
+serialize(Kireto, kireto.json, json)
+add(Bobo, Sofia, 08568755252)

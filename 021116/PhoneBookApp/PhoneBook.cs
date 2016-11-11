@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace PhoneBookApp
 {
@@ -40,7 +42,32 @@ namespace PhoneBookApp
         {
             return this.PersonsList[index];
         }
-        
+
+        public Person FindPerson(string name)
+        {
+            return this.PersonsList.Find(p => p.Name == name);
+        }
+
+        public Person FindPerson(string name, string city)
+        {
+            return this.PersonsList.Find(p => p.Name == name && p.CityName == city);
+        }
+
+        //public string SerializeJson()
+        //{
+        //    return JsonConvert.SerializeObject(this);
+        //}
+
+        //public Person DeserializeJson(string json)
+        //{
+        //    return JsonConvert.DeserializeObject(json) as Person;
+        //}
+
+        //public string SerializeXml()
+        //{
+        //    XmlSerializer xmlSerializer = new XmlSerializer(this.GetType());
+        //}
+
         public IEnumerator<Person> GetEnumerator()
         {
             for (int i = 0; i < this.PersonsList.Count; i++)
@@ -91,5 +118,6 @@ namespace PhoneBookApp
         {
             return String.Format(this.Name);
         }
+
     }
 }
