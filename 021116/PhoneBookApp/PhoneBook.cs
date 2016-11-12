@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using PhoneBookApp.Contracts;
+using PhoneBookApp;
 
 namespace PhoneBookApp
 {
@@ -53,19 +55,14 @@ namespace PhoneBookApp
             return this.PersonsList.Find(p => p.Name == name && p.CityName == city);
         }
 
-        //public string SerializeJson()
-        //{
-        //    return JsonConvert.SerializeObject(this);
-        //}
+        public void Serialize(Serializator<PhoneBook> serializer, IWriter writer)
+        {
+            serializer.Serialize(writer, this);
+        }
 
         //public Person DeserializeJson(string json)
         //{
         //    return JsonConvert.DeserializeObject(json) as Person;
-        //}
-
-        //public string SerializeXml()
-        //{
-        //    XmlSerializer xmlSerializer = new XmlSerializer(this.GetType());
         //}
 
         public IEnumerator<Person> GetEnumerator()

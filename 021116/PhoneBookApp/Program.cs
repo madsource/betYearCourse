@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PhoneBookApp;
+using PhoneBookApp.Contracts;
+using PhoneBookApp.Readers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -61,32 +64,29 @@ namespace PhoneBookApp
                         string fileName = phonebookCommand.Arguments[1];
                         string serializationType = phonebookCommand.Arguments[2];
 
+                        FileWriter writer = new FileWriter(fileName);                        
 
-                        Serializator serializator;
+                        Serializator<List<Person>> serializator;
 
                         switch (serializationType.ToLower())
                         {
-                            case "json": serializator = new JsonSerializator(fileName); break;
-                            case "xml": serializator = new XmlSerializator(fileName); break;
-                            default: serializator = new JsonSerializator(fileName); break;
+                            case "json": serializator = new JsonSerializator<List<Person>>(); break;
+                            case "xml": serializator = new XmlSerializator<List<Person>>(); break;
+                            default: serializator = new JsonSerializator<List<Person>>(); break;
                         }
 
                         List<Person> personsFound = contacts.Where(p => p.Name == name).ToList();
-                        serializator.Serialize(personsFound);
+                        serializator.Serialize(writer, personsFound);
 
-                        StreamReader jsonReader = new StreamReader(fileName);
 
-                        using (jsonReader)
+                        FileReader fileReader = new FileReader(fileName);
+                        List<Person> newList = serializator.Deserialize(fileReader);
+
+                        foreach (var person in newList)
                         {
-                            string json = jsonReader.ReadToEnd().Trim();
-                            List<Person> newList = serializator.Deserialize(json);
-
-                            foreach (var person in newList)
-                            {
-                                Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
-                            }
+                            Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
                         }
-                        
+
                     }
                 }
             }
