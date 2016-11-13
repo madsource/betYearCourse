@@ -59,8 +59,8 @@
     <Compile Include="Contracts\ISerializator.cs" />
     <Compile Include="Contracts\ICommandReader.cs" />
     <Compile Include="Command\PhonebookCommand.cs" />
-    <Compile Include="Readers\PhonebookCommandReader.cs" />
-    <Compile Include="Readers\PhonebookReader.cs" />
+    <Compile Include="Readers\PhonebookCommandFileReader.cs" />
+    <Compile Include="Readers\PhonebookFileReader.cs" />
     <Compile Include="Contracts\IPhoneBookReader.cs" />
     <Compile Include="PhoneBook.cs" />
     <Compile Include="Person.cs" />

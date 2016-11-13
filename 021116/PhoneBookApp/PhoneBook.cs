@@ -47,23 +47,18 @@ namespace PhoneBookApp
 
         public Person FindPerson(string name)
         {
-            return this.PersonsList.Find(p => p.Name == name);
+            return this.PersonsList.Find(p => p.Name.ToLower() == name.ToLower());
         }
 
         public Person FindPerson(string name, string city)
         {
-            return this.PersonsList.Find(p => p.Name == name && p.CityName == city);
+            return this.PersonsList.Find(p => p.Name.ToLower() == name.ToLower() && p.CityName.ToLower() == city.ToLower());
         }
 
         public void Serialize(Serializator<PhoneBook> serializer, IWriter writer)
         {
             serializer.Serialize(writer, this);
         }
-
-        //public Person DeserializeJson(string json)
-        //{
-        //    return JsonConvert.DeserializeObject(json) as Person;
-        //}
 
         public IEnumerator<Person> GetEnumerator()
         {
@@ -87,7 +82,25 @@ namespace PhoneBookApp
             else
             {
                 this.PersonsList.Add(item);
+                TakenPhonesSet.Add(item.PhoneNumber);                
+            }
+        }
+
+        public void AddToFile(Person item, FileWriter writer)
+        {
+            if (TakenPhonesSet.Contains(item.PhoneNumber))
+            {
+                Console.WriteLine($"Person with phone number: {item.PhoneNumber} already exists in {this}");
+            }
+            else
+            {
+                this.PersonsList.Add(item);
                 TakenPhonesSet.Add(item.PhoneNumber);
+
+                using (writer)
+                {
+                    writer.WriteLine(String.Format($"{item.Name} | {item.CityName} | {item.PhoneNumber}"));
+                }
             }
         }
 

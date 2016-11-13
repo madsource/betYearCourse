@@ -13,10 +13,8 @@ namespace PhoneBookApp
         private StreamWriter writer;
 
         public FileWriter(string filePath)
-        {
-            
-            writer = new StreamWriter(filePath);
-           
+        {            
+            writer = new StreamWriter(filePath, true, Encoding.UTF8);           
         }
 
         public void Dispose()

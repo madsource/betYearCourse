@@ -31,23 +31,27 @@ namespace PhoneBookApp
             //Person p5 = new Person("Krasi", "Sofia", "08884575566");
             //book.Add(p5);
 
-            if (!File.Exists("../../phonebook.txt"))
+            if (!File.Exists("../../book.txt"))
             {
                 Console.WriteLine("No file phonebook.txt found!");
             }
             else
             {
-                PhonebookReader reader = new PhonebookReader("../../phonebook.txt");
-                List<Person> contacts = reader.ReadRecords();
+                PhonebookFileReader reader = new PhonebookFileReader("../../book.txt");
+
+                List<Person> contacts;
+                using (reader)
+                {
+                    contacts = reader.ReadRecords();                    
+                }
 
                 foreach (var person in contacts)
                 {
                     Console.WriteLine(person);
                     book.Add(person);
                 }
-
-                PhonebookCommandReader commandReader = new PhonebookCommandReader("../../commands.txt");
-
+                        
+                PhonebookCommandFileReader commandReader = new PhonebookCommandFileReader("../../commands.txt");
                 List<PhonebookCommand> commands = commandReader.GetCommands();
 
                 foreach (var phonebookCommand in commands)
@@ -78,7 +82,6 @@ namespace PhoneBookApp
                         List<Person> personsFound = contacts.Where(p => p.Name == name).ToList();
                         serializator.Serialize(writer, personsFound);
 
-
                         FileReader fileReader = new FileReader(fileName);
                         List<Person> newList = serializator.Deserialize(fileReader);
 
@@ -87,6 +90,35 @@ namespace PhoneBookApp
                             Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
                         }
 
+                    } else if(phonebookCommand.CommandType == Commands.add)
+                    {
+                        var writer = new FileWriter("../../book.txt");
+                        book.AddToFile(
+                            new Person(
+                                phonebookCommand.Arguments[0].Trim(),
+                                phonebookCommand.Arguments[1].Trim(),
+                                phonebookCommand.Arguments[2].Trim()
+                                ),
+                            writer
+                            );
+
+                    } else if(phonebookCommand.CommandType == Commands.Find)
+                    {
+                        Person person = null;
+
+                        if (phonebookCommand.Arguments.Length == 2)
+                        {
+                            person = book.FindPerson(phonebookCommand.Arguments[0], phonebookCommand.Arguments[1]);
+                        } else
+                        {
+                            person = book.FindPerson(phonebookCommand.Arguments[0]);
+                        }
+                        
+                        if(person != null)
+                        {
+                            var consoleWriter = new ConsoleWriter();
+                            consoleWriter.WriteLine(String.Format($"{person.Id} : {person.Name}, {person.CityName}, {person.PhoneNumber}"));
+                        }
                     }
                 }
             }

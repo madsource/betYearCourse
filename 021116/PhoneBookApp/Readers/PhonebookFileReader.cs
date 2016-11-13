@@ -5,29 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PhoneBookApp.Contracts;
+using PhoneBookApp.Readers;
 
 namespace PhoneBookApp
 {
-    class PhonebookReader : IPhoneBookReader
+    class PhonebookFileReader : FileReader, IPhoneBookReader
     {
-        private StreamReader _reader;
+        public string FilePath { get; private set; }
 
-        public string FilePath { get; set; }
-
-        public PhonebookReader(string filePath)
+        public PhonebookFileReader(string filePath):base(filePath)
         {
-            this._reader = new StreamReader(filePath);
             this.FilePath = filePath;
         }
 
         public List<Person> ReadRecords()
         {
-            List<Person> persons = new List<Person>();
-            string text;
+            List<Person> persons = new List<Person>();            
 
-            using (_reader)
+            using (this.reader)
             {
-                text = _reader.ReadToEnd();
+                string text = this.reader.ReadToEnd();
 
                 string[] lines = text.Split(new char[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
 
@@ -40,9 +37,10 @@ namespace PhoneBookApp
                         persons.Add(person);
                     }
                 }
-            }
 
-            return persons;
+                this.reader.Close();
+                return persons;
+            }            
         }
 
         public Person CreatePerson(string personLine)

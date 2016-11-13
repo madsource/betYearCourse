@@ -17,12 +17,12 @@ namespace PhoneBookApp
                 using (writer as FileWriter)
                 {
                     writer.WriteLine(JsonConvert.SerializeObject(obj));
-                    writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
+                    //writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
                 }
             } else
             {
                 writer.WriteLine(JsonConvert.SerializeObject(obj));
-                writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
+                //writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
             }
             
         }

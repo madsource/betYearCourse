@@ -1,16 +1,12 @@
 ﻿using PhoneBookApp.Contracts;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBookApp.Readers
 {
     public class FileReader : IReader, IDisposable
     {
-        private StreamReader reader;
+        protected StreamReader reader;
 
         public FileReader(string filePath)
         {
