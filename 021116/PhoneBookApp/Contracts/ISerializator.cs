@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBookApp.Contracts
 {
-    interface ISerializator<T>
+    public interface ISerializator<T>
     {
-        void Serialize(IWriter writer, T obj);
-        T Deserialize(IReader reader);
+        void Serialize(IDisposable writer, T obj);
+        T Deserialize(IDisposable reader);
     }
 }

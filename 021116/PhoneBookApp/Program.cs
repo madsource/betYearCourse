@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace PhoneBookApp
 {
@@ -33,6 +34,7 @@ namespace PhoneBookApp
 
             if (!File.Exists("../../book.txt"))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No file phonebook.txt found!");
             }
             else
@@ -42,7 +44,7 @@ namespace PhoneBookApp
                 List<Person> contacts;
                 using (reader)
                 {
-                    contacts = reader.ReadRecords();                    
+                    contacts = reader.ReadRecords();
                 }
 
                 foreach (var person in contacts)
@@ -50,7 +52,7 @@ namespace PhoneBookApp
                     Console.WriteLine(person);
                     book.Add(person);
                 }
-                        
+
                 PhonebookCommandFileReader commandReader = new PhonebookCommandFileReader("../../commands.txt");
                 List<PhonebookCommand> commands = commandReader.GetCommands();
 
@@ -68,32 +70,60 @@ namespace PhoneBookApp
                         string fileName = phonebookCommand.Arguments[1];
                         string serializationType = phonebookCommand.Arguments[2];
 
-                        FileWriter writer = new FileWriter(fileName);                        
+                        IDisposable writer = null;
+                        ISerializator<List<Person>> serializator;
 
-                        Serializator<List<Person>> serializator;
 
                         switch (serializationType.ToLower())
                         {
-                            case "json": serializator = new JsonSerializator<List<Person>>(); break;
-                            case "xml": serializator = new XmlSerializator<List<Person>>(); break;
-                            default: serializator = new JsonSerializator<List<Person>>(); break;
+                            case "json": serializator = new JsonSerializator<List<Person>>(); writer = new FileWriter(fileName); break;
+                            case "xml": serializator = new XmlSerializator<List<Person>>(); writer = XmlWriter.Create(fileName); break;
+                            default: serializator = new JsonSerializator<List<Person>>(); writer = new FileWriter(fileName);  break;
                         }
 
-                        List<Person> personsFound = contacts.Where(p => p.Name == name).ToList();
-                        serializator.Serialize(writer, personsFound);
 
-                        FileReader fileReader = new FileReader(fileName);
-                        List<Person> newList = serializator.Deserialize(fileReader);
+                        List<Person> personsFound = book.FindAllPersons(name);
 
-                        foreach (var person in newList)
+                        if (personsFound.Count > 0)
                         {
-                            Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
+                            using (writer)
+                            {
+                                serializator.Serialize(writer, personsFound);
+                            }
+                            IDisposable fileReader = null;
+
+                            if(serializationType.ToLower() == "json")
+                            {
+                                fileReader = new FileReader(fileName);
+                            } else
+                            {
+                                fileReader = XmlReader.Create(fileName);
+                            }
+
+                            List<Person> newList = serializator.Deserialize(fileReader);
+
+                            foreach (var person in newList)
+                            {
+
+                                Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
+                            }
+
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"No person with name \"{name}\" found!");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
 
-                    } else if(phonebookCommand.CommandType == Commands.add)
+
+                    }
+                    else if (phonebookCommand.CommandType == Commands.add)
                     {
                         var writer = new FileWriter("../../book.txt");
-                        book.AddToFile(
+                        using (writer)
+                        {
+                            book.AddToFile(
                             new Person(
                                 phonebookCommand.Arguments[0].Trim(),
                                 phonebookCommand.Arguments[1].Trim(),
@@ -101,23 +131,28 @@ namespace PhoneBookApp
                                 ),
                             writer
                             );
+                        }
 
-                    } else if(phonebookCommand.CommandType == Commands.Find)
+                    }
+                    else if (phonebookCommand.CommandType == Commands.Find)
                     {
                         Person person = null;
 
                         if (phonebookCommand.Arguments.Length == 2)
                         {
                             person = book.FindPerson(phonebookCommand.Arguments[0], phonebookCommand.Arguments[1]);
-                        } else
+                        }
+                        else
                         {
                             person = book.FindPerson(phonebookCommand.Arguments[0]);
                         }
-                        
-                        if(person != null)
+
+                        if (person != null)
                         {
                             var consoleWriter = new ConsoleWriter();
+                            Console.ForegroundColor = ConsoleColor.Green;
                             consoleWriter.WriteLine(String.Format($"{person.Id} : {person.Name}, {person.CityName}, {person.PhoneNumber}"));
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
                 }

@@ -54,7 +54,6 @@
     <Compile Include="Writers\FileWriter.cs" />
     <Compile Include="Serializators\JsonSerializator.cs" />
     <Compile Include="Serializators\SerializationType.cs" />
-    <Compile Include="Serializators\Serializator.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Contracts\ISerializator.cs" />
     <Compile Include="Contracts\ICommandReader.cs" />

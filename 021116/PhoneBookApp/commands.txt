@@ -1,6 +1,7 @@
 find(Kireto)
 find(Mimi Shmatkata, Plovdiv)
-serialize(Kireto, kireto.json, json)
+serialize(Kireto, ../../kireto.json, json)
+serialize(Mimi Shmatkata, ../../mimi.xml, xml)
 add(Bobo1, Sofia, 08568755252)
 add(Bobo2, Sofia, 08568755254)
 add(Bobo3, Sofia, 08568755251)

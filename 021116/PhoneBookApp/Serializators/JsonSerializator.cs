@@ -8,26 +8,26 @@ using System;
 
 namespace PhoneBookApp
 {
-    public class JsonSerializator<T> : Serializator<T>
+    public class JsonSerializator<T> : ISerializator<T>
     {      
-        public override void Serialize(IWriter writer, T obj)
+        public void Serialize(IDisposable writer, T obj)
         {
             if(writer is FileWriter)
             {
                 using (writer as FileWriter)
                 {
-                    writer.WriteLine(JsonConvert.SerializeObject(obj));
+                    ((FileWriter)writer).WriteLine(JsonConvert.SerializeObject(obj));
                     //writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
                 }
             } else
             {
-                writer.WriteLine(JsonConvert.SerializeObject(obj));
+                ((FileWriter)writer).WriteLine(JsonConvert.SerializeObject(obj));
                 //writer.WriteLine(string.Format($"Serialized on: {DateTime.Now}"));
             }
             
         }
 
-        public override T Deserialize(IReader reader)
+        public T Deserialize(IDisposable reader)
         {
             string json;
             using (reader as FileReader)

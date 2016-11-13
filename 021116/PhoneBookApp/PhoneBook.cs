@@ -55,9 +55,14 @@ namespace PhoneBookApp
             return this.PersonsList.Find(p => p.Name.ToLower() == name.ToLower() && p.CityName.ToLower() == city.ToLower());
         }
 
-        public void Serialize(Serializator<PhoneBook> serializer, IWriter writer)
+        public List<Person> FindAllPersons(string name)
         {
-            serializer.Serialize(writer, this);
+            return this.PersonsList.FindAll(p => p.Name.ToLower() == name.ToLower()).ToList();
+        }
+
+        public void Serialize(ISerializator<PhoneBook> serializer, IWriter writer)
+        {
+            serializer.Serialize(writer as FileWriter, this);
         }
 
         public IEnumerator<Person> GetEnumerator()

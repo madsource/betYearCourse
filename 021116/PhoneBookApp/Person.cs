@@ -14,12 +14,16 @@ namespace PhoneBookApp
         public string CityName { get; set; }
         public string PhoneNumber { get; set; }
 
-        public Person(string name, string cityName, string phoneNumber)
+        public Person()
+        {
+            this.Id = _nextId++;
+        }
+
+        public Person(string name, string cityName, string phoneNumber):this()
         {
             this.Name = name;
             this.CityName = cityName;
             this.PhoneNumber = phoneNumber;
-            this.Id = _nextId++;
         }
 
         public override string ToString()

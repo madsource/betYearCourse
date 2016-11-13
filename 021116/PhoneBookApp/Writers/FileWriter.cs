@@ -8,13 +8,21 @@ using System.Threading.Tasks;
 
 namespace PhoneBookApp
 {
-    public class FileWriter : IWriter, IDisposable
+    public class FileWriter : TextWriter, IWriter, IDisposable
     {
         private StreamWriter writer;
 
         public FileWriter(string filePath)
         {            
-            writer = new StreamWriter(filePath, true, Encoding.UTF8);           
+            writer = new StreamWriter(filePath, true, Encoding.UTF8);
+        }
+
+        public override Encoding Encoding
+        {
+            get
+            {
+                return this.writer.Encoding;
+            }
         }
 
         public void Dispose()
