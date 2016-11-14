@@ -18,9 +18,9 @@ namespace PhoneDirectory
             this.FilePath = filePath;
         }
 
-        public List<Person> ReadRecords()
+        public List<IEntity> ReadRecords()
         {
-            List<Person> persons = new List<Person>();            
+            List<IEntity> persons = new List<IEntity>();            
 
             using (this.reader)
             {
@@ -30,11 +30,11 @@ namespace PhoneDirectory
 
                 foreach (var line in lines)
                 {
-                    Person person = CreatePerson(line);
+                    IEntity entity = CreatePerson(line);
 
-                    if (person != null)
+                    if (entity != null)
                     {
-                        persons.Add(person);
+                        persons.Add(entity);
                     }
                 }
 
@@ -43,7 +43,7 @@ namespace PhoneDirectory
             }            
         }
 
-        public Person CreatePerson(string personLine)
+        public IEntity CreatePerson(string personLine)
         {
             string[] personInfo = personLine.Split('|');
 
@@ -51,8 +51,8 @@ namespace PhoneDirectory
             string city = personInfo[1].Trim();
             string phone = personInfo[2].Trim();
 
-            Person person = new Person(name, city, phone);
-            return person;
+            IEntity entity = new IEntity(name, city, phone);
+            return entity;
         }
     }
 }

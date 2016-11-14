@@ -1,6 +1,4 @@
-﻿using PhoneBookApp;
-using PhoneBookApp.Contracts;
-using PhoneBookApp.Readers;
+﻿using PhoneDirectory;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using PhoneDirectory.Contracts;
+using PhoneDirectory.Readers;
 
-namespace PhoneBookApp
+namespace PhoneDirectory
 {
     class Program
     {

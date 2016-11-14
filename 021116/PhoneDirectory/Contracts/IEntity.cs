@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace PhoneDirectory.Contracts
 {
-    public interface IWriter
+    public interface IEntity
     {
-        void Write(string text);
-        void WriteLine(string text);
+        string Name { get; set; }
+        string CityName { get; set; }
+        string PhoneNumber { get; set; }
+
+        string ToString();
     }
 }

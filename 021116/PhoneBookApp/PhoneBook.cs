@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using PhoneBookApp.Contracts;
-using PhoneBookApp;
+using PhoneDirectory;
+using PhoneDirectory.Contracts;
 
-namespace PhoneBookApp
+namespace PhoneDirectory
 {
     public class PhoneBook : ICollection<Person>
     {
@@ -67,10 +67,7 @@ namespace PhoneBookApp
 
         public IEnumerator<Person> GetEnumerator()
         {
-            for (int i = 0; i < this.PersonsList.Count; i++)
-            {
-                yield return PersonsList[i];
-            }
+            return this.PersonsList.Select((t, i) => PersonsList[i]).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

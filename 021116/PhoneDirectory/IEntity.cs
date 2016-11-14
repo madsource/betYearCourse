@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhoneDirectory.Contracts;
 
 namespace PhoneDirectory
 {
-    public class Person
+    public class IEntity : Contracts.IEntity
     {
         private static int _nextId = 0;
         public int Id { get; set; }
@@ -14,12 +15,12 @@ namespace PhoneDirectory
         public string CityName { get; set; }
         public string PhoneNumber { get; set; }
 
-        public Person()
+        public IEntity()
         {
             this.Id = _nextId++;
         }
 
-        public Person(string name, string cityName, string phoneNumber):this()
+        public IEntity(string name, string cityName, string phoneNumber):this()
         {
             this.Name = name;
             this.CityName = cityName;

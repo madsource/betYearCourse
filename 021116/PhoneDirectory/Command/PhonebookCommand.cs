@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace PhoneDirectory
 {
-    public class PhonebookCommand
+    public abstract class PhonebookCommand
     {
-        public Commands CommandType { get; set; }
         public string[] Arguments { get; set; }
 
-        public PhonebookCommand(Commands commandType, string[] arguments)
+        public PhonebookCommand(string[] arguments)
         {
-            this.CommandType = commandType;
             this.Arguments = arguments;
         }
     }

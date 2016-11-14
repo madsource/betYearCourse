@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using PhoneDirectory.Command;
 using PhoneDirectory.Readers;
 
 namespace PhoneDirectory
@@ -27,7 +28,7 @@ namespace PhoneDirectory
 
                 foreach (var line in lines)
                 {
-                    PhonebookCommand command = ReadCommand(line);
+                    var command = ReadCommand(line);
                     commands.Add(command);
                 }
 
@@ -50,15 +51,17 @@ namespace PhoneDirectory
 
             Commands type;
 
+            PhonebookCommand command = null;
+
             switch (commandType)
             {
-                case "find": type = Commands.Find; break;
-                case "serialize": type = Commands.Serialize; break;
-                case "add": type = Commands.add; break;
-                default: type = Commands.Find; break;
+                case "find": type = Commands.Find; command = new FindCommand(args); break;
+                case "serialize": type = Commands.Serialize; command = new SerializeCommand(args); break;
+                case "add": type = Commands.add; command = new AddCommand(args); break;
+                default: type = Commands.Find; command = new FindCommand(args); break;
             }
 
-            return new PhonebookCommand(type, args);
+            return command;
 
         }
     }
