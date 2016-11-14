@@ -13,29 +13,33 @@ namespace PhoneDirectory.Command
         {
         }
 
-        public void Add(IEntity item, PhoneBook book)
+        public void Add(IEntity item, PhoneBook<IEntity> book)
         {
-            if (PhoneBook.TakenPhonesSet.Contains(item.PhoneNumber))
+            if (PhoneBook<IEntity>.TakenPhonesSet.Contains(item))
             {
-                Console.WriteLine($"IEntity with phone number: {item.PhoneNumber} already exists in {book}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{item.Name} with phone number: {item.PhoneNumber} already exists in {book}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
                 book.EntitiesList.Add(item);
-                PhoneBook.TakenPhonesSet.Add(item.PhoneNumber);
+                PhoneBook<IEntity>.TakenPhonesSet.Add(item);
             }
         }
 
-        public void AddToFile(IEntity item, FileWriter writer, PhoneBook book)
+        public void AddToFile(IEntity item, FileWriter writer, PhoneBook<IEntity> book)
         {
-            if (PhoneBook.TakenPhonesSet.Contains(item.PhoneNumber))
+            if (PhoneBook<IEntity>.TakenPhonesSet.Contains(item))
             {
-                Console.WriteLine($"IEntity with phone number: {item.PhoneNumber} already exists in {book}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{item.Name} with phone number: {item.PhoneNumber} already exists in {book}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
                 book.EntitiesList.Add(item);
-                PhoneBook.TakenPhonesSet.Add(item.PhoneNumber);
+                PhoneBook<IEntity>.TakenPhonesSet.Add(item);
 
                 using (writer)
                 {

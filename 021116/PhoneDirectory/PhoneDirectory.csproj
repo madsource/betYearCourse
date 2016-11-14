@@ -60,6 +60,7 @@
     <Compile Include="Contracts\IWriter.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="PhoneBook.cs" />
+    <Compile Include="PhonebookEntityComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\FileReader.cs" />

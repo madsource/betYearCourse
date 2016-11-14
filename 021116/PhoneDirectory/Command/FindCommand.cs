@@ -13,17 +13,17 @@ namespace PhoneDirectory.Command
            
         }
 
-        public IEntity FindEntity(string name, PhoneBook book)
+        public IEntity FindEntity(string name, PhoneBook<IEntity> book)
         {
             return book.EntitiesList.Find(p => p.Name.ToLower() == name.ToLower());
         }
 
-        public IEntity FindEntity(string name, string city, PhoneBook book)
+        public IEntity FindEntity(string name, string city, PhoneBook<IEntity> book)
         {
             return book.EntitiesList.Find(p => p.Name.ToLower() == name.ToLower() && p.CityName.ToLower() == city.ToLower());
         }
 
-        public List<IEntity> FindAllEntities(string name, PhoneBook book)
+        public List<IEntity> FindAllEntities(string name, PhoneBook<IEntity> book)
         {
             return book.EntitiesList.FindAll(p => p.Name.ToLower() == name.ToLower()).ToList();
         }

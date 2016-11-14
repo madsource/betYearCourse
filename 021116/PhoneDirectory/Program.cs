@@ -16,7 +16,7 @@ namespace PhoneDirectory
     {
         static void Main(string[] args)
         {
-            PhoneBook book = new PhoneBook("Mad book");
+            PhoneBook<IEntity> book = new PhoneBook<IEntity>("Mad book");
  
             if (!File.Exists("../../book.txt"))
             {
@@ -78,40 +78,36 @@ namespace PhoneDirectory
 
                         List<IEntity> personsFound = findCommand.FindAllEntities(name, book);
 
-                        ((SerializeCommand)phonebookCommand).SerializeEntities(serializator, personsFound, writer);
+                        if (personsFound.Count > 0)
+                        {
+                            ((SerializeCommand)phonebookCommand).SerializeEntities(serializator, personsFound, writer);
 
-                        //if (personsFound.Count > 0)
-                        //{
-                        //    using (writer)
-                        //    {
-                        //        serializator.Serialize(writer, personsFound);
-                        //    }
-                        //    IDisposable fileReader = null;
+                            // Deserialize test
+                            IDisposable fileReader = null;
 
-                        //    if(serializationType.ToLower() == "json")
-                        //    {
-                        //        fileReader = new FileReader(fileName);
-                        //    } else
-                        //    {
-                        //        fileReader = XmlReader.Create(fileName);
-                        //    }
+                            if (serializationType.ToLower() == "json")
+                            {
+                                fileReader = new FileReader(fileName);
+                            }
+                            else
+                            {
+                                fileReader = XmlReader.Create(fileName);
+                            }
 
-                        //    List<IEntity> newList = serializator.Deserialize(fileReader);
+                            List<IEntity> newList = serializator.Deserialize(fileReader);
 
-                        //    foreach (var person in newList)
-                        //    {
+                            foreach (var person in newList)
+                            {
+                                Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
+                            }
 
-                        //        Console.WriteLine($"Deserialized:\n -- Name {person.Name}, city: {person.CityName}, phone: {person.PhoneNumber}");
-                        //    }
-
-                        //}
-                        //else
-                        //{
-                        //    Console.ForegroundColor = ConsoleColor.Red;
-                        //    Console.WriteLine($"No person with name \"{name}\" found!");
-                        //    Console.ForegroundColor = ConsoleColor.White;
-                        // }
-
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"No person with name \"{name}\" found!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
 
                     }
                     else if (phonebookCommand is AddCommand)

@@ -22,7 +22,7 @@ namespace PhoneDirectory.Command
             SerializationType = this.Arguments[2].ToLower();
         }
 
-        public void SerializeBook(ISerializator<PhoneBook> serializer, IWriter writer, PhoneBook book)
+        public void SerializeBook(ISerializator<PhoneBook<IEntity>> serializer, IWriter writer, PhoneBook<IEntity> book)
         {
             serializer.Serialize(writer as FileWriter, book);
         }
