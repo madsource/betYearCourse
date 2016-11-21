@@ -8,7 +8,6 @@ namespace PhoneDirectory.Command
 {
     public class AddCommand: PhonebookCommand
     {
-
         public AddCommand(string[] arguments) : base(arguments)
         {
         }

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemo", "WebApplication1\EfDemo.csproj", "{7A93BFCD-9C76-430E-9BBE-98F8E49CD92F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemo.Models", "WebApplication1.Models\EfDemo.Models.csproj", "{39521C9A-57AF-40CE-B87F-47A1270A9BB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemo.Data", "WebApplication1.Data\EfDemo.Data.csproj", "{9DB9C5F5-0BFA-4CAD-8D0C-9E4A1099FDAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A93BFCD-9C76-430E-9BBE-98F8E49CD92F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A93BFCD-9C76-430E-9BBE-98F8E49CD92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A93BFCD-9C76-430E-9BBE-98F8E49CD92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A93BFCD-9C76-430E-9BBE-98F8E49CD92F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39521C9A-57AF-40CE-B87F-47A1270A9BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39521C9A-57AF-40CE-B87F-47A1270A9BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39521C9A-57AF-40CE-B87F-47A1270A9BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39521C9A-57AF-40CE-B87F-47A1270A9BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB9C5F5-0BFA-4CAD-8D0C-9E4A1099FDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB9C5F5-0BFA-4CAD-8D0C-9E4A1099FDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB9C5F5-0BFA-4CAD-8D0C-9E4A1099FDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB9C5F5-0BFA-4CAD-8D0C-9E4A1099FDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
