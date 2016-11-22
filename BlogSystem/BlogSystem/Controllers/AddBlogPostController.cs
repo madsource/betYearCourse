@@ -20,6 +20,7 @@ namespace BlogSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Index(int? id)
         {
             PostViewModel postViewModel = new PostViewModel();
@@ -37,6 +38,7 @@ namespace BlogSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult NewBlogPost(PostViewModel postViewModel)
         {
             var newPost = new Models.Post()
