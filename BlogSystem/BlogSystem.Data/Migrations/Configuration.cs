@@ -11,6 +11,7 @@ namespace BlogSystem.Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "BlogSystem.Data.BlogSystemDbContext";
+           
         }
 
         protected override void Seed(BlogSystem.Data.BlogSystemDbContext context)

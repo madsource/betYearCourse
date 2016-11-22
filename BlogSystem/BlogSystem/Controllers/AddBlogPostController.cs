@@ -39,16 +39,28 @@ namespace BlogSystem.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult NewBlogPost(PostViewModel postViewModel)
+        public ActionResult UpdateBlogPost(PostViewModel postViewModel)
         {
-            var newPost = new Models.Post()
+            if(postViewModel.Id != 0)
             {
-                Name = postViewModel.Name,
-                Content = postViewModel.Content,
-                DateCreated = DateTime.Now,
-                User = UserManager.FindById(User.Identity.GetUserId())
-            };
-            this.dbContext.Posts.Add(newPost);
+                var existingPost = this.dbContext.Posts.FirstOrDefault(p => p.Id == postViewModel.Id);
+                existingPost.Name = postViewModel.Name;
+                existingPost.Content = postViewModel.Content;
+                existingPost.DateCreated = DateTime.Now;
+                existingPost.User = UserManager.FindById(User.Identity.GetUserId());
+
+            } else
+            {
+                var newPost = new Models.Post()
+                {
+                    Name = postViewModel.Name,
+                    Content = postViewModel.Content,
+                    DateCreated = DateTime.Now,
+                    User = UserManager.FindById(User.Identity.GetUserId())
+                };
+                this.dbContext.Posts.Add(newPost);
+            }
+            
             dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Home");
