@@ -6,7 +6,6 @@ using BlogSystem.Models;
 using BlogSystem.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Post = BlogSystem.ViewModels.Post;
 
 namespace BlogSystem.Controllers
 {
@@ -20,9 +19,10 @@ namespace BlogSystem.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.dbContext));
         }
 
-        public ActionResult Index(int id)
+        [HttpGet]
+        public ActionResult Index(int? id)
         {
-            Post postViewModel = new ViewModels.Post();
+            PostViewModel postViewModel = new PostViewModel();
             if (id != null)
             {
                 var postModel = dbContext.Posts.FirstOrDefault(p => p.Id == id);
@@ -30,19 +30,19 @@ namespace BlogSystem.Controllers
                 postViewModel.Content = postModel.Content;
                 postViewModel.DateCreated = postModel.DateCreated;
                 postViewModel.Id = postModel.Id;
-                postViewModel.User = postModel.User;
+                postViewModel.Username = postModel.User.UserName;
             }
   
             return View(postViewModel);
         }
 
         [HttpPost]
-        public ActionResult NewBlogPost(ViewModels.Post post)
+        public ActionResult NewBlogPost(PostViewModel postViewModel)
         {
             var newPost = new Models.Post()
             {
-                Name = post.Name,
-                Content = post.Content,
+                Name = postViewModel.Name,
+                Content = postViewModel.Content,
                 DateCreated = DateTime.Now,
                 User = UserManager.FindById(User.Identity.GetUserId())
             };

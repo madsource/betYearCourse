@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BlogSystem.Data;
 using BlogSystem.Models;
+using BlogSystem.ViewModels;
 
 namespace BlogSystem.Controllers
 {
@@ -15,7 +17,14 @@ namespace BlogSystem.Controllers
         }
         public ActionResult Index()
         {
-            var posts = BlogSystemDbContext.Posts.OrderByDescending(p => p.DateCreated).ToList();
+            ICollection<PostViewModel> posts = BlogSystemDbContext.Posts.Select(p => new PostViewModel()
+            {
+                Content = p.Content,
+                Name = p.Name,
+                DateCreated = p.DateCreated,
+                Username = p.User.UserName,
+                Id = p.Id
+            }).OrderByDescending(p => p.DateCreated).ToList();
             return View(posts);
         }
 

@@ -4,7 +4,7 @@ using BlogSystem.Models;
 
 namespace BlogSystem.ViewModels
 {
-    public class Post
+    public class PostViewModel
     {
  
         public int Id { get; set; }
@@ -16,9 +16,9 @@ namespace BlogSystem.ViewModels
         [Required]
         [Display(Name = "Added on")]
         public DateTime DateCreated { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public string Username { get; set; }
 
-        public Post()
+        public PostViewModel()
         {
             this.Name = "";
             this.Content = "";
