@@ -1,0 +1,17 @@
+﻿@model ICollection<BlogSystem.Models.Post>
+
+<h1>Posts</h1>
+<div class="row">
+    @foreach (var post in Model)
+    {
+        <div class="col-lg-3 post">
+            @if (Request.IsAuthenticated)
+            {
+                @Html.ActionLink(" ", "Index", "AddBlogPost", new { id = post.Id }, new { @class = "glyphicon glyphicon-pencil pull-right btn btn-default" })
+            }
+            <h2>@post.Name</h2>
+            <p class="bg-info">@post.Content</p>
+            <p class="text-muted">@String.Format($"{post.DateCreated:f}");</p>
+        </div>
+    }
+</div>

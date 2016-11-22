@@ -1,0 +1,23 @@
+﻿@model BlogSystem.ViewModels.Post
+@{
+    ViewBag.Title = "Add a new post";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@using (Html.BeginForm("NewBlogPost", "AddBlogPost", FormMethod.Post))
+{
+    <fieldset>
+        <p class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-lg" })
+        </p>
+        <p class="form-group">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextAreaFor(m => m.Content, new {@class = "form-control", rows = "4" })
+        </p>
+        @Html.HiddenFor(m => m.Id)
+    </fieldset>
+    <input class="btn btn-primary" type="submit" name="submit-post" value="Add post" />
+}
