@@ -5,19 +5,38 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+<div class="row">
+    @using (Html.BeginForm("UpdateBlogPost", "AddBlogPost", FormMethod.Post))
+    {
+        <fieldset>
+            <p class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-lg" })
+            </p>
+            <p class="form-group">
+                @Html.LabelFor(m => m.Content)
+                @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "4" })
+            </p>
+            @Html.HiddenFor(m => m.Id)
+        </fieldset>
+        <input class="btn btn-primary" type="submit" name="submit-post" value="Add post" />
+    }
+</div>
 
-@using (Html.BeginForm("UpdateBlogPost", "AddBlogPost", FormMethod.Post))
-{
-    <fieldset>
-        <p class="form-group">
-            @Html.LabelFor(m => m.Name)
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-lg" })
-        </p>
-        <p class="form-group">
-            @Html.LabelFor(m => m.Content)
-            @Html.TextAreaFor(m => m.Content, new {@class = "form-control", rows = "4" })
-        </p>
-        @Html.HiddenFor(m => m.Id)
-    </fieldset>
-    <input class="btn btn-primary" type="submit" name="submit-post" value="Add post" />
-}
+<div class="row">
+    @if (Request.Params["deletedName"] != null)
+    {
+        <p class="row bg-danger">The post "@Request.Params["deletedName"]" has been deleted!</p>
+    }
+
+    @if (Model.Id != 0)
+    {
+
+        using (Html.BeginForm("DeleteBlogPost", "AddBlogPost", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.Id)
+            <input class="btn btn-danger btn-lg" type="submit" onclick="return confirm('Are you sure you wish to delete this post?');" name="submit-post" value="Delete this post" />
+        }
+
+    }
+</div>

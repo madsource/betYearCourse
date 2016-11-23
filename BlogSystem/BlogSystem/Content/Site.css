@@ -28,3 +28,14 @@ textarea {
     border: 5px solid white;
     min-height: 250px;
 }
+
+.post > a {
+    text-decoration: none;
+    color: black;
+}
+
+.bg-danger {
+    background-color: #f2dede;
+    padding: 15px;
+    margin: 10px 0;
+}

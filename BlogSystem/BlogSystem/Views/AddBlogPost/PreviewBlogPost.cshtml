@@ -1,0 +1,6 @@
+﻿@model BlogSystem.ViewModels.PostViewModel
+
+<h1>@Model.Name</h1>
+<h6>Created by: @Model.Username on @String.Format($"{Model.DateCreated:f}")</h6>
+
+<article>@Model.Content</article>
