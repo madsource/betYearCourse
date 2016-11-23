@@ -8,13 +8,8 @@ using BlogSystem.ViewModels;
 
 namespace BlogSystem.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : RootController
     {
-        public BlogSystemDbContext BlogSystemDbContext { get; set; }
-        public HomeController()
-        {
-            BlogSystemDbContext = new BlogSystemDbContext();
-        }
         public ActionResult Index()
         {
             ICollection<PostViewModel> posts = BlogSystemDbContext.Posts.Select(p => new PostViewModel()
@@ -27,6 +22,5 @@ namespace BlogSystem.Controllers
             }).OrderByDescending(p => p.DateCreated).ToList();
             return View(posts);
         }
-
     }
 }
