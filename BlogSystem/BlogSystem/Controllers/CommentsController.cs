@@ -34,7 +34,7 @@ namespace BlogSystem.Controllers
             PostModel.Comments.Add(newComment);
             this.BlogSystemDbContext.SaveChanges();
 
-            return RedirectToAction("PreviewBlogPost", "AddBlogPost", new {id});
+            return RedirectToAction("Index", "Post", new {id});
         }
     }
 }

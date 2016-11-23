@@ -10,30 +10,28 @@ using System.Net;
 
 namespace BlogSystem.Controllers
 {
-    public class AddBlogPostController : RootController
+    public class PostController : RootController
     {
 
         [HttpGet]
         [Authorize]
-        public ActionResult Index(int? id)
-        {
-            PostViewModel postViewModel = new PostViewModel();
-            if (id != null)
+        public ActionResult Update(int? id)
+        {          
+            if (id == null)
             {
-                var postModel = BlogSystemDbContext.Posts.FirstOrDefault(p => p.Id == id);
-                postViewModel.Name = postModel.Name;
-                postViewModel.Content = postModel.Content;
-                postViewModel.DateCreated = postModel.DateCreated;
-                postViewModel.Id = postModel.Id;
-                postViewModel.Username = postModel.User.UserName;
+                PostViewModel postViewModel = new PostViewModel();
+                return View(postViewModel);
             }
-
-            return View(postViewModel);
+            else
+            {
+                var postViewModel = this.GetPost(id);
+                return View(postViewModel);
+            }
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdateBlogPost(PostViewModel postViewModel)
+        public ActionResult Update(PostViewModel postViewModel)
         {
             if (postViewModel.Id != 0)
             {
@@ -62,7 +60,7 @@ namespace BlogSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult PreviewBlogPost(int? id)
+        public ActionResult Index(int? id)
         {
             if (id == null)
             {
@@ -70,20 +68,20 @@ namespace BlogSystem.Controllers
             }
             else
             {
-                var post = this.GetPost(id);
-                return View(post);
+                var postViewModel = this.GetPost(id);
+                return View(postViewModel);
             }
         }
 
         [HttpGet]
-        public ActionResult DeleteBlogPost(int? id)
+        public ActionResult Delete(int? id)
         {
 
-            return RedirectToAction("PreviewBlogPost");
+            return RedirectToAction("Index");
 
         }
 
-        [HttpPost, ActionName("DeleteBlogPost")]
+        [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             var existingPost = this.BlogSystemDbContext.Posts.FirstOrDefault(p => p.Id == id);
@@ -96,10 +94,13 @@ namespace BlogSystem.Controllers
                 return HttpNotFound();
             }
 
+            // remove all comments first
+            existingPost.Comments.ToList().ForEach(c => existingPost.Comments.Remove(c));
+            // delete the actual post
             this.BlogSystemDbContext.Posts.Remove(existingPost);
             this.BlogSystemDbContext.SaveChanges();
 
-            return RedirectToAction("Index", new { deletedName = postName, deletedAuthor = postAuthor });
+            return RedirectToAction("Update", new { deletedName = postName, deletedAuthor = postAuthor });
         }
 
         private PostViewModel GetPost(int? id)
