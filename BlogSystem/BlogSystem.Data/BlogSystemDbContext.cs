@@ -20,6 +20,7 @@ namespace BlogSystem.Data
             return new BlogSystemDbContext();
         }
 
-        public IDbSet<Post> Posts { get; set; } 
+        public IDbSet<Post> Posts { get; set; }
+        public IDbSet<Comment> Comments { get; set; }
     }
 }

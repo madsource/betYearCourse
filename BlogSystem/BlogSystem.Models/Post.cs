@@ -10,6 +10,10 @@ namespace BlogSystem.Models
 {
     public class Post
     {
+        public Post()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -17,6 +21,7 @@ namespace BlogSystem.Models
         [Required]
         public DateTime DateCreated { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
 

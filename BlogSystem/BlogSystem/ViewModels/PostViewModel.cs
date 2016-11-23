@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BlogSystem.Models;
 
@@ -18,10 +19,13 @@ namespace BlogSystem.ViewModels
         public DateTime DateCreated { get; set; }
         public string Username { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
         public PostViewModel()
         {
             this.Name = "";
             this.Content = "";
+            this.Comments = new HashSet<Comment>();
         }
     }
 }

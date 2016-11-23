@@ -18,7 +18,8 @@ namespace BlogSystem.Controllers
                 Name = p.Name,
                 DateCreated = p.DateCreated,
                 Username = p.User.UserName,
-                Id = p.Id
+                Id = p.Id,
+                Comments = p.Comments
             }).OrderByDescending(p => p.DateCreated).ToList();
             return View(posts);
         }

@@ -1,0 +1,9 @@
+﻿@model BlogSystem.ViewModels.CommentViewModel
+
+<h1>Add comment</h1>
+@using (Html.BeginForm("AddComment", "Comments", FormMethod.Post))
+{
+    @Html.LabelFor(c => c.Text)
+    @Html.TextAreaFor(c => c.Text, new {@class = "form-control"})
+    <input class="btn btn-primary" type="submit" name="submit-post" value="Add comment" />
+}

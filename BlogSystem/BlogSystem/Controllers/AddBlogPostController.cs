@@ -117,7 +117,8 @@ namespace BlogSystem.Controllers
                 Content = existingPost.Content,
                 DateCreated = existingPost.DateCreated,
                 Username = existingPost.User.UserName,
-                Id = existingPost.Id
+                Id = existingPost.Id,
+                Comments = existingPost.Comments
             };
 
             return postViewModel;
