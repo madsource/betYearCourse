@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using BlogSystem.Filters;
 
 namespace BlogSystem
 {
@@ -8,6 +9,7 @@ namespace BlogSystem
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new NotFoundRedirect());
         }
     }
 }
