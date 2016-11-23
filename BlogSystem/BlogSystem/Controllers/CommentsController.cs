@@ -11,6 +11,7 @@ namespace BlogSystem.Controllers
     {
 
         [HttpGet]
+        [Authorize]
         public ActionResult AddComment(int id)
         {
             //this.PostModel = this.BlogSystemDbContext.Posts.FirstOrDefault(p => p.Id == id);

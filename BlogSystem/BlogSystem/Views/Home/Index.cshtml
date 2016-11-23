@@ -1,6 +1,6 @@
 ﻿@model ICollection<BlogSystem.ViewModels.PostViewModel>
 
-<h1>Posts</h1>
+<h1>Latest Posts</h1>
 <div class="row">
     @foreach (var post in Model)
     {
@@ -8,7 +8,7 @@
 
             @if (Request.IsAuthenticated)
                 {
-                @Html.ActionLink(" ", "Update", "Post", new { id = post.Id }, new { @class = "glyphicon glyphicon-pencil pull-right btn btn-default" })
+                @Html.ActionLink(" ", "Update", "Post", new { id = post.Id }, new { @class = "glyphicon glyphicon-pencil edit-icon btn btn-default" })
             }
             <a href="@Url.Action("Index", "Post", new {id = post.Id})">
                 <h2>@post.Name</h2>

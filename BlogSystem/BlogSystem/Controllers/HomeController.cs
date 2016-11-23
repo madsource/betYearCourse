@@ -20,7 +20,7 @@ namespace BlogSystem.Controllers
                 Username = p.User.UserName,
                 Id = p.Id,
                 Comments = p.Comments
-            }).OrderByDescending(p => p.DateCreated).ToList();
+            }).OrderByDescending(p => p.DateCreated).Take(12).ToList();
             return View(posts);
         }
     }
