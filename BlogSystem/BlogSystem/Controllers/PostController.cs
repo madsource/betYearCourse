@@ -125,6 +125,12 @@ namespace BlogSystem.Controllers
             return postViewModel;
         }
 
+        [HttpGet]
+        public ActionResult AddComment(int id)
+        {
+            return RedirectToAction("Index", new {id});
+        }
+
         [HttpPost]
         [Authorize]
         public ActionResult AddComment(CommentViewModel commentViewModel, int id)
