@@ -119,7 +119,13 @@ namespace BlogSystem.Controllers
                 DateCreated = existingPost.DateCreated,
                 Username = existingPost.User.UserName,
                 Id = existingPost.Id,
-                Comments = existingPost.Comments
+                Comments = existingPost.Comments.Select( c => new CommentViewModel()
+                {
+                   Text = c.Text,
+                   Author = c.Author,
+                   Id = c.Id,
+                   CreatedAt = c.CreatedAt
+                }).ToList()
             };
 
             return postViewModel;
@@ -152,12 +158,87 @@ namespace BlogSystem.Controllers
                 Name = postModel.Name,
                 Content = postModel.Content,
                 Id = postModel.Id,
-                Comments = postModel.Comments,
                 DateCreated = postModel.DateCreated,
-                Username = postModel.User.UserName
+                Username = postModel.User.UserName,
+                Comments = postModel.Comments.Select(c => new CommentViewModel()
+                {
+                    Text = c.Text,
+                    Author = c.Author,
+                    Id = c.Id,
+                    CreatedAt = c.CreatedAt
+                }).ToList()
+            };
+            
+            return PartialView("_comments", updatedPostViewModel);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult EditComment(int commentid)
+        {
+            Comment existingComment = this.BlogSystemDbContext.Comments.FirstOrDefault(c => c.Id == commentid);
+
+            if (existingComment == null)
+            {
+                return HttpNotFound();
+            }
+
+            CommentViewModel commentViewModel = new CommentViewModel()
+            {
+                Text = existingComment.Text,
+                Author = existingComment.Author,
+                CreatedAt = existingComment.CreatedAt,
+                Id = existingComment.Id
             };
 
-            return PartialView("_comments", updatedPostViewModel);
+            return PartialView("_editComment", commentViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditComment(CommentViewModel commentViewModel, int Id )
+        {
+            Comment existingComment = this.BlogSystemDbContext.Comments.FirstOrDefault(c => c.Id == Id);
+
+            if (existingComment == null)
+            {
+                return HttpNotFound();
+            }
+
+            existingComment.CreatedAt = DateTime.Now;
+            existingComment.Text = commentViewModel.Text;
+
+            this.BlogSystemDbContext.SaveChanges();
+
+            CommentViewModel updatedCommentViewModel = new CommentViewModel()
+            {
+                Text = existingComment.Text,
+                Author = existingComment.Author,
+                CreatedAt = existingComment.CreatedAt,
+                Id = existingComment.Id
+            };
+
+           
+            // get post of this comment
+            Post existingPost = this.BlogSystemDbContext.Posts.Where(p => p.Comments.Any(c => c.Id == existingComment.Id)).ToList().First();
+
+            var updatedPostViewModel = new PostViewModel()
+            {
+                Name = existingPost.Name,
+                Content = existingPost.Content,
+                Id = existingPost.Id,
+                Comments = existingPost.Comments.Select(c => new CommentViewModel()
+                {
+                    Text = c.Text,
+                    Author = c.Author,
+                    Id = c.Id,
+                    CreatedAt = c.CreatedAt
+                }).ToList(),
+                DateCreated = existingPost.DateCreated,
+                Username = existingPost.User.UserName
+            };
+
+            return PartialView("_comment", updatedCommentViewModel);
         }
     }
 }

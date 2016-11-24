@@ -1,0 +1,12 @@
+﻿@model BlogSystem.ViewModels.CommentViewModel
+
+<div class="editForm">
+    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    @using (Ajax.BeginForm("EditComment", new {Id = Model.Id}, new AjaxOptions {HttpMethod = "Post", UpdateTargetId = "comment-" + Model.Id}))
+    {
+        <fieldset>
+            @Html.TextAreaFor(c => c.Text, new {@class = "form-control"})
+        </fieldset><br/>
+        <input class="btn btn-primary" type="submit" name="submit-post" value="Edit comment"/>
+    }
+</div>

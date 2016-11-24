@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNet.Identity
+@model BlogSystem.ViewModels.CommentViewModel
+
+@if (Request.IsAuthenticated && User.Identity.GetUserName() == Model.Author)
+{
+    <a class="glyphicon glyphicon-pencil edit-icon btn btn-default editComment" href="#"></a>
+}
+<h3>By: @Model.Author</h3>
+<article>@Model.Text</article>
+<span>@String.Format($"{Model.CreatedAt:f}")</span>
+@Html.Partial("_editComment", Model)
+

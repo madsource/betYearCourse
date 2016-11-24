@@ -37,5 +37,10 @@ namespace BlogSystem.Controllers
 
             return RedirectToAction("Index", "Post", new {id});
         }
+
+        public ActionResult Update(int commentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model ICollection<BlogSystem.ViewModels.PostViewModel>
+﻿@using Microsoft.AspNet.Identity
+@model ICollection<BlogSystem.ViewModels.PostViewModel>
 
 <h1>Latest Posts</h1>
 <div class="row">
@@ -6,8 +7,8 @@
     {
         <div class="col-lg-3 post">
 
-            @if (Request.IsAuthenticated)
-                {
+            @if (Request.IsAuthenticated && User.Identity.GetUserName() == post.Username)
+            {
                 @Html.ActionLink(" ", "Update", "Post", new { id = post.Id }, new { @class = "glyphicon glyphicon-pencil edit-icon btn btn-default" })
             }
             <a href="@Url.Action("Index", "Post", new {id = post.Id})">

@@ -1,4 +1,5 @@
-﻿@model BlogSystem.ViewModels.PostViewModel
+﻿@using Microsoft.AspNet.Identity
+@model BlogSystem.ViewModels.PostViewModel
 
 <h4>Comments</h4>
 
@@ -6,10 +7,8 @@
 {
     foreach (var comment in Model.Comments.OrderByDescending(p => p.CreatedAt))
     {
-        <div class="row comment">
-            <h3>By: @comment.Author</h3>
-            <article>@comment.Text</article>
-            <span>@String.Format($"{comment.CreatedAt:f}")</span>
+        <div class="row comment" id="comment-@comment.Id">
+            @Html.Partial("_comment", comment)
         </div>
     }
 }

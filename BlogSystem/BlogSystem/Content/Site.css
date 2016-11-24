@@ -62,7 +62,9 @@ textarea {
     font-size: 0.75em;
     margin: 10px 0;
     border: 1px solid grey;
-    padding: 0px 5px 14px 15px;
+    padding: 0px 15px 14px 15px;
+    position: relative;
+
 }
 
     .comment.row > h3 {
@@ -79,6 +81,16 @@ textarea {
 
     .comment.row > span {
         color: #808080;
+    }
+
+    .comment .editForm {
+        display: none;
+        margin-top: 15px;
+    }
+
+    .comment .editComment {
+        position: absolute;
+        right: 0;
     }
 
 .postDetails > h6 {
