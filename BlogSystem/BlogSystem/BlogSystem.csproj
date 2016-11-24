@@ -280,6 +280,7 @@
     <Content Include="Views\Post\index.cshtml" />
     <Content Include="Views\Comments\AddComment.cshtml" />
     <Content Include="Views\Post\_addComment.cshtml" />
+    <Content Include="Views\Post\_comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

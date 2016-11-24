@@ -157,7 +157,7 @@ namespace BlogSystem.Controllers
                 Username = postModel.User.UserName
             };
 
-            return View("index", updatedPostViewModel);
+            return PartialView("_comments", updatedPostViewModel);
         }
     }
 }

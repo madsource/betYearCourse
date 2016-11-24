@@ -7,27 +7,14 @@
 
     <article>@Model.Content</article>
 
-    <br/>
-    <h4>Comments</h4>
-    @if (Model.Comments.Count > 0)
-    {
-        foreach (var comment in Model.Comments.OrderByDescending(p => p.CreatedAt))
-        {
-            <div class="row comment">
-                <h3>By: @comment.Author</h3>
-                <article>@comment.Text</article>
-                <span>@String.Format($"{comment.CreatedAt:f}")</span>
-            </div>
-        }
-    }
-    else
-    {
-        <p>No comments</p>
-    }
-
-
+    <br />
+    @* ajax loaded comments here. From _comments partial view *@
+    <div id="comments">
+        @Html.Partial("_comments", Model)
+    </div>
     @* @Html.ActionLink("Add mew comment", "AddComment", "Comments", new { id = Model.Id }, new { @class = "btn btn-default" })*@
+    
+
+    @Html.Partial("_addComment", new CommentViewModel(), new ViewDataDictionary { { "postId", Model.Id } })
+
 </div>
-
-
-@Html.Partial("_addComment", new CommentViewModel(), new ViewDataDictionary { {"postId", Model.Id}});
