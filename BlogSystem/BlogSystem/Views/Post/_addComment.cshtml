@@ -1,7 +1,7 @@
 ﻿@model BlogSystem.ViewModels.CommentViewModel
 
 <h3>Add a comment</h3>
-@using (Ajax.BeginForm("AddComment", new { Id = ViewData["postId"] }, new AjaxOptions { HttpMethod = "Post" }))
+@using (Ajax.BeginForm("AddComment", new { Id = ViewData["postId"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "postDetails" }))
 {
     <fieldset>
         @Html.LabelFor(c => c.Text)

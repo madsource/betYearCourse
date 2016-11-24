@@ -1,7 +1,7 @@
 ﻿@using BlogSystem.ViewModels
 @model BlogSystem.ViewModels.PostViewModel
 
-<div class="postDetails">
+<div class="postDetails" id="postDetails">
     <h1>@Model.Name</h1>
     <h6>Created by: @Model.Username on @String.Format($"{Model.DateCreated:f}")</h6>
 
