@@ -124,5 +124,34 @@ namespace BlogSystem.Controllers
 
             return postViewModel;
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddComment(CommentViewModel commentViewModel, int id)
+        {
+            Post postModel = this.BlogSystemDbContext.Posts.FirstOrDefault(p => p.Id == id);
+
+            Comment newComment = new Comment()
+            {
+                Author = this.UserManager.FindById(User.Identity.GetUserId()).UserName,
+                CreatedAt = DateTime.Now,
+                Text = commentViewModel.Text
+            };
+
+            postModel.Comments.Add(newComment);
+            this.BlogSystemDbContext.SaveChanges();
+
+            var updatedPostViewModel = new PostViewModel()
+            {
+                Name = postModel.Name,
+                Content = postModel.Content,
+                Id = postModel.Id,
+                Comments = postModel.Comments,
+                DateCreated = postModel.DateCreated,
+                Username = postModel.User.UserName
+            };
+
+            return View("index", updatedPostViewModel);
+        }
     }
 }

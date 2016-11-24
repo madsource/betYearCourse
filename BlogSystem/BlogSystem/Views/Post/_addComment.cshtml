@@ -1,0 +1,11 @@
+﻿@model BlogSystem.ViewModels.CommentViewModel
+
+<h1>Add a comment</h1>
+@using (Ajax.BeginForm("AddComment", new { Id = ViewData["postId"] }, new AjaxOptions { HttpMethod = "Post" }))
+{
+    <fieldset>
+        @Html.LabelFor(c => c.Text)
+        @Html.TextAreaFor(c => c.Text, new { @class = "form-control" })
+    </fieldset><br />
+    <input class="btn btn-primary" type="submit" name="submit-post" value="Add comment" />
+}
