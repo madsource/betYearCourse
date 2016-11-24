@@ -29,28 +29,28 @@ textarea {
     min-height: 220px;
 }
 
-.post p.text-primary,
-.post h2 {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
+    .post p.text-primary,
+    .post h2 {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
-.post .edit-icon {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    top: auto;
-    border: none;
-    border-radius: 0;
-}
+    .post .edit-icon {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        top: auto;
+        border: none;
+        border-radius: 0;
+    }
 
-.post > a {
-    text-decoration: none;
-    color: black;
-}
+    .post > a {
+        text-decoration: none;
+        color: black;
+    }
 
 .bg-danger {
     background-color: #f2dede;
@@ -60,26 +60,26 @@ textarea {
 
 .comment.row {
     font-size: 0.75em;
-    margin: 20px 0;
-    border: 1px solid grey;
-    padding: 20px;
-}
-
-.comment.row > h3 {
-    color: goldenrod;
-    font-style: normal;
-    font-size: 1em;
-}
-
-.comment.row > article {
-    font-size: 1.5em;
-    color:  coral;
     margin: 10px 0;
+    border: 1px solid grey;
+    padding: 0px 5px 14px 15px;
 }
 
-.comment.row > span {
-    color: #808080;
-}
+    .comment.row > h3 {
+        color: goldenrod;
+        font-style: normal;
+        font-size: 1em;
+    }
+
+    .comment.row > article {
+        font-size: 1.5em;
+        color: coral;
+        margin: 10px 0;
+    }
+
+    .comment.row > span {
+        color: #808080;
+    }
 
 .postDetails > h6 {
     color: #c66940;

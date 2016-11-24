@@ -1,6 +1,6 @@
 ﻿@model BlogSystem.ViewModels.CommentViewModel
 
-<h1>Add a comment</h1>
+<h3>Add a comment</h3>
 @using (Ajax.BeginForm("AddComment", new { Id = ViewData["postId"] }, new AjaxOptions { HttpMethod = "Post" }))
 {
     <fieldset>
