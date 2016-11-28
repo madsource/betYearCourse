@@ -169,7 +169,7 @@ namespace ProjectsTracker.Controllers
                         await roleManager.CreateAsync(new IdentityRole("PTManager"));
                     }
 
-                    await UserManager.AddToRoleAsync(user.Id, "PTManager");
+                    //await UserManager.AddToRoleAsync(user.Id, "PTManager");
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

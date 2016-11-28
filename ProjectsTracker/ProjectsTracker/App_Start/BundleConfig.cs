@@ -8,8 +8,14 @@ namespace ProjectsTracker
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/libs").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js",
+                        "~/Content/vendors/fastclick/lib/fastclick.js",
+                        "~/Content/vendors/nprogress/nprogress.js",
+                        "~/Content/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js",
+                        "~/Scripts/theme.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,7 +30,11 @@ namespace ProjectsTracker
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/vendors/bootstrap/dist/css/bootstrap.css",
+                      "~/Content/vendors/font-awesome/css/font-awesome.css",
+                      "~/Content/vendors/nprogress/nprogress.css",
+                      "~/Content/vendors/iCheck/skins/flat/green.css",
+                      "~/Content/css/theme.css",
                       "~/Content/site.css"));
         }
     }
