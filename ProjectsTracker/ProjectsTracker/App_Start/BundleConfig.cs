@@ -35,6 +35,7 @@ namespace ProjectsTracker
                       "~/Content/vendors/nprogress/nprogress.css",
                       "~/Content/vendors/iCheck/skins/flat/green.css",
                       "~/Content/css/theme.css",
+                      "~/Content/vendors/animate.css/animate.min.css",
                       "~/Content/site.css"));
         }
     }

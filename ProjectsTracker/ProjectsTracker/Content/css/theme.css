@@ -1,4 +1,4 @@
-.daterangepicker .ranges li {
+﻿.daterangepicker .ranges li {
   color: #73879C; }
   .daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
     background: #536A7F;
@@ -552,7 +552,8 @@ a:hover, a:focus {
 .top_nav .dropdown-menu li {
   width: 100%; }
 
-.top_nav .dropdown-menu li a {
+.top_nav .dropdown-menu li > a,
+.top_nav .dropdown-menu li form {
   width: 100%;
   padding: 12px 20px; }
 

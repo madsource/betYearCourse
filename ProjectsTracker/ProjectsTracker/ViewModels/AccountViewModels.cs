@@ -89,6 +89,17 @@ namespace ProjectsTracker.Models
         public string LastName { get; set; }
     }
 
+    public class LoginRegisterViewModel
+    {
+        public LoginRegisterViewModel()
+        {
+            this.LoginViewModel = new LoginViewModel();
+            this.RegisterViewModel = new RegisterViewModel();
+        }
+        public LoginViewModel LoginViewModel { get; set; }
+        public RegisterViewModel RegisterViewModel { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]
