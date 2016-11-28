@@ -73,6 +73,14 @@
     <Compile Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.Designer.cs">
       <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611281434221_FirstNameLastNameForUser_added.cs" />
+    <Compile Include="Migrations\201611281434221_FirstNameLastNameForUser_added.Designer.cs">
+      <DependentUpon>201611281434221_FirstNameLastNameForUser_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.cs" />
+    <Compile Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.Designer.cs">
+      <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.resx">
       <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281434221_FirstNameLastNameForUser_added.resx">
+      <DependentUpon>201611281434221_FirstNameLastNameForUser_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.resx">
+      <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
