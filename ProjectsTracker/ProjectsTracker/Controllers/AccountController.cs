@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProjectsTracker.Data;
 using ProjectsTracker.Models;
 
 namespace ProjectsTracker.Controllers
@@ -156,6 +158,18 @@ namespace ProjectsTracker.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+
+                    // Adding user to a PTManager role
+                    var roleStore = new RoleStore<IdentityRole>(ProjectsTrackerDbContext.Create());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    if (!await roleManager.RoleExistsAsync("PTManager"))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole("PTManager"));
+                    }
+
+                    await UserManager.AddToRoleAsync(user.Id, "PTManager");
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

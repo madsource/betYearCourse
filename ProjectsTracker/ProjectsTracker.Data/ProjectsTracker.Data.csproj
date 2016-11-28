@@ -61,6 +61,18 @@
     <Compile Include="Migrations\201611280929278_InitialCreate.Designer.cs">
       <DependentUpon>201611280929278_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611281059477_PTAdministrator_user_add.cs" />
+    <Compile Include="Migrations\201611281059477_PTAdministrator_user_add.Designer.cs">
+      <DependentUpon>201611281059477_PTAdministrator_user_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611281116086_PTAdmin_role_add.cs" />
+    <Compile Include="Migrations\201611281116086_PTAdmin_role_add.Designer.cs">
+      <DependentUpon>201611281116086_PTAdmin_role_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.cs" />
+    <Compile Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.Designer.cs">
+      <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +90,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611280929278_InitialCreate.resx">
       <DependentUpon>201611280929278_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281059477_PTAdministrator_user_add.resx">
+      <DependentUpon>201611281059477_PTAdministrator_user_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281116086_PTAdmin_role_add.resx">
+      <DependentUpon>201611281116086_PTAdmin_role_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.resx">
+      <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
