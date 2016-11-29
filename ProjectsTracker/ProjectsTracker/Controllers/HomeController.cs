@@ -8,13 +8,12 @@ using ProjectsTracker.Data;
 namespace ProjectsTracker.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
-            ProjectsTrackerDbContext _context =  new ProjectsTrackerDbContext();
-            var users = _context.Users.ToList();
-            return View(users);
+            var projects = ProjectsTrackerDbContext.Projects.ToList();
+            return View(projects);
         }
 
         public ActionResult About()
