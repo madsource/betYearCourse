@@ -45,29 +45,33 @@
                                 <a class="close-link"><i class="fa fa-close"></i></a>
                             </li>
                         </ul>*@
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <p>Simple table with project listing with progress and editing options</p>
-                        <!-- start project list -->
-                        <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th style="width: 1%">#</th>
-                                    <th style="width: 20%">Project Name</th>
-                                    <th>Team Members</th>
-                                    <th>Project Progress</th>
-                                    <th>Status</th>
-                                    @if (User.IsInRole("PTManager") || User.IsInRole("PTAdministrator"))
-                                    {
-                                        <th style="width: 20%">#Edit</th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p>Simple table with project listing with progress and editing options</p>
+                    <!-- start project list -->
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th style="width: 1%">#</th>
+                                <th style="width: 20%">Project Name</th>
+                                <th>Team Members</th>
+                                <th>Project Progress</th>
+                                <th>Status</th>
+                                @if (User.IsInRole("PTManager") || User.IsInRole("PTAdministrator"))
+                                {
+                                    <th style="width: 20%">Edit</th>
+                                }
+                                else
+                                {
+                                    <th style="width: 20%">View</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
                             @foreach (var project in Model)
                             {
-                                if(project.isActive && !project.IsDeleted)
+                                if (project.isActive && !project.IsDeleted)
                                 {
                                     <tr>
                                         <td>@project.Id</td>
@@ -101,14 +105,16 @@
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs">Success</button>
                                         </td>
-                                        @if ((User.IsInRole("PTManager") && User.Identity.GetUserId() == project.OwnerId) || User.IsInRole("PTAdministrator"))
-                                        {
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                            @if ((User.IsInRole("PTManager") && User.Identity.GetUserId() == project.OwnerId) || User.IsInRole("PTAdministrator"))
+                                            {
                                                 <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                                            </td>
-                                        }
+                                            }
+                                        </td>
+
                                     </tr>
                                 }
                             }
@@ -120,11 +126,11 @@
                                     </td>
                                 </tr>
                             }
-                            </tbody>
-                        </table>
-                        <!-- end project list -->
-                    </div>
+                        </tbody>
+                    </table>
+                    <!-- end project list -->
                 </div>
             </div>
         </div>
     </div>
+</div>

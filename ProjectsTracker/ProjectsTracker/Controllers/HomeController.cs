@@ -36,7 +36,7 @@ namespace ProjectsTracker.Controllers
                 OwnerName = p.Owner.FirstName + p.Owner.LastName,
                 OwnerId = p.Owner.Id,
                 Title = p.Title
-            }).ToList();
+            }).OrderByDescending(p => p.CreatedOn).ToList();
 
 
             return View(projects);
