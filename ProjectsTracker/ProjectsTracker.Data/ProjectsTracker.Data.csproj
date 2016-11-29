@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.Designer.cs">
       <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs" />
+    <Compile Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.Designer.cs">
+      <DependentUpon>201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.resx">
       <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.resx">
+      <DependentUpon>201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

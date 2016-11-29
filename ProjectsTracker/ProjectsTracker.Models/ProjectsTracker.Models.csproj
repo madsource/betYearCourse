@@ -59,9 +59,12 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Comment.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
+    <Compile Include="Metric.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
