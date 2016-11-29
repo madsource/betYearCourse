@@ -11,7 +11,7 @@ namespace ProjectsTracker.Services
 {
     public class UsersService :BaseService<ApplicationUser>, IUsersService
     {
-        public UsersService(IBlogSystemData data)
+        public UsersService(IProjectsTrackerData data)
             :base(data)
         {
         }

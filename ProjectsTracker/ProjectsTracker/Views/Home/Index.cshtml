@@ -1,6 +1,4 @@
-﻿@{
-    ViewBag.Title = "Projects";
-}
+﻿@model IEnumerable<ProjectViewModel>
 
 <div class="">
     <div class="page-title">
@@ -63,8 +61,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach (var project in Model)
+                        {
                             <tr>
-                                <td>#</td>
+                                <td>project.</td>
                                 <td>
                                     <a>Pesamakini Backend UI</a>
                                     <br />
@@ -101,6 +101,7 @@
                                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                                 </td>
                             </tr>
+                        }
                         </tbody>
                     </table>
                     <!-- end project list -->

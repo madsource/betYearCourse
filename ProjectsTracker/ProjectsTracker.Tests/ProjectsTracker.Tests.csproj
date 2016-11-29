@@ -92,6 +92,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProjectsTracker.Services\ProjectsTracker.Services.csproj">
+      <Project>{B0E6C418-AABC-4FDE-A468-26AC424CD8AE}</Project>
+      <Name>ProjectsTracker.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectsTracker\ProjectsTracker.csproj">
       <Project>{2AB86ECD-FAA5-4375-9719-C565C39E76D7}</Project>
       <Name>ProjectsTracker</Name>
