@@ -11,8 +11,6 @@ namespace ProjectsTracker.Models
 
         public virtual ApplicationUser Owner { get; set; }
 
-        public string OwnerId { get; set; }
-
         public DateTime? ExpectedEndDate { get; set; }
 
         public DateTime? DateFinished { get; set; }

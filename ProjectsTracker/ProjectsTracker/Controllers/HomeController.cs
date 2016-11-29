@@ -34,6 +34,7 @@ namespace ProjectsTracker.Controllers
                 isActive = p.isActive,
                 IsDeleted = p.IsDeleted,
                 OwnerName = p.Owner.FirstName + p.Owner.LastName,
+                OwnerId = p.Owner.Id,
                 Title = p.Title
             }).ToList();
 

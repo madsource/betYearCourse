@@ -57,6 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201611291348491_removedOwnerIdfromProject.cs" />
+    <Compile Include="Migrations\201611291348491_removedOwnerIdfromProject.Designer.cs">
+      <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
     <Compile Include="Migrations\201611280929278_InitialCreate.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.resx">
       <DependentUpon>201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291348491_removedOwnerIdfromProject.resx">
+      <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
