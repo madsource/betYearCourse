@@ -7,6 +7,7 @@ using ProjectsTracker.Data;
 using ProjectsTracker.Models;
 using ProjectsTracker.Services.Contracts;
 using ProjectsTracker.ViewModels;
+using AutoMapper.QueryableExtensions;
 
 namespace ProjectsTracker.Controllers
 {
@@ -22,21 +23,26 @@ namespace ProjectsTracker.Controllers
         }
         public ActionResult Index()
         {
-            IEnumerable<ProjectViewModel> projects = this.projectService.GetAll().Select(p => new ProjectViewModel()
-            {
-                CreatedOn = p.CreatedOn,
-                ExpectedEndDate = p.ExpectedEndDate,
-                ClientName = p.ClientName,
-                Content = p.Content,
-                DateFinished = p.DateFinished,
-                EstimatedBudget = p.EstimatedBudget,
-                Id = p.Id,
-                isActive = p.isActive,
-                IsDeleted = p.IsDeleted,
-                OwnerName = p.Owner.FirstName + p.Owner.LastName,
-                OwnerId = p.Owner.Id,
-                Title = p.Title
-            }).OrderByDescending(p => p.CreatedOn).ToList();
+            //IEnumerable<ProjectViewModel> projects = this.projectService.GetAll().Select(p => new ProjectViewModel()
+            //{
+            //    CreatedOn = p.CreatedOn,
+            //    ExpectedEndDate = p.ExpectedEndDate,
+            //    ClientName = p.ClientName,
+            //    Content = p.Content,
+            //    DateFinished = p.DateFinished,
+            //    EstimatedBudget = p.EstimatedBudget,
+            //    Id = p.Id,
+            //    isActive = p.isActive,
+            //    IsDeleted = p.IsDeleted,
+            //    OwnerName = p.Owner.FirstName + p.Owner.LastName,
+            //    OwnerId = p.Owner.Id,
+            //    Title = p.Title
+            //}).OrderByDescending(p => p.CreatedOn).ToList();
+
+            IEnumerable<ProjectViewModel> projects = this.projectService.GetAll()
+                .OrderByDescending(p => p.CreatedOn)
+                .ProjectTo<ProjectViewModel>()
+                .ToList();
 
 
             return View(projects);
