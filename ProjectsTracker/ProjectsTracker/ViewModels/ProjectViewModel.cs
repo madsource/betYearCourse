@@ -37,6 +37,7 @@ namespace ProjectsTracker.ViewModels
         public DateTime? DateFinished { get; set; }
 
         [Required]
+        [Display(Name = "Is Active")]
         public bool isActive { get; set; }
 
         [Display(Name = "Estimated Budget")]

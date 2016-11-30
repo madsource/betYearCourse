@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.Infrastructure.Annotations;
+﻿using System;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Web.Mvc;
 using AutoMapper;
 using ProjectsTracker.Models;
@@ -10,7 +11,7 @@ using ProjectsTracker.Services.Contracts;
 
 namespace ProjectsTracker.Controllers
 {
-    [Authorize]
+   
     public class ProjectController : Controller
     {
         private IProjectService projectService;
@@ -26,6 +27,8 @@ namespace ProjectsTracker.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "PTAdministrator, PTManager")]
         [HttpPost]
         public ActionResult Create(ProjectViewModel projectViewModel)
         {
