@@ -8,16 +8,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>@CreateProjectConstants.Project</h4>
-        <hr />
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -48,25 +40,12 @@
         <div class="form-group has-feedback">
         @Html.LabelFor(model => model.ExpectedEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.ExpectedEndDate, new { @class = "form-control has-feedback-left single_cal" })
+            @Html.TextBoxFor(model => model.ExpectedEndDate, new { @class = "form-control has-feedback-left single_cal", required = "" })
             <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
             @Html.ValidationMessageFor(model => model.ExpectedEndDate, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    @*<fieldset>
-        <div class="control-group">
-            <div class="controls">
-                <div class="col-md-11 xdisplay_inputx form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="single_cal1"
-                           placeholder="First Name" aria-describedby="inputSuccess2Status">
-                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                    <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                </div>
-            </div>
-        </div>
-    </fieldset>*@
-
+ 
         @*<div class="form-group">
             @Html.LabelFor(model => model.DateFinished, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -107,13 +86,8 @@
     @Scripts.Render("~/bundles/jqueryval")
     
     <script>
-          $(document).ready(function() {
-            $('.single_cal').daterangepicker({
-              singleDatePicker: true,
-              singleClasses: "picker_1"
-            }, function(start, end, label) {
-              console.log(start.toISOString(), end.toISOString(), label);
-            });
-          });
+        $(document).ready(function () {
+            $('#ExpectedEndDate').singleDatePicker();
+        });
     </script>
 }

@@ -12,6 +12,8 @@ namespace ProjectsTracker.ViewModels
         
         public int Id { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Created on")]
         public DateTime? CreatedOn { get; set; }
 
         public bool IsDeleted { get; set; }
@@ -27,13 +29,16 @@ namespace ProjectsTracker.ViewModels
         [Display(Name = "Owner Name")]
         [StringLength(100)]
         public ApplicationUserViewModel Owner { get; set; }
-        
-        //public string OwnerId { get; set; }
 
+        //public string OwnerId { get; set; }
+        [Required]
         [Display(Name = "Expected End Date")]
-        public DateTime? ExpectedEndDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime ExpectedEndDate { get; set; }
 
         [Display(Name = "Date Finished")]
+        [DataType(DataType.Date)]
         public DateTime? DateFinished { get; set; }
 
         [Required]

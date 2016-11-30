@@ -277,3 +277,18 @@ if (typeof NProgress != 'undefined') {
         NProgress.done();
     });
 }
+
+
+// single datepicker plugin
+
+$.fn.singleDatePicker = function () {
+    $(this).on("apply.daterangepicker", function (e, picker) {
+        picker.element.val(picker.startDate.format(picker.locale.format));
+    });
+    return $(this).daterangepicker({
+        singleDatePicker: true,
+        autoUpdateInput: false,
+        minDate: new Date(Date.now()),
+        singleClasses: "picker_1"
+    });
+};

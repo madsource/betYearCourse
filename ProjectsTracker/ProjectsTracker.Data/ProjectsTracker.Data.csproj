@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201611291348491_removedOwnerIdfromProject.Designer.cs">
       <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.cs" />
+    <Compile Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.Designer.cs">
+      <DependentUpon>201611301233325_ExpectedEndDate_project_madeRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
     <Compile Include="Migrations\201611280929278_InitialCreate.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611291348491_removedOwnerIdfromProject.resx">
       <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.resx">
+      <DependentUpon>201611301233325_ExpectedEndDate_project_madeRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

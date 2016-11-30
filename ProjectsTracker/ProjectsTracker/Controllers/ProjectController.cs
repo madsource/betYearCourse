@@ -30,6 +30,7 @@ namespace ProjectsTracker.Controllers
 
         [Authorize(Roles = "PTAdministrator, PTManager")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ProjectViewModel projectViewModel)
         {
             Project project = Mapper.Map<Project>(projectViewModel);
