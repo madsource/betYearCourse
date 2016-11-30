@@ -23,11 +23,12 @@ namespace ProjectsTracker.ViewModels
         [StringLength(10000)]
         public string Content { get; set; }
 
+        [Required]
         [Display(Name = "Owner Name")]
         [StringLength(100)]
-        public string OwnerName { get; set; }
-        [Required]
-        public string OwnerId { get; set; }
+        public ApplicationUserViewModel Owner { get; set; }
+        
+        //public string OwnerId { get; set; }
 
         [Display(Name = "Expected End Date")]
         public DateTime? ExpectedEndDate { get; set; }

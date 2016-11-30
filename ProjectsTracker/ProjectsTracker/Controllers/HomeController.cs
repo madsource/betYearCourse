@@ -44,6 +44,7 @@ namespace ProjectsTracker.Controllers
                 .ProjectTo<ProjectViewModel>()
                 .ToList();
 
+            IEnumerable<Project> projectsDb = projects.AsQueryable().ProjectTo<Project>().ToList();   
 
             return View(projects);
         }

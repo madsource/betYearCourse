@@ -12,16 +12,21 @@ namespace ProjectsTracker
         public static void RegisterMaps()
         {
 
-        AutoMapper.Mapper.Initialize(config =>
+            AutoMapper.Mapper.Initialize(config =>
             {
-                config.CreateMap<Project, ProjectViewModel>()
-                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.FirstName + src.Owner.LastName));
+                //Application user
+                config.CreateMap<ApplicationUser, ApplicationUserViewModel>();
+                config.CreateMap<ApplicationUserViewModel, ApplicationUser>();
 
-                config.CreateMap<ProjectViewModel, Project>()
-                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => new ApplicationUser()
-                    {
-                        Id = src.OwnerId
-                    }));
+                //Project
+                config.CreateMap<Project, ProjectViewModel>();
+                //.ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.FirstName + src.Owner.LastName));
+
+                config.CreateMap<ProjectViewModel, Project>();
+                //.ForMember(dest => dest.Owner, opt => opt.MapFrom(src => new ApplicationUser()
+                //    {
+                //        Id = src.OwnerId
+                //    }));
             });
         }
     }
