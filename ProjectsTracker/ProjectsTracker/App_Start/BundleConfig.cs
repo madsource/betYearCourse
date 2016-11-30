@@ -19,11 +19,14 @@ namespace ProjectsTracker
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
-                        "~/Content/vendors/iCheck/icheck.min.js"));
+                        "~/Content/vendors/iCheck/icheck.min.js",
+                        "~/Content/vendors/moment/min/moment.min.js",
+                        "~/Content/vendors/bootstrap-daterangepicker/daterangepicker.js"
+                        ));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+              // Use the development version of Modernizr to develop with and learn from. Then, when you're
+              // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+              bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
@@ -35,8 +38,9 @@ namespace ProjectsTracker
                       "~/Content/vendors/font-awesome/css/font-awesome.css",
                       "~/Content/vendors/nprogress/nprogress.css",
                       "~/Content/vendors/iCheck/skins/flat/green.css",
-                      "~/Content/css/theme.css",
                       "~/Content/vendors/animate.css/animate.min.css",
+                      "~/Content/vendors/bootstrap-daterangepicker/daterangepicker.css",
+                      "~/Content/css/theme.css",
                       "~/Content/site.css"));
         }
     }
