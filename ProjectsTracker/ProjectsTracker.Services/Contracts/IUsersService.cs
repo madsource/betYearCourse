@@ -10,5 +10,6 @@ namespace ProjectsTracker.Services.Contracts
     public interface IUsersService : IService<ApplicationUser>
     {
         IQueryable<ApplicationUser> GetAll();
+        List<string> GetUserRoles(string userId);
     }
 }

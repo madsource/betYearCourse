@@ -1,0 +1,72 @@
+﻿@using System.Security.AccessControl
+@model IEnumerable<ProjectsTracker.ViewModels.ApplicationUserViewModel>
+
+<h3>Administration</h3>
+<div class="col-md-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Manager Users <small>active</small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <ul class="list-unstyled msg_list">
+                @foreach (var user in Model)
+                {
+                    if (user.userRoles.Contains(RoleConstants.ManagerRole))
+                    {
+                        <li>
+                            <a>
+                                <span class="image">
+                                    <img src="/Content/images/img.jpg" alt="img" />
+                                </span>
+                                <span>
+                                    <span>@user.FirstName @user.LastName</span>
+                                    @*<span class="time">@user.Id</span>*@
+                                </span>
+                                <span class="message">
+                                    @user.Email
+                                </span>
+                            </a>
+                        </li>
+                    }
+
+                }
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Users <small>active</small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <ul class="list-unstyled msg_list">
+                @foreach (var user in Model)
+                {
+                    if (!user.userRoles.Contains(RoleConstants.ManagerRole) && !user.userRoles.Contains(RoleConstants.AdmminRole))
+                    {
+                        <li>
+                            <a>
+                                <span class="image">
+                                    <img src="/Content/images/img.jpg" alt="img" />
+                                </span>
+                                <span>
+                                    <span>@user.FirstName @user.LastName</span>
+                                    @*<span class="time">@user.Id</span>*@
+                                </span>
+                                <span class="message">
+                                    @user.Email
+                                </span>
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

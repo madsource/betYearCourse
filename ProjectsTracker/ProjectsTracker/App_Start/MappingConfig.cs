@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Linq;
+using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ProjectsTracker.Data;
 using ProjectsTracker.Models;
@@ -15,9 +17,11 @@ namespace ProjectsTracker
             AutoMapper.Mapper.Initialize(config =>
             {
                 //Application user
-                config.CreateMap<ApplicationUser, ApplicationUserViewModel>();
-                config.CreateMap<ApplicationUserViewModel, ApplicationUser>();
+                config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(s => s.Roles.FirstOrDefault().RoleId));
 
+                config.CreateMap<ApplicationUserViewModel, ApplicationUser>()
+                    .ForMember(dest => dest.Roles, opt => opt.Ignore());
                 //Project
                 config.CreateMap<Project, ProjectViewModel>();
                 //.ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.FirstName + src.Owner.LastName));
