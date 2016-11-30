@@ -11,7 +11,7 @@ using ProjectsTracker.Services.Contracts;
 
 namespace ProjectsTracker.Controllers
 {
-   
+    [Authorize(Roles = "PTAdministrator, PTManager")]
     public class ProjectController : Controller
     {
         private IProjectService projectService;
@@ -22,13 +22,13 @@ namespace ProjectsTracker.Controllers
             this.projectService = projectService;
             this.usersService = usersService;
         }
+        
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-
-        [Authorize(Roles = "PTAdministrator, PTManager")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProjectViewModel projectViewModel)
