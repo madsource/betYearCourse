@@ -33,8 +33,8 @@ namespace ProjectsTracker.ViewModels
         //public string OwnerId { get; set; }
         [Required]
         [Display(Name = "Expected End Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ExpectedEndDate { get; set; }
 
         [Display(Name = "Date Finished")]

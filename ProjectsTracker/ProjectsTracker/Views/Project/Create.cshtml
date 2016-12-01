@@ -40,7 +40,7 @@
         <div class="form-group has-feedback">
             @Html.LabelFor(model => model.ExpectedEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ExpectedEndDate, "{0:DD/MM/YYYY}", new { @class = "form-control has-feedback-left single_cal", required = "" })
+                @Html.TextBoxFor(model => model.ExpectedEndDate, "{0:yyyy-MM-dd}", new { @class = "form-control has-feedback-left single_cal ignore", required = "" })
                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                 @Html.ValidationMessageFor(model => model.ExpectedEndDate, "", new { @class = "text-danger" })
             </div>
@@ -86,26 +86,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
-            $('#ExpectedEndDate').singleDatePicker();
-
-            //$.validator.addMethod(
-            //    "ptDate",
-            //    function (value, element) {
-            //        // put your own logic here, this is just a (crappy) example
-            //        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
-            //    },
-            //    "Please enter a date in the format dd/mm/yyyy."
-            //);
-
-            //$('#CreateProjectForm')
-            //    .validate({
-            //        rules: {
-            //            myDate: {
-            //                ptDate: true
-            //            }
-            //        }
-            //    });
-        });
+        $(document)
+            .ready(function() {
+                $('#ExpectedEndDate').singleDatePicker();
+                //$.validator.methods.date = function (value, element) {
+                //    return this.optional(element) || Globalize.parseDate(value, "d/M/y", "en");
+                //}
+            });
     </script>
 }
