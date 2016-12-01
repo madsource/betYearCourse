@@ -15,6 +15,7 @@ namespace ProjectsTracker
                         "~/Content/vendors/fastclick/lib/fastclick.js",
                         "~/Content/vendors/nprogress/nprogress.js",
                         "~/Content/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js",
+                        "~/Scripts/globalize.js",
                         "~/Scripts/theme.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -41,7 +42,7 @@ namespace ProjectsTracker
                       "~/Content/vendors/animate.css/animate.min.css",
                       "~/Content/vendors/bootstrap-daterangepicker/daterangepicker.css",
                       "~/Content/css/theme.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/site.css"));
         }
     }
 }

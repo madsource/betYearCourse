@@ -34,7 +34,7 @@ namespace ProjectsTracker.ViewModels
         [Required]
         [Display(Name = "Expected End Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime ExpectedEndDate { get; set; }
 
         [Display(Name = "Date Finished")]

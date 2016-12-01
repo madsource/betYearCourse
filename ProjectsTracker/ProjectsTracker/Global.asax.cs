@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ProjectsTracker.Models.Extensions;
 
 namespace ProjectsTracker
 {
@@ -17,7 +18,8 @@ namespace ProjectsTracker
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            // custom
+            ModelBinders.Binders.Add(typeof(DateTime?), new PtDateModelBinder());
             MappingConfig.RegisterMaps();
         }
     }

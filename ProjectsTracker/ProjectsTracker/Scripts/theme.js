@@ -289,6 +289,30 @@ $.fn.singleDatePicker = function () {
         singleDatePicker: true,
         autoUpdateInput: false,
         minDate: new Date(Date.now()),
-        singleClasses: "picker_1"
+        singleClasses: "picker_1",
+        locale: {
+            format: "DD/MM/YYYY"
+        }
     });
 };
+
+// custome date validation
+//$.validator.addMethod(
+//    "ptDate",
+//    function (value, element) {
+//        // put your own logic here, this is just a (crappy) example
+//        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+//    },
+//    "Please enter a date in the format dd/mm/yyyy."
+//);
+$(document).ready(function () {
+    $.culture = Globalize.culture("en-GB");
+    $.validator.methods.date = function (value, element) {
+        //This is not ideal but Chrome passes dates through in ISO1901 format regardless of locale 
+        //and despite displaying in the specified format.
+
+        return this.optional(element)
+            || Globalize.parseDate(value, "DD/MM/YYYY", "en-GB")
+            || Globalize.parseDate(value, "yyyy-mm-dd");
+    }
+});
