@@ -8,7 +8,7 @@ namespace ProjectsTracker.Common
 {
     public class RoleConstants
     {
-        public const string AdmminRole = "PTAdministartor";
+        public const string AdmminRole = "PTAdministrator";
         public const string ManagerRole = "PTManager";
     }
 }

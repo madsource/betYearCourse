@@ -6,12 +6,13 @@ using ProjectsTracker.Models;
 using ProjectsTracker.ViewModels;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNet.Identity;
+using ProjectsTracker.Common;
 using ProjectsTracker.Services;
 using ProjectsTracker.Services.Contracts;
 
 namespace ProjectsTracker.Controllers
 {
-    [Authorize(Roles = "PTAdministrator, PTManager")]
+    [Authorize(Roles = RoleConstants.AdmminRole +"," + RoleConstants.ManagerRole)]
     public class ProjectController : Controller
     {
         private IProjectService projectService;

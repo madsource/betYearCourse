@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using ProjectsTracker.Services.Contracts;
 using ProjectsTracker.ViewModels;
 using AutoMapper.QueryableExtensions;
+using Microsoft.Owin.Security.Provider;
 using ProjectsTracker.Areas.Admin.ViewModels;
 using WebGrease.Css.Extensions;
 
@@ -37,9 +38,13 @@ namespace ProjectsTracker.Areas.Admin.Controllers
             //usersCollections.ManagerUsers = managerUsers;
             //usersCollections.Users = normalUsers;
 
-            users.ForEach((u) => { u.userRoles = usersService.GetUserRoles(u.Id); });
+            var usersWithRoles = users?.Select(u =>
+            {
+                u.userRoles = usersService.GetUserRoles(u.Id);
+                return u;
+            }).ToList();
 
-            return View(users);
+            return View(usersWithRoles);
         }
 
         public ActionResult Create()
