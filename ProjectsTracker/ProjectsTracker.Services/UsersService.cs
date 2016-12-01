@@ -13,21 +13,30 @@ namespace ProjectsTracker.Services
 {
     public class UsersService : BaseService<ApplicationUser>, IUsersService
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+
         public UsersService(IProjectsTrackerData data)
             : base(data)
         {
-
+            _userManager =
+                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ProjectsTrackerDbContext()));
         }
 
 
         public List<string> GetUserRoles(string userId)
         {
-            using (var userManager =
-                    new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ProjectsTrackerDbContext())))
-            {
-                var roles = userManager.GetRoles(userId);
-                return roles as List<string>;
-            }
+            var roles = this._userManager.GetRoles(userId);
+            return roles as List<string>;
+        }
+
+        public void AddRoleToUser(string userId, string role)
+        {
+            this._userManager.AddToRole(userId, role);
+        }
+
+        public void RemoveRoleFromUser(string userId, string role)
+        {           
+            this._userManager.RemoveFromRole(userId, role);
         }
     }
 }

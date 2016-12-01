@@ -25,19 +25,6 @@ namespace ProjectsTracker.Areas.Admin.Controllers
             IEnumerable<ApplicationUserViewModel> users = usersService.GetAll()
                 .ProjectTo<ApplicationUserViewModel>();
 
-            //var managerRole = usersService.GetAll()
-            //    .Where(u => u.Roles.Select(x => x.UserId).Contains(Common.RoleConstants.ManagerRole));
-            //var adminRole = usersService.GetAll()
-            //    .Where(u => u.Roles.Select(x => x.UserId).Contains(Common.RoleConstants.AdmminRole));
-
-            //IEnumerable<ApplicationUserViewModel> normalUsers = usersService.GetAll()
-            //    .Except(managerRole).Except(adminRole)
-            //    .ProjectTo<ApplicationUserViewModel>();
-
-            //UserCollectionsViewModel usersCollections = new UserCollectionsViewModel();
-            //usersCollections.ManagerUsers = managerUsers;
-            //usersCollections.Users = normalUsers;
-
             var usersWithRoles = users?.Select(u =>
             {
                 u.userRoles = usersService.GetUserRoles(u.Id);
@@ -47,9 +34,16 @@ namespace ProjectsTracker.Areas.Admin.Controllers
             return View(usersWithRoles);
         }
 
-        public ActionResult Create()
+        public ActionResult AddUserToRole(string userId, string role)
         {
-            throw new System.NotImplementedException();
+            this.usersService.AddRoleToUser(userId, role);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult RemoveUserFromRole(string userId, string role)
+        {
+            this.usersService.RemoveRoleFromUser(userId, role);
+            return RedirectToAction("Index");
         }
     }
 }

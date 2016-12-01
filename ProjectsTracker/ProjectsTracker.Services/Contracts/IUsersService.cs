@@ -11,5 +11,7 @@ namespace ProjectsTracker.Services.Contracts
     {
         IQueryable<ApplicationUser> GetAll();
         List<string> GetUserRoles(string userId);
+        void AddRoleToUser(string userId, string role);
+        void RemoveRoleFromUser(string userId, string role);
     }
 }
