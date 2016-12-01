@@ -7,13 +7,13 @@ namespace ProjectsTracker.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class removedOwnerIdfromProject : IMigrationMetadata
+    public sealed partial class Admin_User_FirstnameLastname : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(removedOwnerIdfromProject));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Admin_User_FirstnameLastname));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611291348491_removedOwnerIdfromProject"; }
+            get { return "201612011911422_Admin_User_FirstnameLastname"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace ProjectsTracker.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class Project_PTask_Comment_Metric_initModelsStructure : IMigrationMetadata
+    public sealed partial class Admin_User : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Project_PTask_Comment_Metric_initModelsStructure));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Admin_User));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611290923308_Project_PTask_Comment_Metric_initModelsStructure"; }
+            get { return "201612011900451_Admin_User"; }
         }
         
         string IMigrationMetadata.Source

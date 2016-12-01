@@ -1,5 +1,4 @@
 ﻿
-@using ProjectsTracker.Models.Extensions
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +27,20 @@
                             </div>
                             <div class="profile_info">
                                 <span>@PtConstants.Welcome,</span>
-                                <h2>@User.Identity.GetFullName()</h2>
+                                <h2>
+                                    @((User.IsInRole(RoleConstants.AdmminRole)) ? PtConstants.Admin : User.Identity.GetFullName() )
+                                </h2>
                             </div>
                         </div>
-                        <!-- /menu profile quick info -->
+                        <!-- / menu profile quick info-->
+
+
                         <br />
-                        <!-- sidebar menu -->
+
+
+                        <!--sidebar menu-->
+
+
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                             <div class="menu_section">
@@ -42,8 +49,8 @@
                                     <li class="active">
                                         <a><i class="fa fa-home"></i> @PtConstants.General <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu" style="display: block;">
-                                            <li><a href="/">Projects</a></li>
-                                            <li><a href="#">Tasks</a></li>
+                                            <li><a href="/">@PtConstants.Projects</a></li>
+                                            <li><a href="#">@PtConstants.Tasks</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -56,7 +63,7 @@
                                         <li class="active">
                                             <a><i class="fa fa-home"></i> @PtConstants.Administration <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu" style="display: block;">
-                                                <li><a href="@Url.Action("Index", "Users", new {Area = "Admin"})">Users</a></li>
+                                                <li><a href="@Url.Action("Index", "Users", new {Area = "Admin"})">@PtConstants.Users</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -78,70 +85,70 @@
                             <li class="">
                                 @Html.Partial("_LoginPartial")
                             </li>
-                            <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="badge bg-green">6</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                            <span>
-                                                <span>John Smith</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                            <span>
-                                                <span>John Smith</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                            <span>
-                                                <span>John Smith</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                            <span>
-                                                <span>John Smith</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="text-center">
+                            @*<li role="presentation" class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-envelope-o"></i>
+                                        <span class="badge bg-green">6</span>
+                                    </a>
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        <li>
                                             <a>
-                                                <strong>See All Alerts</strong>
-                                                <i class="fa fa-angle-right"></i>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
                                             </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="text-center">
+                                                <a>
+                                                    <strong>See All Alerts</strong>
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>*@
                         </ul>
                     </nav>
                 </div>

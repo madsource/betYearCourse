@@ -9,8 +9,7 @@ namespace ProjectsTracker.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "ProjectsTracker.Data.ProjectsTrackerDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(ProjectsTracker.Data.ProjectsTrackerDbContext context)

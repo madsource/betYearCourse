@@ -12,5 +12,9 @@ namespace ProjectsTracker.Common
         public const string Welcome = "Welcome";
         public const string General = "General";
         public const string Administration = "Administration";
+        public const string Projects = "Projects";
+        public const string Tasks = "Tasks";
+        public const string Users = "Users";
+        public const string Admin = "Admin";
     }
 }

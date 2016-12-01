@@ -57,45 +57,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201611291348491_removedOwnerIdfromProject.cs" />
-    <Compile Include="Migrations\201611291348491_removedOwnerIdfromProject.Designer.cs">
-      <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
+    <Compile Include="Migrations\201612011857162_initial.cs" />
+    <Compile Include="Migrations\201612011857162_initial.Designer.cs">
+      <DependentUpon>201612011857162_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.cs" />
-    <Compile Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.Designer.cs">
-      <DependentUpon>201611301233325_ExpectedEndDate_project_madeRequired.cs</DependentUpon>
+    <Compile Include="Migrations\201612011900451_Admin_User.cs" />
+    <Compile Include="Migrations\201612011900451_Admin_User.Designer.cs">
+      <DependentUpon>201612011900451_Admin_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectsTrackerData.cs" />
-    <Compile Include="IProjectsTrackerData.cs" />
-    <Compile Include="Migrations\201611280929278_InitialCreate.cs" />
-    <Compile Include="Migrations\201611280929278_InitialCreate.Designer.cs">
-      <DependentUpon>201611280929278_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281059477_PTAdministrator_user_add.cs" />
-    <Compile Include="Migrations\201611281059477_PTAdministrator_user_add.Designer.cs">
-      <DependentUpon>201611281059477_PTAdministrator_user_add.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281116086_PTAdmin_role_add.cs" />
-    <Compile Include="Migrations\201611281116086_PTAdmin_role_add.Designer.cs">
-      <DependentUpon>201611281116086_PTAdmin_role_add.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.cs" />
-    <Compile Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.Designer.cs">
-      <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281434221_FirstNameLastNameForUser_added.cs" />
-    <Compile Include="Migrations\201611281434221_FirstNameLastNameForUser_added.Designer.cs">
-      <DependentUpon>201611281434221_FirstNameLastNameForUser_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.cs" />
-    <Compile Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.Designer.cs">
-      <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs" />
-    <Compile Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.Designer.cs">
-      <DependentUpon>201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs</DependentUpon>
+    <Compile Include="Migrations\201612011911422_Admin_User_FirstnameLastname.cs" />
+    <Compile Include="Migrations\201612011911422_Admin_User_FirstnameLastname.Designer.cs">
+      <DependentUpon>201612011911422_Admin_User_FirstnameLastname.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ProjectsTrackerData.cs" />
+    <Compile Include="IProjectsTrackerData.cs" />
     <Compile Include="ProjectsTrackerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -117,38 +93,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611280929278_InitialCreate.resx">
-      <DependentUpon>201611280929278_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281059477_PTAdministrator_user_add.resx">
-      <DependentUpon>201611281059477_PTAdministrator_user_add.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281116086_PTAdmin_role_add.resx">
-      <DependentUpon>201611281116086_PTAdmin_role_add.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281117328_AssignPTAdmin_toUserRole.resx">
-      <DependentUpon>201611281117328_AssignPTAdmin_toUserRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281434221_FirstNameLastNameForUser_added.resx">
-      <DependentUpon>201611281434221_FirstNameLastNameForUser_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281441456_FirstNameLastNameMadeRequired.resx">
-      <DependentUpon>201611281441456_FirstNameLastNameMadeRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611290923308_Project_PTask_Comment_Metric_initModelsStructure.resx">
-      <DependentUpon>201611290923308_Project_PTask_Comment_Metric_initModelsStructure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611291348491_removedOwnerIdfromProject.resx">
-      <DependentUpon>201611291348491_removedOwnerIdfromProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611301233325_ExpectedEndDate_project_madeRequired.resx">
-      <DependentUpon>201611301233325_ExpectedEndDate_project_madeRequired.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612011857162_initial.resx">
+      <DependentUpon>201612011857162_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612011900451_Admin_User.resx">
+      <DependentUpon>201612011900451_Admin_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612011911422_Admin_User_FirstnameLastname.resx">
+      <DependentUpon>201612011911422_Admin_User_FirstnameLastname.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
