@@ -22,23 +22,7 @@ namespace ProjectsTracker.Controllers
             this.projectService = projectService;
         }
         public ActionResult Index()
-        {
-            //IEnumerable<ProjectViewModel> projects = this.projectService.GetAll().Select(p => new ProjectViewModel()
-            //{
-            //    CreatedOn = p.CreatedOn,
-            //    ExpectedEndDate = p.ExpectedEndDate,
-            //    ClientName = p.ClientName,
-            //    Content = p.Content,
-            //    DateFinished = p.DateFinished,
-            //    EstimatedBudget = p.EstimatedBudget,
-            //    Id = p.Id,
-            //    isActive = p.isActive,
-            //    IsDeleted = p.IsDeleted,
-            //    OwnerName = p.Owner.FirstName + p.Owner.LastName,
-            //    OwnerId = p.Owner.Id,
-            //    Title = p.Title
-            //}).OrderByDescending(p => p.CreatedOn).ToList();
-
+        {        
             IEnumerable<ProjectViewModel> projects = this.projectService.GetAll()
                 .OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ProjectViewModel>()
@@ -47,20 +31,6 @@ namespace ProjectsTracker.Controllers
             IEnumerable<Project> projectsDb = projects.AsQueryable().ProjectTo<Project>().ToList();   
 
             return View(projects);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

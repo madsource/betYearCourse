@@ -42,5 +42,12 @@ namespace ProjectsTracker.Controllers
 
             return RedirectToAction("Index","Home");
         }
+
+        [HttpGet]
+        public ActionResult Details(int Id)
+        {
+            ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(projectService.Find(Id));
+            return View(projectVm);
+        }
     }
 }
