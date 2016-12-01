@@ -280,7 +280,6 @@ if (typeof NProgress != 'undefined') {
 
 
 // single datepicker plugin
-
 $.fn.singleDatePicker = function () {
     $(this).on("apply.daterangepicker", function (e, picker) {
         picker.element.val(picker.startDate.format(picker.locale.format));
@@ -295,13 +294,3 @@ $.fn.singleDatePicker = function () {
         }
     });
 };
-
-// custome date validation
-//$.validator.addMethod(
-//    "ptDate",
-//    function (value, element) {
-//        // put your own logic here, this is just a (crappy) example
-//        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
-//    },
-//    "Please enter a date in the format dd/mm/yyyy."
-//);
