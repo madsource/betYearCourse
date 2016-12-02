@@ -14,6 +14,7 @@ namespace ProjectsTracker.ViewModels
 
         [DataType(DataType.Date)]
         [Display(Name = "Created on")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? CreatedOn { get; set; }
 
         public bool IsDeleted { get; set; }
@@ -25,9 +26,6 @@ namespace ProjectsTracker.ViewModels
         [StringLength(10000)]
         public string Content { get; set; }
 
-        [Required]
-        [Display(Name = "Owner Name")]
-        [StringLength(100)]
         public ApplicationUserViewModel Owner { get; set; }
 
         //public string OwnerId { get; set; }
@@ -38,7 +36,8 @@ namespace ProjectsTracker.ViewModels
         public DateTime ExpectedEndDate { get; set; }
 
         [Display(Name = "Date Finished")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true )]
         public DateTime? DateFinished { get; set; }
 
         [Required]
@@ -46,6 +45,8 @@ namespace ProjectsTracker.ViewModels
         public bool isActive { get; set; }
 
         [Display(Name = "Estimated Budget")]
+        //[DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
         public decimal EstimatedBudget { get; set; }
 
         [Required]

@@ -10,6 +10,7 @@ namespace ProjectsTracker
         {
             bundles.Add(new ScriptBundle("~/bundles/libs").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
                         "~/Content/vendors/fastclick/lib/fastclick.js",
