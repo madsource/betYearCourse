@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.Annotations;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
@@ -81,5 +83,37 @@ namespace ProjectsTracker.Controllers
 
             return View(projectViewModel);
         }
+
+
+        [HttpPost]
+        [Authorize(Roles = RoleConstants.AdmminRole)]
+        public ActionResult Delete(int? projectId)
+        {
+            if (projectId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project project = projectService.Find(projectId);
+            project.IsDeleted = true;
+            projectService.Update(project);
+
+            // projectService.Delete(Id);
+
+            IEnumerable <ProjectViewModel> projects = projectService.GetAll()
+                .OrderByDescending(p => p.CreatedOn)
+                .ProjectTo<ProjectViewModel>()
+                .ToList();
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ProjectsList", projects);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home", projects);
+            }
+        }
+
     }
 }

@@ -34,7 +34,7 @@
                         @Html.ActionLink("Create project", "Create", "Project", null, new {@class = "btn btn-default btn-lg"})
                     }
                     <!-- start project list -->
-                    <div class="projects-holder">
+                    <div id="projects-holder" class="projects-holder">
                         @Html.Partial("_ProjectsList", Model)
                     </div>
                     <!-- end project list -->
