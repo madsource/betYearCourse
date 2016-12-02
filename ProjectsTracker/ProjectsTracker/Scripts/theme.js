@@ -294,3 +294,19 @@ $.fn.singleDatePicker = function () {
         }
     });
 };
+
+// custome live search
+$(function () {
+    $("#livesearch").keyup(function (e) {
+
+        var searchText = $(this).val();
+
+        if (searchText.length >= 3 || searchText == "") {
+            $.get("/Home/Index?search=" + searchText, function (r) {
+                $(".projects-holder").html(r);
+                $('.progress .progress-bar').progressbar();
+            });
+        } 
+    });
+
+});

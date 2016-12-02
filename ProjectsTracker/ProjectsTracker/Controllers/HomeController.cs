@@ -8,6 +8,7 @@ using ProjectsTracker.Models;
 using ProjectsTracker.Services.Contracts;
 using ProjectsTracker.ViewModels;
 using AutoMapper.QueryableExtensions;
+using Microsoft.Ajax.Utilities;
 
 namespace ProjectsTracker.Controllers
 {
@@ -21,7 +22,7 @@ namespace ProjectsTracker.Controllers
         {
             this.projectService = projectService;
         }
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             //IEnumerable<ProjectViewModel> projects = this.projectService.GetAll().Select(p => new ProjectViewModel()
             //{
@@ -39,12 +40,29 @@ namespace ProjectsTracker.Controllers
             //    Title = p.Title
             //}).OrderByDescending(p => p.CreatedOn).ToList();
 
-            IEnumerable<ProjectViewModel> projects = this.projectService.GetAll()
+            var projectsInDb = this.projectService.GetAll();
+
+            IEnumerable<ProjectViewModel> projects = projectsInDb
                 .OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ProjectViewModel>()
                 .ToList();
 
-            IEnumerable<Project> projectsDb = projects.AsQueryable().ProjectTo<Project>().ToList();   
+            //IEnumerable<Project> projectsDb = projects.AsQueryable().ProjectTo<Project>().ToList();
+
+            if (Request.IsAjaxRequest() && search != null)
+            {
+                var filteredDbProjects = projectsInDb.Where(p => p.Title.Contains(search) ||
+                                    p.Content.Contains(search) ||
+                                    p.ClientName.Contains(search) ||
+                                    (p.Owner.FirstName + p.Owner.LastName).Contains(search));
+
+                IEnumerable<ProjectViewModel> filteredProjects = filteredDbProjects
+                .OrderByDescending(p => p.CreatedOn)
+                .ProjectTo<ProjectViewModel>()
+                .ToList();
+
+                return PartialView("_ProjectsList", filteredProjects);
+            }
 
             return View(projects);
         }
