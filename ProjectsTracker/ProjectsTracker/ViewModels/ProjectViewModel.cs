@@ -15,7 +15,12 @@ namespace ProjectsTracker.ViewModels
         [DataType(DataType.Date)]
         [Display(Name = "Created on")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Updated on")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? UpdatedOn { get; set; }
 
         public bool IsDeleted { get; set; }
 
@@ -60,9 +65,9 @@ namespace ProjectsTracker.ViewModels
 
         public ProjectViewModel()
         {
-            this.Tasks = new List<PTask>();
-            this.Comments = new List<Comment>();
-            this.Metrics = new List<Metric>();
+            this.Tasks = new HashSet<PTask>();
+            this.Comments = new HashSet<Comment>();
+            this.Metrics = new HashSet<Metric>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

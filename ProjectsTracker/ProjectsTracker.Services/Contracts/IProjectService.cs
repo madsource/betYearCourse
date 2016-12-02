@@ -10,5 +10,12 @@ namespace ProjectsTracker.Services.Contracts
     public interface IProjectService : IService<Project>
     {
         IQueryable<Project> GetAll();
+
+        void Add(Project entity);
+
+        void Update(Project entity);
+
+        void SoftDelete(object Id);
+        
     }
 }

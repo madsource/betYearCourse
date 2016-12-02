@@ -56,7 +56,7 @@
                 </td>
 
                 <td>
-                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                    <a href="@Url.Action("Details", "Project", new {Id = project.Id})" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                     @if ((User.IsInRole(RoleConstants.ManagerRole) && User.Identity.GetUserId() == project.Owner.Id) || User.IsInRole(RoleConstants.AdmminRole))
                     {
                         <a href="@Url.Action("Edit", "Project", new {Id = project.Id})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
@@ -67,13 +67,13 @@
                     {
                         @Ajax.ActionLink("Delete",
                             "Delete", "Project",
-                            new {projectId = project.Id},
+                            new {Id = project.Id},
                             new AjaxOptions
                             {
                                 Confirm = "Are you sure you want to delete this project?",
-                                HttpMethod = "POST",
+                                HttpMethod = "Post",
                                 InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "projects-holder"
+                                UpdateTargetId = "projects-holder"                                
                             }, 
                             new {@class = "btn btn-danger btn-xs"})
                     }

@@ -69,6 +69,14 @@
     <Compile Include="Migrations\201612011911422_Admin_User_FirstnameLastname.Designer.cs">
       <DependentUpon>201612011911422_Admin_User_FirstnameLastname.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021826313_BaseModelRequiredFields.cs" />
+    <Compile Include="Migrations\201612021826313_BaseModelRequiredFields.Designer.cs">
+      <DependentUpon>201612021826313_BaseModelRequiredFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021838076_BaseModelAdded_UpdateOn.cs" />
+    <Compile Include="Migrations\201612021838076_BaseModelAdded_UpdateOn.Designer.cs">
+      <DependentUpon>201612021838076_BaseModelAdded_UpdateOn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
@@ -106,6 +114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612011911422_Admin_User_FirstnameLastname.resx">
       <DependentUpon>201612011911422_Admin_User_FirstnameLastname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021826313_BaseModelRequiredFields.resx">
+      <DependentUpon>201612021826313_BaseModelRequiredFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021838076_BaseModelAdded_UpdateOn.resx">
+      <DependentUpon>201612021838076_BaseModelAdded_UpdateOn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

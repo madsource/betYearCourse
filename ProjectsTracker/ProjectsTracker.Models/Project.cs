@@ -27,5 +27,12 @@ namespace ProjectsTracker.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Metric> Metrics { get; set; }
 
+        public Project()
+        {
+            this.Tasks = new HashSet<PTask>();
+            this.Comments = new HashSet<Comment>();
+            this.Metrics = new HashSet<Metric>();
+        }
+
     }
 }

@@ -76,7 +76,6 @@ namespace ProjectsTracker.Controllers
             if (ModelState.IsValid)
             {
                 Project project = Mapper.Map<Project>(projectViewModel);
-                project.CreatedOn = DateTime.Now;
                 projectService.Update(project);
                 return RedirectToAction("Index", "Home");
             }
@@ -84,19 +83,37 @@ namespace ProjectsTracker.Controllers
             return View(projectViewModel);
         }
 
-
-        [HttpPost]
-        [Authorize(Roles = RoleConstants.AdmminRole)]
-        public ActionResult Delete(int? projectId)
+        [HttpGet]
+        public ActionResult Delete(int? Id)
         {
-            if (projectId == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Project project = projectService.Find(projectId);
-            project.IsDeleted = true;
-            projectService.Update(project);
+            Project project = projectService.Find(Id);
+            return View("Details", project);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = RoleConstants.AdmminRole)]
+        [ActionName("Delete")]
+        public ActionResult DeleteProject(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //Project project = projectService.Find(Id);     
+
+            //if(project == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            projectService.SoftDelete(Id);
 
             // projectService.Delete(Id);
 

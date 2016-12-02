@@ -89,6 +89,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="Extensions\FormattedDbEntityValidationException.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Extensions\PTDateModelBinder.cs" />
     <Compile Include="Metric.cs" />

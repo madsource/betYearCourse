@@ -4,6 +4,8 @@
     using System.Data.Entity;
     //using ProjectsTracker.Data.Migrations;
     using Models;
+    using Models.Extensions;
+    using System.Data.Entity.Validation;
 
     public class ProjectsTrackerDbContext : IdentityDbContext
     {
@@ -28,6 +30,19 @@
         public static ProjectsTrackerDbContext Create()
         {
             return new ProjectsTrackerDbContext();
+        }
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                var newException = new FormattedDbEntityValidationException(e);
+                throw newException;
+            }
         }
     }
 }

@@ -23,31 +23,13 @@ namespace ProjectsTracker.Controllers
             this.projectService = projectService;
         }
         public ActionResult Index(string search)
-        {
-            //IEnumerable<ProjectViewModel> projects = this.projectService.GetAll().Select(p => new ProjectViewModel()
-            //{
-            //    CreatedOn = p.CreatedOn,
-            //    ExpectedEndDate = p.ExpectedEndDate,
-            //    ClientName = p.ClientName,
-            //    Content = p.Content,
-            //    DateFinished = p.DateFinished,
-            //    EstimatedBudget = p.EstimatedBudget,
-            //    Id = p.Id,
-            //    isActive = p.isActive,
-            //    IsDeleted = p.IsDeleted,
-            //    OwnerName = p.Owner.FirstName + p.Owner.LastName,
-            //    OwnerId = p.Owner.Id,
-            //    Title = p.Title
-            //}).OrderByDescending(p => p.CreatedOn).ToList();
-
+        {    
             var projectsInDb = this.projectService.GetAll();
 
             IEnumerable<ProjectViewModel> projects = projectsInDb
                 .OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ProjectViewModel>()
-                .ToList();
-
-            //IEnumerable<Project> projectsDb = projects.AsQueryable().ProjectTo<Project>().ToList();
+                .ToList();                       
 
             if (Request.IsAjaxRequest() && search != null)
             {
