@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Infrastructure.Annotations;
+using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
 using ProjectsTracker.Models;
@@ -41,6 +42,43 @@ namespace ProjectsTracker.Controllers
             this.projectService.Add(project);
 
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var project = projectService.Find(Id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (project.Owner.Id != User.Identity.GetUserId())
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            ProjectViewModel projectViewModel = Mapper.Map<ProjectViewModel>(project);
+            return View(projectViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProjectViewModel projectViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Project project = Mapper.Map<Project>(projectViewModel);
+                projectService.Update(project);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(projectViewModel);
         }
     }
 }

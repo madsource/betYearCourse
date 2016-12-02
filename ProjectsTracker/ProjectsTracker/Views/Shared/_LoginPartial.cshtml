@@ -10,13 +10,6 @@
 
     <ul class="dropdown-menu dropdown-usermenu pull-right">
         <li>@Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
-        @*<li>
-                <a href="javascript:;">
-                    <span class="badge bg-red pull-right">50%</span>
-                    <span>Settings</span>
-                </a>
-            </li>
-            <li><a href="javascript:;">Help</a></li>*@
         <li>
             @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
             {
