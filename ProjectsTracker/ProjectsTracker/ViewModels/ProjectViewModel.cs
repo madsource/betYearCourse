@@ -36,8 +36,8 @@ namespace ProjectsTracker.ViewModels
         public DateTime ExpectedEndDate { get; set; }
 
         [Display(Name = "Date Finished")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true )]
         public DateTime? DateFinished { get; set; }
 
         [Required]

@@ -1,6 +1,6 @@
 ﻿@model ProjectsTracker.ViewModels.ProjectViewModel
 
-<h2>Edit "@Model.Title" project</h2>
+<h3>Edit <span>"@Model.Title"</span> project</h3>
 
 
 @using (Html.BeginForm("Edit", "Project", FormMethod.Post))
@@ -64,7 +64,7 @@
         <div class="form-group has-feedback">
             @Html.LabelFor(model => model.DateFinished, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DateFinished, "{0:yyyy-MM-dd}", new { @class = "form-control has-feedback-left single_cal ignore", required = "" })
+                @Html.TextBoxFor(model => model.DateFinished, "{0:yyyy-MM-dd}", new { @class = "form-control has-feedback-left single_cal ignore"})
                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                 @Html.ValidationMessageFor(model => model.DateFinished, "", new { @class = "text-danger" })
             </div>

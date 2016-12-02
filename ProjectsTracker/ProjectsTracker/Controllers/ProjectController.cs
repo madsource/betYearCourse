@@ -74,6 +74,7 @@ namespace ProjectsTracker.Controllers
             if (ModelState.IsValid)
             {
                 Project project = Mapper.Map<Project>(projectViewModel);
+                project.CreatedOn = DateTime.Now;
                 projectService.Update(project);
                 return RedirectToAction("Index", "Home");
             }

@@ -19,7 +19,6 @@ namespace ProjectsTracker
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             // custom
-            ModelBinders.Binders.Add(typeof(DateTime?), new PtDateModelBinder());
             MappingConfig.RegisterMaps();
         }
     }
