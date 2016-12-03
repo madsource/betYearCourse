@@ -51,7 +51,7 @@ namespace ProjectsTracker.ViewModels
 
         [Display(Name = "Estimated Budget")]
         [DataType(DataType.Currency)]
-        //[DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
         public decimal EstimatedBudget { get; set; }
 
         [Required]

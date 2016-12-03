@@ -12,6 +12,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Owner.Id)
+        @Html.HiddenFor(model => model.CreatedOn)
      
         @if(User.IsInRole(RoleConstants.AdmminRole))
         {

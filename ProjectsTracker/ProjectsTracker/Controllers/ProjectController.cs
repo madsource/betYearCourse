@@ -60,7 +60,7 @@ namespace ProjectsTracker.Controllers
                 return HttpNotFound();
             }
 
-            if (project.Owner.Id != User.Identity.GetUserId())
+            if ((project.Owner.Id != User.Identity.GetUserId()) && !User.IsInRole(RoleConstants.AdmminRole) )
             {
                 return new HttpUnauthorizedResult();
             }

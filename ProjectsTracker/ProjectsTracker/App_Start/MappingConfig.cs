@@ -23,14 +23,10 @@ namespace ProjectsTracker
                 config.CreateMap<ApplicationUserViewModel, ApplicationUser>()
                     .ForMember(dest => dest.Roles, opt => opt.Ignore());
                 //Project
-                config.CreateMap<Project, ProjectViewModel>();
-                //.ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.FirstName + src.Owner.LastName));
-
-                config.CreateMap<ProjectViewModel, Project>();
-                //.ForMember(dest => dest.Owner, opt => opt.MapFrom(src => new ApplicationUser()
-                //    {
-                //        Id = src.OwnerId
-                //    }));
+                config.CreateMap<Project, ProjectViewModel>().ReverseMap();
+                //PTask
+                config.CreateMap<PTask, PTaskViewModel>().ReverseMap();
+        
             });
         }
     }
