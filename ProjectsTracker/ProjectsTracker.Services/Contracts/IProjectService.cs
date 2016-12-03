@@ -15,7 +15,7 @@ namespace ProjectsTracker.Services.Contracts
 
         void Update(Project entity);
 
-        void SoftDelete(object Id);
+        void SoftDelete(Project entity);
         
     }
 }

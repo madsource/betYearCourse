@@ -9,7 +9,7 @@ namespace ProjectsTracker.ViewModels
     {
         public ApplicationUserViewModel()
         {
-            this.userRoles = new List<string>();
+            this.userRoles = new HashSet<string>();
         }
         public string Id { get; set; }
         public string UserName { get; set; }

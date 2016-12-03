@@ -18,6 +18,13 @@
             return base.GetAll().OrderByDescending(p => p.CreatedOn);
         }
 
+        public override Project Find(object Id)
+        {
+            Project project = base.Find(Id);
+            project.Owner = base.Data.Users.Find(project.Owner.Id);
+            return project;
+        }
+
         public override void Add(Project entity)
         {
             entity.CreatedOn = DateTime.Now;
@@ -32,9 +39,8 @@
             base.SaveChanges();
         }
 
-        public void SoftDelete(object Id)
+        public void SoftDelete(Project entity)
         {
-            var entity = this.Find(Id);
             entity.UpdatedOn = DateTime.Now;
             entity.IsDeleted = true;
             base.Update(entity);

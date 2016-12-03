@@ -60,24 +60,28 @@
                     @if ((User.IsInRole(RoleConstants.ManagerRole) && User.Identity.GetUserId() == project.Owner.Id) || User.IsInRole(RoleConstants.AdmminRole))
                     {
                         <a href="@Url.Action("Edit", "Project", new {Id = project.Id})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            @*<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>*@
+                        @*<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>*@
                     }
-                        
+
                     @if (User.IsInRole(RoleConstants.AdmminRole))
                     {
                         @Ajax.ActionLink("Delete",
                             "Delete", "Project",
-                            new {Id = project.Id},
+                            new { Id = project.Id },
                             new AjaxOptions
                             {
                                 Confirm = "Are you sure you want to delete this project?",
                                 HttpMethod = "Post",
                                 InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "projects-holder"                                
-                            }, 
-                            new {@class = "btn btn-danger btn-xs"})
+                                UpdateTargetId = "projects-holder",
+                                OnSuccess = "refreshProgressBars",
+                                OnFailure = "alert('Something went wrong!')"
+                            },
+                            new { @class = "btn btn-danger btn-xs" })
                     }
                 </td>
+
+
 
             </tr>
         }

@@ -106,14 +106,14 @@ namespace ProjectsTracker.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //Project project = projectService.Find(Id);     
+            Project project = projectService.Find(Id);
 
-            //if(project == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
 
-            projectService.SoftDelete(Id);
+            projectService.SoftDelete(project);
 
             // projectService.Delete(Id);
 

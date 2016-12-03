@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201612021838076_BaseModelAdded_UpdateOn.Designer.cs">
       <DependentUpon>201612021838076_BaseModelAdded_UpdateOn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612031037061_Project_ApplicationUserNotVirtual.cs" />
+    <Compile Include="Migrations\201612031037061_Project_ApplicationUserNotVirtual.Designer.cs">
+      <DependentUpon>201612031037061_Project_ApplicationUserNotVirtual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021838076_BaseModelAdded_UpdateOn.resx">
       <DependentUpon>201612021838076_BaseModelAdded_UpdateOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612031037061_Project_ApplicationUserNotVirtual.resx">
+      <DependentUpon>201612031037061_Project_ApplicationUserNotVirtual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

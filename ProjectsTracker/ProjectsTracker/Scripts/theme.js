@@ -304,9 +304,13 @@ $(function () {
         if (searchText.length >= 3 || searchText == "") {
             $.get("/Home/Index?search=" + searchText, function (r) {
                 $(".projects-holder").html(r);
-                $('.progress .progress-bar').progressbar();
+                refreshProgressBars();
             });
         } 
     });
 
 });
+
+function refreshProgressBars() {
+    $('.progress .progress-bar').progressbar();
+}
