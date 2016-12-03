@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="Contracts\IPTaskService.cs" />
     <Compile Include="Contracts\IProjectService.cs" />
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="Contracts\IUsersService.cs" />
     <Compile Include="ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTaskService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
