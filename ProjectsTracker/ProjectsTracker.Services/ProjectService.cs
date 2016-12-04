@@ -46,5 +46,13 @@
             base.Update(entity);
             base.SaveChanges();
         }
+
+        public Project AddTask(Project project, PTask task)
+        {
+            project.Tasks.Add(task);
+            base.Update(project);
+            base.SaveChanges();
+            return project;
+        }
     }
 }

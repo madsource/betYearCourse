@@ -60,7 +60,7 @@ namespace ProjectsTracker.ViewModels
         [StringLength(100)]
         public string ClientName { get; set; }
 
-        public ICollection<PTask> Tasks { get; set; }
+        public ICollection<PTaskViewModel> Tasks { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Metric> Metrics { get; set; }
 
@@ -68,7 +68,7 @@ namespace ProjectsTracker.ViewModels
 
         public ProjectViewModel()
         {
-            this.Tasks = new HashSet<PTask>();
+            this.Tasks = new HashSet<PTaskViewModel>();
             this.Comments = new HashSet<Comment>();
             this.Metrics = new HashSet<Metric>();
         }

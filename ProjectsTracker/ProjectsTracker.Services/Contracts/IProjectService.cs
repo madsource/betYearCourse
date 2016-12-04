@@ -16,6 +16,8 @@ namespace ProjectsTracker.Services.Contracts
         void Update(Project entity);
 
         void SoftDelete(Project entity);
+
+        Project AddTask(Project project, PTask task); 
         
     }
 }

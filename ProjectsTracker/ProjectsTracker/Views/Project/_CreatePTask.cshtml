@@ -1,6 +1,6 @@
 ﻿@model ProjectsTracker.ViewModels.PTaskViewModel
 
-@using (Html.BeginForm("Create", "PTask", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+@using (Ajax.BeginForm("Create", "PTask", new { }, new AjaxOptions {HttpMethod = "Post", UpdateTargetId = "tasks-holder" },  new { @class = "form-horizontal form-label-left" }))
 {
     @Html.AntiForgeryToken()
     

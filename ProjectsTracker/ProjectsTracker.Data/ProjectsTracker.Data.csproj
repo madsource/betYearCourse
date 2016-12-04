@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201612031317113_PTaskChange.Designer.cs">
       <DependentUpon>201612031317113_PTaskChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612041203307_TimeReportItem_added.cs" />
+    <Compile Include="Migrations\201612041203307_TimeReportItem_added.Designer.cs">
+      <DependentUpon>201612041203307_TimeReportItem_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612031317113_PTaskChange.resx">
       <DependentUpon>201612031317113_PTaskChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612041203307_TimeReportItem_added.resx">
+      <DependentUpon>201612041203307_TimeReportItem_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

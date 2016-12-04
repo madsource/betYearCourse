@@ -20,9 +20,9 @@ namespace ProjectsTracker.ViewModels
         public bool IsDeleted { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
         public string Description { get; set; }
 
@@ -32,13 +32,13 @@ namespace ProjectsTracker.ViewModels
 
         public float EstimatedHours { get; set; }
 
-        public IDictionary<DateTime, float> HoursWorkedList { get; set; }
+        public ICollection<TimeReportItemViewModel> TimeReportList { get; set; }
 
         public float ProgressPercent { get; set; }
 
         public PTaskViewModel()
         {
-            HoursWorkedList = new Dictionary<DateTime, float>();
+            TimeReportList = new HashSet<TimeReportItemViewModel>();
         }
     }
 }

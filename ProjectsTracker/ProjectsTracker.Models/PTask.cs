@@ -18,13 +18,13 @@ namespace ProjectsTracker.Models
 
         public float EstimatedHours { get; set; }
 
-        public virtual IDictionary<DateTime, float> HoursWorkedList { get; set; }
+        public virtual ICollection<TimeReportItem> TimeReportList { get; set; }
 
         public float ProgressPercent { get; set; }
 
         public PTask()
         {
-            HoursWorkedList = new Dictionary<DateTime, float>();
+            TimeReportList = new HashSet<TimeReportItem>();
         }
     }
 }

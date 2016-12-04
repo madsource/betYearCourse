@@ -205,6 +205,10 @@
 
                                 @Html.Partial("_CreatePTask", new PTaskViewModel(), new ViewDataDictionary { {"Users", Model.Users} })
 
+                                <div class="tasks-holder">
+                                    @Html.Partial("~/Views/PTask/_TasksList.cshtml", Model.Tasks);
+                                </div>
+
 
                             </div>
 

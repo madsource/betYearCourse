@@ -1,10 +1,15 @@
-﻿using ProjectsTracker.Services.Contracts;
+﻿using Microsoft.AspNet.Identity;
+using ProjectsTracker.Common;
+using ProjectsTracker.Models;
+using ProjectsTracker.Services.Contracts;
 using ProjectsTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace ProjectsTracker.Controllers
 {
@@ -14,15 +19,16 @@ namespace ProjectsTracker.Controllers
 
         private IUsersService userService;
         private IPTaskService ptaskService;
+        private IProjectService projectService;
 
-        public PTaskController(IUsersService userService, IPTaskService ptaskService)
+        public PTaskController(IUsersService userService, IPTaskService ptaskService, IProjectService projectService)
         {
             this.userService = userService;
             this.ptaskService = ptaskService;
+            this.projectService = projectService;
         }
              
 
-        // GET: PTask
         public ActionResult Index()
         {
 
@@ -30,32 +36,45 @@ namespace ProjectsTracker.Controllers
             return View(ptaskVM);
         }
 
-        // GET: PTask/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PTask/Create
         public ActionResult Create()
         {
             PTaskViewModel ptaskVM = new PTaskViewModel();
             return View(ptaskVM);
         }
 
-        // POST: PTask/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [Authorize(Roles = RoleConstants.AdmminRole +","+ RoleConstants.ManagerRole)]
+        public ActionResult Create(PTaskViewModel pTaskVm, int projectId)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Project project = this.projectService.Find(projectId);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if(project == null)
             {
-                return View();
+                return HttpNotFound();
+            }
+
+            if(project.Owner.Id != User.Identity.GetUserId())
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            PTask pTask = Mapper.Map<PTask>(pTaskVm);
+
+            ProjectViewModel updatedProject = Mapper.Map<ProjectViewModel>(this.projectService.AddTask(project, pTask));
+
+            if(Request.IsAjaxRequest())
+            {
+
+                return PartialView("_TasksList", updatedProject.Tasks);
+            }
+            else
+            {
+                return RedirectToAction("Details", "Project", updatedProject);
             }
         }
 

@@ -26,7 +26,8 @@ namespace ProjectsTracker
                 config.CreateMap<Project, ProjectViewModel>().ReverseMap();
                 //PTask
                 config.CreateMap<PTask, PTaskViewModel>().ReverseMap();
-        
+                config.CreateMap<TimeReportItem, TimeReportItemViewModel>().ReverseMap();
+
             });
         }
     }
