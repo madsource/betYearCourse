@@ -326,7 +326,7 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Shared\_ProjectsList.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
-    <Content Include="Views\Project\_CreatePTask.cshtml" />
+    <Content Include="Views\PTask\_CreatePTask.cshtml" />
     <Content Include="Views\PTask\_TasksList.cshtml" />
   </ItemGroup>
   <ItemGroup>

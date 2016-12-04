@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", required = "" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EstimatedHours, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EstimatedHours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EstimatedHours, new { htmlAttributes = new { @class = "form-control" , required = "" } })
                 @Html.ValidationMessageFor(model => model.EstimatedHours, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OwnerId, "Owner", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OwnerId", (IEnumerable<SelectListItem>)ViewData["Users"], htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OwnerId", (IEnumerable<SelectListItem>)ViewData["Users"], "Select a user", htmlAttributes: new { @class = "form-control", required = "" })
                 @Html.ValidationMessageFor(model => model.OwnerId, "", new { @class = "text-danger" })
             </div>
         </div>
