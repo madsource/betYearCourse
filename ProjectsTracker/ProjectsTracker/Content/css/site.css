@@ -3,23 +3,23 @@
 }
 
 /*Project statuses*/
-.btn.btn-success.btn-xs.status-red {
+.project-status .btn.btn-xs {
     color: #fff;
     padding: 2px 12px;
-    background-color: #d9534f;
-    border-color: #d43f3a;
+    min-width: 60px;
 }
 
-.btn.btn-success.btn-xs.status-amber {
-    padding: 2px 12px;
-    color: #fff;
+.project-status .btn.btn-xs.status-red {    
+    background-color: #d9534f;
+    border-color: #d43f3a;    
+}
+
+.project-status .btn.btn-xs.status-amber {
     background-color: #f0ad4e;
     border-color: #eea236;
 }
 
-.btn.btn-success.btn-xs.status-green {
-    padding: 2px 12px;
-    color: #fff;
+.project-status .btn.btn-xs.status-green {
     background: #26B99A;
     border: 1px solid #169F85;
 }

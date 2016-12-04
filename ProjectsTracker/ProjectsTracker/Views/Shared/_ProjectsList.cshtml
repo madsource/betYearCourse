@@ -51,8 +51,8 @@
                     </div>
                     <small>@project.Progress% Complete</small>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-success status-@project.GetProjectStatus().ToLower() btn-xs">@project.GetProjectStatus()</button>
+                <td class="project-status">
+                    <button type="button" class="btn status-@project.GetProjectStatus().ToLower() btn-xs">@project.GetProjectStatus()</button>
                 </td>
 
                 <td>
