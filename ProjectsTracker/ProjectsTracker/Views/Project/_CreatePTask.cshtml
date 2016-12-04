@@ -1,11 +1,19 @@
 ﻿@model ProjectsTracker.ViewModels.PTaskViewModel
 
-@using (Ajax.BeginForm("Create", "PTask", new { }, new AjaxOptions {HttpMethod = "Post", UpdateTargetId = "tasks-holder" },  new { @class = "form-horizontal form-label-left" }))
+@using (Ajax.BeginForm("Create", "PTask",
+    new { projectId = ViewData["projectId"] },
+    new AjaxOptions {
+        HttpMethod = "Post",
+        UpdateTargetId = "tasks-holder",
+        OnSuccess = "refreshProgressBars",
+        OnFailure = "alert('Something went wrong!')"
+    },
+    new { @class = "form-horizontal form-label-left" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
     
     <div class="form-horizontal">
-        <h5>@ProjectDetailsConstants.AddNewTask</h5>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

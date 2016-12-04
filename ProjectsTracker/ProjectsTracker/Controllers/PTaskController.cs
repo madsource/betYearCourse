@@ -65,6 +65,15 @@ namespace ProjectsTracker.Controllers
 
             PTask pTask = Mapper.Map<PTask>(pTaskVm);
 
+            pTask.CreatedOn = DateTime.Now;
+
+            //set users of task
+            ApplicationUser currentUser = this.userService.Find(User.Identity.GetUserId());
+            ApplicationUser chosenOwner = this.userService.Find(pTaskVm.OwnerId);
+
+            pTask.Author = currentUser;
+            pTask.Owner = chosenOwner;
+
             ProjectViewModel updatedProject = Mapper.Map<ProjectViewModel>(this.projectService.AddTask(project, pTask));
 
             if(Request.IsAjaxRequest())

@@ -20,6 +20,7 @@ namespace ProjectsTracker.Common
         public const string Tasks = "Tasks";
         public const string AddNewTask = "Add a new task";
         public const string AddTask = "Add task";
+        public const string NoTasks = "There are still no tasks added.";
         public const string EstimatedBudget = "Estimated Budget";
         public const string EstimatedDaysToFinish = "Estimated days to finish";
         public const string TotalAmountSpend = "Total amount spend";
