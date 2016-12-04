@@ -114,8 +114,23 @@ namespace ProjectsTracker.ViewModels
             else
             {
                 return "Green";
-
             }
+        }
+
+        public ICollection<ApplicationUserViewModel> GetProjectUsers()
+        {
+            ICollection<ApplicationUserViewModel> users = new HashSet<ApplicationUserViewModel>();
+
+            foreach (var task in this.Tasks)
+            {
+                if(users.FirstOrDefault(u => u.Id == task.Owner.Id) == null)
+                {
+                    // user not added, so add it
+                    users.Add(task.Owner);
+                }                
+            }
+
+            return users;
         }
     }
 }

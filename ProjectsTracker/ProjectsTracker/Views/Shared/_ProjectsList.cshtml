@@ -31,18 +31,12 @@
                 </td>
                 <td>
                     <ul class="list-inline">
-                        <li>
-                            <img src="/Content/images/user.png" class="avatar" alt="Avatar">
-                        </li>
-                        <li>
-                            <img src="/Content/images/user.png" class="avatar" alt="Avatar">
-                        </li>
-                        <li>
-                            <img src="/Content/images/user.png" class="avatar" alt="Avatar">
-                        </li>
-                        <li>
-                            <img src="/Content/images/user.png" class="avatar" alt="Avatar">
-                        </li>
+                        @foreach (var user in project.GetProjectUsers())
+                        {
+                            <li>
+                                <img src="/Content/images/user.png" class="avatar" alt="@user.FirstName @user.LastName" title="@user.FirstName @user.LastName">
+                            </li>
+                        }                                            
                     </ul>
                 </td>
                 <td class="project_progress">
