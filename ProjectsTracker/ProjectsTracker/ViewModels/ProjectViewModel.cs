@@ -66,6 +66,8 @@ namespace ProjectsTracker.ViewModels
 
         public SelectList Users { get; set; }
 
+        public float Progress { get; set; }
+
         public ProjectViewModel()
         {
             this.Tasks = new HashSet<PTaskViewModel>();

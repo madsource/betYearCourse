@@ -26,10 +26,7 @@ namespace ProjectsTracker.Controllers
         {    
             var projectsInDb = this.projectService.GetAll();
 
-            IEnumerable<ProjectViewModel> projects = projectsInDb
-                .OrderByDescending(p => p.CreatedOn)
-                .ProjectTo<ProjectViewModel>()
-                .ToList();                       
+            IEnumerable<ProjectViewModel> projects = this.ConvertDbToVmList(projectsInDb);           
 
             if (Request.IsAjaxRequest() && search != null)
             {
@@ -38,15 +35,20 @@ namespace ProjectsTracker.Controllers
                                     p.ClientName.Contains(search) ||
                                     (p.Owner.FirstName + p.Owner.LastName).Contains(search));
 
-                IEnumerable<ProjectViewModel> filteredProjects = filteredDbProjects
-                .OrderByDescending(p => p.CreatedOn)
-                .ProjectTo<ProjectViewModel>()
-                .ToList();
+                IEnumerable<ProjectViewModel> filteredProjects = this.ConvertDbToVmList(filteredDbProjects);             
 
                 return PartialView("_ProjectsList", filteredProjects);
             }
 
             return View(projects);
+        }
+
+        private IEnumerable<ProjectViewModel> ConvertDbToVmList(IQueryable<Project> projects)
+        {
+            return projects.OrderByDescending(p => p.CreatedOn)
+                .ProjectTo<ProjectViewModel>()
+                .ToList()
+                .Select(p => { p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0); return p; });
         }
     }
 }
