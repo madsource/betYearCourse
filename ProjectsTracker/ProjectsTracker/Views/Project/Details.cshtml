@@ -6,7 +6,7 @@
         <div class="page-title">
             <div class="title_left">
                 <h3>@Model.Title</h3>
-                <h6>@ProjectDetailsConstants.Created: @Model.CreatedOn <small> @((Model.UpdatedOn != null) ? ( ProjectDetailsConstants.Edited +": " + Model.UpdatedOn) : "")</small></h6>
+                <h6>@ProjectDetailsConstants.Created: @Model.CreatedOn <small> @((Model.UpdatedOn != null) ? (ProjectDetailsConstants.Edited + ": " + Model.UpdatedOn) : "")</small></h6>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
                     <div class="x_title">
                         <h2>
                             @ProjectDetailsConstants.Status: <span class="text-status-@Model.GetProjectStatus().ToLower()">@Model.GetProjectStatus()</span>
-                        </h2>                    
+                        </h2>
                         <div class="clearfix"></div>
                     </div>
 
@@ -26,23 +26,27 @@
 
                         <div class="col-md-9 col-sm-9 col-xs-12">
 
-                            <ul class="stats-overview">
-                                <li>
-                                    <span class="name"> @ProjectDetailsConstants.EstimatedBudget </span>
-                                    <span class="value text-success"> @Model.EstimatedBudget </span>
-                                </li>
-                                <li>
-                                    <span class="name"> @ProjectDetailsConstants.TotalAmountSpend</span>
-                                    <span class="value text-success"> 2000 </span>
-                                </li>
-                                <li class="hidden-phone">
-                                    <span class="name"> @ProjectDetailsConstants.EstimatedDaysToFinish </span>
-                                    <span class="value text-success">@((Model.ExpectedEndDate - DateTime.Now).Days)</span>
-                                </li>
-                            </ul>
-                            <br />
+                            @if (User.IsInRole(RoleConstants.AdmminRole) || User.IsInRole(RoleConstants.ManagerRole))
+                            {
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> @ProjectDetailsConstants.EstimatedBudget</span>
+                                        <span class="value text-success"> @Model.EstimatedBudget</span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> @ProjectDetailsConstants.TotalAmountSpend</span>
+                                        <span class="value text-success"> 2000 </span>
+                                    </li>
+                                    <li class="hidden-phone">
+                                        <span class="name"> @ProjectDetailsConstants.EstimatedDaysToFinish</span>
+                                        <span class="value text-success">@((Model.ExpectedEndDate - DateTime.Now).Days)</span>
+                                    </li>
+                                </ul>
+                                <br />
 
-                            <div id="mainb" style="height:350px;"></div>
+                                <div id="mainb" style="height:350px;"></div>
+                            }
+
 
 
                             @*<h4>Recent Activity</h4>
@@ -64,7 +68,7 @@
                                                 <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
                                             </p>
                                         </div>
-                                    </li>                                    
+                                    </li>
                                 </ul>*@
                             <!-- end of user messages -->
 
@@ -72,8 +76,10 @@
 
                             @if (User.IsInRole(RoleConstants.AdmminRole) || (User.IsInRole(RoleConstants.ManagerRole) && User.Identity.GetUserId() == Model.Owner.Id))
                             {
-                                @Html.Partial("~/Views/PTask/_CreatePTask.cshtml", new PTaskViewModel(), new ViewDataDictionary { { "Users", Model.Users }, { "projectId", Model.Id } })
-                            }                            
+                                @Html.Partial("~/Views/PTask/_CreatePTask.cshtml", new PTaskViewModel(), new ViewDataDictionary { { "Users", Model.Users
+                                        }, { "projectId", Model.Id
+                                    } })
+                            }
 
                             <div id="tasks-holder" class="tasks-holder col-md-12">
                                 @Html.Partial("~/Views/PTask/_TasksList.cshtml", Model.Tasks)
@@ -90,7 +96,7 @@
                                     <h2>@ProjectDetailsConstants.ProjectDescription</h2>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="panel-body">                                  
+                                <div class="panel-body">
 
                                     <p>@Model.Content</p>
                                     <br />
@@ -147,7 +153,7 @@
 </div>
 
 @section scripts {
-@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
     <!-- ECharts -->
     <script>
         var theme = {
