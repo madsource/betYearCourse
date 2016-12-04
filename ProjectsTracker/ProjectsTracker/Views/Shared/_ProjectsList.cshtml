@@ -60,7 +60,6 @@
                     @if ((User.IsInRole(RoleConstants.ManagerRole) && User.Identity.GetUserId() == project.Owner.Id) || User.IsInRole(RoleConstants.AdmminRole))
                     {
                         <a href="@Url.Action("Edit", "Project", new {Id = project.Id})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                        @*<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>*@
                     }
 
                     @if (User.IsInRole(RoleConstants.AdmminRole))

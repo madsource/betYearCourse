@@ -7,7 +7,6 @@
             <tr>
                 <th>@Html.DisplayNameFor(model => model[0].Id)</th>
                 <th>@Html.DisplayNameFor(model => model[0].Title)</th>
-                @*<th>@Html.DisplayNameFor(model => model[0].Description)</th>*@
                 <th>@Html.DisplayNameFor(model => model[0].ProgressPercent)</th>
                 <th>@Html.DisplayNameFor(model => model[0].Owner.UserName)</th>
             </tr>
@@ -18,7 +17,6 @@
                 <tr>
                     <th scope="row">@Html.DisplayFor(modelItem => task.Id)</th>
                     <td>@Html.DisplayFor(modelItem => task.Title)</td>
-                    @*<td>@Html.DisplayFor(modelItem => task.Description)</td>*@
                     <td>
                         <div class="progress right">
                             <div class="progress-bar progress-bar-success" data-transitiongoal="@task.ProgressPercent"></div>

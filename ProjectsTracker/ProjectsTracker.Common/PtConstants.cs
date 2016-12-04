@@ -16,5 +16,6 @@ namespace ProjectsTracker.Common
         public const string Tasks = "Tasks";
         public const string Users = "Users";
         public const string Admin = "Admin";
+        public const string AdminUsername = "admin@projectstracker.bg";
     }
 }

@@ -137,7 +137,7 @@ namespace ProjectsTracker.Controllers
         public ActionResult Details(int Id)
         {
             ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(projectService.Find(Id));
-            projectVm.Users = new SelectList(this.usersService.GetAll(), "Id", "UserName");
+            projectVm.Users = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
             return View(projectVm);
         }
     }
