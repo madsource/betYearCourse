@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using ProjectsTracker.Models;
 using System.Web.Mvc;
+using ProjectsTracker.Common;
 
 namespace ProjectsTracker.ViewModels
 {
@@ -89,6 +90,31 @@ namespace ProjectsTracker.ViewModels
                 yield return
                   new ValidationResult(errorMessage: $"{this.DateFinished} must be greater than {this.CreatedOn}",
                                        memberNames: new[] { "DateFinished" });
+            }
+        }
+
+        public string GetProjectStatus()
+        {
+            double actualCost = 0;
+
+            foreach (var task in this.Tasks)
+            {
+                actualCost += ((task.ProgressPercent / 100) * task.EstimatedHours) * PtConstants.RatePerHour;
+            }
+
+            if (actualCost > (double)this.EstimatedBudget + (double)this.EstimatedBudget * PtConstants.BudgetToleranceInPercents)
+            {
+                return "Red";
+            }
+            else if (((double)this.EstimatedBudget + (double)this.EstimatedBudget * PtConstants.BudgetToleranceInPercents) > actualCost 
+                && actualCost > (double)this.EstimatedBudget)
+            {
+                return "Amber";
+            }
+            else
+            {
+                return "Green";
+
             }
         }
     }

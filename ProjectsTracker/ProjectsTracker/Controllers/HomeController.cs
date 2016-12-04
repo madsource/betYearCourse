@@ -9,6 +9,7 @@ using ProjectsTracker.Services.Contracts;
 using ProjectsTracker.ViewModels;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Ajax.Utilities;
+using ProjectsTracker.Common;
 
 namespace ProjectsTracker.Controllers
 {
@@ -48,7 +49,8 @@ namespace ProjectsTracker.Controllers
             return projects.OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ProjectViewModel>()
                 .ToList()
-                .Select(p => { p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0); return p; });
+                .Select(p => { p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0); return p; });                
         }
+
     }
 }

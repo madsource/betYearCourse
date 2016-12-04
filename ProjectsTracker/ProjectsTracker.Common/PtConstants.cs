@@ -17,5 +17,9 @@ namespace ProjectsTracker.Common
         public const string Users = "Users";
         public const string Admin = "Admin";
         public const string AdminUsername = "admin@projectstracker.bg";
+        public const double RatePerHour = 15;
+        //Number from 0 to 1 /0 - 100%/
+        public const double BudgetToleranceInPercents = 0.2;
+
     }
 }
