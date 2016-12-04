@@ -23,3 +23,18 @@
     background: #26B99A;
     border: 1px solid #169F85;
 }
+
+
+/*Text statuses*/
+
+span.text-status-green {
+    color: #26B99A;
+}
+
+span.text-status-amber {
+    color: #f0ad4e;
+}
+
+span.text-status-red {
+    color: #d9534f;
+}

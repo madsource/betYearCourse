@@ -24,5 +24,8 @@ namespace ProjectsTracker.Common
         public const string EstimatedBudget = "Estimated Budget";
         public const string EstimatedDaysToFinish = "Estimated days to finish";
         public const string TotalAmountSpend = "Total amount spend";
+        public const string Edited = "Edited";
+        public const string Created = "Created";
+        public const string Status = "Status";
     }
 }

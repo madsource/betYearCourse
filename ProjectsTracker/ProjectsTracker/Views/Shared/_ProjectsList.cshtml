@@ -34,7 +34,7 @@
                         @foreach (var user in project.GetProjectUsers())
                         {
                             <li>
-                                <img src="/Content/images/user.png" class="avatar" alt="@user.FirstName @user.LastName" title="@user.FirstName @user.LastName">
+                                <img src="~/Content/images/avatars/@(user.UserName).png" class="avatar" alt="@user.FirstName @user.LastName" title="@user.FirstName @user.LastName">
                             </li>
                         }                                            
                     </ul>

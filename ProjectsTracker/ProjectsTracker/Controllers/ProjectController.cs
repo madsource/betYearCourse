@@ -15,7 +15,7 @@ using ProjectsTracker.Services.Contracts;
 
 namespace ProjectsTracker.Controllers
 {
-    [Authorize(Roles = RoleConstants.AdmminRole +"," + RoleConstants.ManagerRole)]
+    
     public class ProjectController : Controller
     {
         private IProjectService projectService;
@@ -35,6 +35,7 @@ namespace ProjectsTracker.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
         public ActionResult Create(ProjectViewModel projectViewModel)
         {
             Project project = Mapper.Map<Project>(projectViewModel);
@@ -47,6 +48,7 @@ namespace ProjectsTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
         public ActionResult Edit(int? Id)
         {
             if (Id == null)
@@ -71,6 +73,7 @@ namespace ProjectsTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
         public ActionResult Edit(ProjectViewModel projectViewModel)
         {
             if (ModelState.IsValid)
@@ -84,6 +87,7 @@ namespace ProjectsTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
         public ActionResult Delete(int? Id)
         {
             if (Id == null)
@@ -134,9 +138,20 @@ namespace ProjectsTracker.Controllers
 
 
         [HttpGet]
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? Id)
         {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(projectService.Find(Id));
+
+            if(projectVm == null)
+            {
+                return HttpNotFound();
+            }
+
             projectVm.Users = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
             return View(projectVm);
         }
