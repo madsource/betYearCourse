@@ -3,39 +3,39 @@
 <h3>Edit <span>"@Model.Title"</span> project</h3>
 
 
-@using (Html.BeginForm("Edit", "Project", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Project", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-      
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Owner.Id)
-        @Html.HiddenFor(model => model.CreatedOn)
-     
-        @if(User.IsInRole(RoleConstants.AdmminRole))
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.CheckBoxFor(model => model.IsDeleted, new { @class = "flat" })
-                        @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        }
-        
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Owner.Id)
+    @Html.HiddenFor(model => model.CreatedOn)
+
+    if(User.IsInRole(RoleConstants.AdmminRole))
+    {
         <div class="form-group">
-            @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.isActive, new { @class = "flat" })
-                    @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+                    @Html.CheckBoxFor(model => model.IsDeleted, new { @class = "flat" })
+                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.isActive, new { @class = "flat" })
+                @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -52,7 +52,7 @@
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group has-feedback">
             @Html.LabelFor(model => model.ExpectedEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -65,18 +65,18 @@
         <div class="form-group has-feedback">
             @Html.LabelFor(model => model.DateFinished, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DateFinished, "{0:yyyy-MM-dd}", new { @class = "form-control has-feedback-left single_cal ignore"})
+                @Html.TextBoxFor(model => model.DateFinished, "{0:yyyy-MM-dd}", new { @class = "form-control has-feedback-left single_cal ignore" })
                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                 @Html.ValidationMessageFor(model => model.DateFinished, "", new { @class = "text-danger" })
             </div>
         </div>
 
-       
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.EstimatedBudget, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.EstimatedBudget, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.EstimatedBudget, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EstimatedBudget, "", new { @class = "text-danger alert" })
             </div>
         </div>
@@ -94,7 +94,7 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-    </div>
+
 }
 
 <div>
@@ -105,7 +105,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#ExpectedEndDate').singleDatePicker();
             $('#DateFinished').singleDatePicker();
         });

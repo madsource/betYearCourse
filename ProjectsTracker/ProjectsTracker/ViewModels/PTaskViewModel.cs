@@ -4,15 +4,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ProjectsTracker.ViewModels
 {
     public class PTaskViewModel
     {
-        [Required]
-        public ApplicationUserViewModel Author { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        public ApplicationUserViewModel Owner { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        [Required]
+        public int AuthorId { get; set; }
+
+        public int OwnerId { get; set; }
 
         public string Description { get; set; }
 

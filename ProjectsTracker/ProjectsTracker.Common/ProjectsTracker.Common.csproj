@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateProjectConstants.cs" />
+    <Compile Include="ProjectDetailsConstants.cs" />
     <Compile Include="PtConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleConstants.cs" />

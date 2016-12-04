@@ -79,6 +79,11 @@ namespace ProjectsTracker.App_Start
                .Bind<IUsersService>()
                .To<UsersService>()
                .InRequestScope();
+
+            kernel
+               .Bind<IPTaskService>()
+               .To<PTaskService>()
+               .InRequestScope();
         }        
     }
 }

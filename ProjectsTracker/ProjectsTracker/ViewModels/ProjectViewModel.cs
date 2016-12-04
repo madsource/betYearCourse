@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using ProjectsTracker.Models;
+using System.Web.Mvc;
 
 namespace ProjectsTracker.ViewModels
 {
@@ -62,6 +63,8 @@ namespace ProjectsTracker.ViewModels
         public ICollection<PTask> Tasks { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Metric> Metrics { get; set; }
+
+        public SelectList Users { get; set; }
 
         public ProjectViewModel()
         {
