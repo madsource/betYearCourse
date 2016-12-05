@@ -17,7 +17,11 @@
                 var task = Model.OrderBy(t => t.CreatedOn).ElementAt(i);
                 <tr>
                     <th scope="row">@(i + 1)</th>
-                    <td>@Html.DisplayFor(modelItem => task.Title)</td>
+                    <td>
+                        <a href="@Url.Action("Update", "PTask", new {Id = task.Id, projectId = ViewData["projectId"]})" >
+                            @Html.DisplayFor(modelItem => task.Title)
+                        </a>
+                    </td>
                     <td>
                         <div class="progress right">
                             <div class="progress-bar progress-bar-success" data-transitiongoal="@task.ProgressPercent"></div>

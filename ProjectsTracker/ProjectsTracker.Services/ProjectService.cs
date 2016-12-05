@@ -49,6 +49,7 @@
 
         public Project AddTask(Project project, PTask task)
         {
+            task.CreatedOn = DateTime.Now;
             project.Tasks.Add(task);
             base.Update(project);
             base.SaveChanges();

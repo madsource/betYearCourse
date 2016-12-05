@@ -328,6 +328,8 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\PTask\_CreatePTask.cshtml" />
     <Content Include="Views\PTask\_TasksList.cshtml" />
+    <Content Include="Views\PTask\Details.cshtml" />
+    <Content Include="Views\PTask\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

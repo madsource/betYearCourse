@@ -82,7 +82,10 @@
                             }
 
                             <div id="tasks-holder" class="tasks-holder col-md-12">
-                                @Html.Partial("~/Views/PTask/_TasksList.cshtml", Model.Tasks)
+                                @Html.Partial("~/Views/PTask/_TasksList.cshtml", Model.Tasks,
+                                    new ViewDataDictionary {
+                                        { "Users", Model.Users }, { "projectId", Model.Id }
+                                    })
                             </div>
 
                         </div>

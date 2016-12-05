@@ -18,13 +18,13 @@ namespace ProjectsTracker.Controllers
     public class PTaskController : Controller
     {
 
-        private IUsersService userService;
+        private IUsersService usersService;
         private IPTaskService ptaskService;
         private IProjectService projectService;
 
-        public PTaskController(IUsersService userService, IPTaskService ptaskService, IProjectService projectService)
+        public PTaskController(IUsersService usersService, IPTaskService ptaskService, IProjectService projectService)
         {
-            this.userService = userService;
+            this.usersService = usersService;
             this.ptaskService = ptaskService;
             this.projectService = projectService;
         }
@@ -37,9 +37,21 @@ namespace ProjectsTracker.Controllers
             return View(ptaskVM);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? Id)
         {
-            return View();
+            if(Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
+
+            if(taskVm == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(taskVm);
         }
 
         public ActionResult Create()
@@ -66,11 +78,11 @@ namespace ProjectsTracker.Controllers
 
             PTask pTask = Mapper.Map<PTask>(pTaskVm);
 
-            pTask.CreatedOn = DateTime.Now;
+            //pTask.CreatedOn = DateTime.Now;
 
             //set users of task
-            ApplicationUser currentUser = this.userService.Find(User.Identity.GetUserId());
-            ApplicationUser chosenOwner = this.userService.Find(pTaskVm.OwnerId);
+            ApplicationUser currentUser = this.usersService.Find(User.Identity.GetUserId());
+            ApplicationUser chosenOwner = this.usersService.Find(pTaskVm.OwnerId);
 
             pTask.Author = currentUser;
             pTask.Owner = chosenOwner;
@@ -88,26 +100,48 @@ namespace ProjectsTracker.Controllers
             }
         }
 
-        // GET: PTask/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Update(int? Id, int? projectId)
         {
-            return View();
+            if (Id == null || projectId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
+            ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(projectService.Find(Id));
+
+            if (taskVm == null || projectVm == null )
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["projectId"] = projectId;
+            ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
+
+            return View(taskVm);
         }
 
-        // POST: PTask/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(PTaskViewModel pTaskVm, int? projectId)
         {
-            try
+            if(projectId == null)
             {
-                // TODO: Add update logic here
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            PTask pTask = Mapper.Map<PTask>(pTaskVm);
+
+            //set users of task
+            ApplicationUser currentUser = this.usersService.Find(User.Identity.GetUserId());
+            ApplicationUser chosenOwner = this.usersService.Find(pTaskVm.OwnerId);
+
+            pTask.Author = currentUser;
+            pTask.Owner = chosenOwner;
+            
+            ptaskService.Update(pTask);
+
+            return RedirectToAction("Details", "Project", new { Id = projectId });
         }
 
         [HttpGet]
