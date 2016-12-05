@@ -15,7 +15,7 @@
 
         public override IQueryable<Project> GetAll()
         {
-            return base.GetAll().OrderByDescending(p => p.CreatedOn);
+            return base.GetAll().Where(p => p.IsDeleted != true).OrderByDescending(p => p.CreatedOn);
         }
 
         public override Project Find(object Id)

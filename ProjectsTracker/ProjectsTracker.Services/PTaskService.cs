@@ -19,7 +19,7 @@ namespace ProjectsTracker.Services
 
         public override IQueryable<PTask> GetAll()
         {
-            return base.GetAll().OrderByDescending(p => p.CreatedOn);
+            return base.GetAll().Where(t => t.IsDeleted != true).OrderByDescending(p => p.CreatedOn);
         }
 
         public override PTask Find(object Id)

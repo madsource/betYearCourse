@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using System.Net;
 
 namespace ProjectsTracker.Controllers
 {
@@ -58,7 +59,7 @@ namespace ProjectsTracker.Controllers
                 return HttpNotFound();
             }
 
-            if(project.Owner.Id != User.Identity.GetUserId())
+            if(project.Owner.Id != User.Identity.GetUserId() && User.IsInRole(RoleConstants.ManagerRole))
             {
                 return new HttpUnauthorizedResult();
             }
@@ -109,26 +110,44 @@ namespace ProjectsTracker.Controllers
             }
         }
 
-        // GET: PTask/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
+        public ActionResult Delete(int? Id)
         {
-            return View();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            PTask task = ptaskService.Find(Id);
+            return View("Details", task);
         }
 
-        // POST: PTask/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+        [HttpPost]
+        [Authorize(Roles = RoleConstants.AdmminRole + "," + RoleConstants.ManagerRole)]
+        [ActionName("Delete")]
+        public ActionResult DeleteTask(int? Id)
+        {
+            if (Id == null)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            PTask task = ptaskService.Find(Id);
+
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+
+            ptaskService.Delete(task.Id);
+
+            IEnumerable<PTaskViewModel> tasks = ptaskService.GetAll()
+                .ProjectTo<PTaskViewModel>()
+                .ToList();
+           
+            return PartialView("_TasksList", tasks);           
         }
     }
 }
