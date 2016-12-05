@@ -101,25 +101,23 @@ namespace ProjectsTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update(int? Id, int? projectId)
+        public ActionResult Update(int? Id)
         {
-            if (Id == null || projectId == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
-            ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(projectService.Find(Id));
 
-            if (taskVm == null || projectVm == null )
+            if (taskVm == null)
             {
                 return HttpNotFound();
             }
 
-            ViewData["projectId"] = projectId;
             ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", taskVm.OwnerId);
 
-            return View(taskVm);
+            return PartialView("_UpdateTask", taskVm);
         }
 
         [HttpPost]
