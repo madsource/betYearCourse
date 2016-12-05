@@ -13,7 +13,7 @@ namespace ProjectsTracker.Services.Contracts
 
         void Add(PTask entity);
 
-        void Update(PTask entity);
+        void Update(PTask entity, string ownerId = null, string authorId = null);
 
         void SoftDelete(PTask entity);
         

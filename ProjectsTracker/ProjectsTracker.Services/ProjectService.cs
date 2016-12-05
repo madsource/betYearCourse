@@ -21,7 +21,10 @@
         public override Project Find(object Id)
         {
             Project project = base.Find(Id);
-            project.Owner = base.Data.Users.Find(project.Owner.Id);
+            if(project != null)
+            {
+                project.Owner = base.Data.Users.Find(project.Owner.Id);
+            }            
             return project;
         }
 

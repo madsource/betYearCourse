@@ -37,9 +37,20 @@ namespace ProjectsTracker.Services
             base.SaveChanges();
         }
 
-        public override void Update(PTask entity)
+        public void Update(PTask entity, string ownerId = null, string authorId = null)
         {
             entity.UpdatedOn = DateTime.Now;
+
+            if(ownerId != null)
+            {
+                entity.Owner = base.Data.Users.Find(ownerId);
+            }
+
+            if (authorId != null)
+            {
+                entity.Author = base.Data.Users.Find(authorId);
+            }
+
             base.Update(entity);
             base.SaveChanges();
         }

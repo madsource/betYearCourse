@@ -23,7 +23,8 @@ namespace ProjectsTracker
                         "~/Scripts/jquery.validate*",
                         "~/Content/vendors/iCheck/icheck.min.js",
                         "~/Content/vendors/moment/min/moment.min.js",
-                        "~/Content/vendors/bootstrap-daterangepicker/daterangepicker.js"
+                        "~/Content/vendors/bootstrap-daterangepicker/daterangepicker.js",
+                        "~/Content/vendors/jquery-knob/dist/jquery.knob.min.js"
                         ));
 
               // Use the development version of Modernizr to develop with and learn from. Then, when you're

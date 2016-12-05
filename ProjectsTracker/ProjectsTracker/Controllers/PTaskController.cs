@@ -117,7 +117,7 @@ namespace ProjectsTracker.Controllers
             }
 
             ViewData["projectId"] = projectId;
-            ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
+            ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", taskVm.OwnerId);
 
             return View(taskVm);
         }
@@ -130,18 +130,19 @@ namespace ProjectsTracker.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            PTask pTask = Mapper.Map<PTask>(pTaskVm);
+            if(ModelState.IsValid)
+            {
+                PTask pTask = Mapper.Map<PTask>(pTaskVm);
 
-            //set users of task
-            ApplicationUser currentUser = this.usersService.Find(User.Identity.GetUserId());
-            ApplicationUser chosenOwner = this.usersService.Find(pTaskVm.OwnerId);
+                this.ptaskService.Update(pTask, pTaskVm.OwnerId, User.Identity.GetUserId());
 
-            pTask.Author = currentUser;
-            pTask.Owner = chosenOwner;
-            
-            ptaskService.Update(pTask);
+                return RedirectToAction("Details", "Project", new { Id = projectId });
+            }
 
-            return RedirectToAction("Details", "Project", new { Id = projectId });
+            ViewData["projectId"] = projectId;
+            ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", pTaskVm.OwnerId);
+
+            return View(pTaskVm);            
         }
 
         [HttpGet]
