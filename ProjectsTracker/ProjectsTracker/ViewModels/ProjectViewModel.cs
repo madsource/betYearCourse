@@ -67,6 +67,7 @@ namespace ProjectsTracker.ViewModels
 
         public SelectList Users { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:00,00}")]
         public float Progress { get; set; }
 
         public ProjectViewModel()
@@ -121,17 +122,17 @@ namespace ProjectsTracker.ViewModels
         {
             ICollection<ApplicationUserViewModel> users = new HashSet<ApplicationUserViewModel>();
 
-            //if(Tasks.Any())
-            //{
-            //    foreach (var task in this.Tasks)
-            //    {          
-            //        if ( users.FirstOrDefault(u => u.Id == task.Owner.Id) == null)
-            //        {
-            //            // user not added, so add it
-            //            users.Add(task.Owner);
-            //        } 
-            //    }
-            //}            
+            if (Tasks.Any())
+            {
+                foreach (var task in this.Tasks)
+                {
+                    if (users.FirstOrDefault(u => u.Id == task.Owner.Id) == null)
+                    {
+                        // user not added, so add it
+                        users.Add(task.Owner);
+                    }
+                }
+            }
 
             return users;
         }

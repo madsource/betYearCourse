@@ -225,8 +225,7 @@ namespace ProjectsTracker.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-                //PTask pTask = Mapper.Map<PTask>(pTaskVm);               
+            {              
                 PTask pTask = this.ptaskService.Find(pTaskVm.Id);
                 pTask.ProgressPercent = pTaskVm.ProgressPercent;
 
