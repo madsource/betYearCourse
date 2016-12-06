@@ -462,14 +462,41 @@
             modal.find(".modal-body").empty();
 
             if (action === "edit") {
+
                 modal.find(".modal-title").text("Edit: " + taskTitle);
                 modal.find(".modal-body")
                     .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form");
+
             } else if (action === "report") {
+
                 modal.find(".modal-title").text("Report time: " + taskTitle);
                 modal.find(".modal-body")
                     .load("/PTask/Report/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
+
                         activateKnobs();
+
+                        var input = $("input#ProgressPercent");
+                        input.after("<span id='percent-sign'>%</span>");
+
+                        var styles = [];
+
+                        styles["width"] = input.css("width");
+                        styles["height"] = input.css("height");
+                        styles["position"] = input.css("position");
+                        styles["margin-top"] = input.css("margin-top");
+                        styles["margin-left"] = input.css("margin-left");
+                        styles["font-size"] = input.css("font-size");
+                        styles["line-height"] = input.css("line-height");
+                        styles["color"] = input.css("color");
+                        styles["line-height"] = input.css("line-height");                 
+
+                        for (var key in styles) {
+
+                            if (styles.hasOwnProperty(key)) {
+                                $("span#percent-sign").css(key, styles[key]);
+                            }
+                        }                
+
                     });
             }            
         });
@@ -478,6 +505,12 @@
             $('#updateModal').modal('hide');
             refreshProgressBars();
         }
+
+        function onSubmitTimeReport(data) {
+            var percent = $("#ReportTimeForm").find("input#ProgressPercent").val();
+            percent = percent.replace(/%/g,"");
+            $("#ReportTimeForm").find("input#ProgressPercent").val(percent);        
+        };
     </script>
 
 }

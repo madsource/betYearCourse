@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201612061542520_TimeReportItem_deletedReportedOn.Designer.cs">
       <DependentUpon>201612061542520_TimeReportItem_deletedReportedOn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061853303_ProjectTasks_cascadeDelete.cs" />
+    <Compile Include="Migrations\201612061853303_ProjectTasks_cascadeDelete.Designer.cs">
+      <DependentUpon>201612061853303_ProjectTasks_cascadeDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612061542520_TimeReportItem_deletedReportedOn.resx">
       <DependentUpon>201612061542520_TimeReportItem_deletedReportedOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061853303_ProjectTasks_cascadeDelete.resx">
+      <DependentUpon>201612061853303_ProjectTasks_cascadeDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

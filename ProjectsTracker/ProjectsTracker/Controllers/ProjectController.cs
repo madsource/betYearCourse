@@ -16,7 +16,7 @@ using ProjectsTracker.Services.Contracts;
 namespace ProjectsTracker.Controllers
 {
     [Authorize]
-    public class ProjectController : Controller
+    public class ProjectController : BaseController
     {
         private IProjectService projectService;
         private IUsersService usersService;
@@ -153,6 +153,8 @@ namespace ProjectsTracker.Controllers
             }
 
             projectVm.Users = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
+
+            ProjectId = projectVm.Id;
             return View(projectVm);
         }
     }

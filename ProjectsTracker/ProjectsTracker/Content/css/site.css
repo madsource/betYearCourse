@@ -38,3 +38,13 @@ span.text-status-amber {
 span.text-status-red {
     color: #d9534f;
 }
+
+/* percent in report time*/
+#percent-sign {
+    top: 5px;
+    text-indent: 37px;
+}
+
+input#ProgressPercent {
+    text-indent: -22px;
+}

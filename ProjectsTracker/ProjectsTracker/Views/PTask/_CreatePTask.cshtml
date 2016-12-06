@@ -1,7 +1,7 @@
 ﻿@model ProjectsTracker.ViewModels.PTaskViewModel
 
 @using (Ajax.BeginForm("Create", "PTask",
-    new { projectId = ViewData["projectId"] },
+    new { },
     new AjaxOptions {
         HttpMethod = "Post",
         UpdateTargetId = "tasks-holder",

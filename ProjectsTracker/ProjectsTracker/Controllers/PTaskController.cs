@@ -15,7 +15,7 @@ using System.Net;
 namespace ProjectsTracker.Controllers
 {
     [Authorize]
-    public class PTaskController : Controller
+    public class PTaskController : BaseController
     {
 
         private IUsersService usersService;
@@ -62,9 +62,10 @@ namespace ProjectsTracker.Controllers
 
         [HttpPost]
         [Authorize(Roles = RoleConstants.AdmminRole +","+ RoleConstants.ManagerRole)]
-        public ActionResult Create(PTaskViewModel pTaskVm, int projectId)
-        {
-            Project project = this.projectService.Find(projectId);
+        public ActionResult Create(PTaskViewModel pTaskVm)
+        {            
+
+            Project project = this.projectService.Find(ProjectId);
 
             if(project == null)
             {
@@ -77,8 +78,6 @@ namespace ProjectsTracker.Controllers
             }
 
             PTask pTask = Mapper.Map<PTask>(pTaskVm);
-
-            //pTask.CreatedOn = DateTime.Now;
 
             //set users of task
             ApplicationUser currentUser = this.usersService.Find(User.Identity.GetUserId());
@@ -186,11 +185,9 @@ namespace ProjectsTracker.Controllers
 
             ptaskService.Delete(task.Id);
 
-            IEnumerable<PTaskViewModel> tasks = ptaskService.GetAll()
-                .ProjectTo<PTaskViewModel>()
-                .ToList();
+            ProjectViewModel projectVm = Mapper.Map<ProjectViewModel>(this.projectService.Find(ProjectId));
            
-            return PartialView("_TasksList", tasks);           
+            return PartialView("_TasksList", projectVm.Tasks);           
         }
 
         [HttpGet]

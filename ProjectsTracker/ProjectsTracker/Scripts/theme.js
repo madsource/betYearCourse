@@ -321,14 +321,14 @@ function activateKnobs() {
         },
         release: function (value) {
             //console.log(this.$.attr('value'));
-            console.log("release : " + value);
+            //console.log("release : " + value);
         },
         cancel: function () {
-            console.log("cancel : ", this);
+            //console.log("cancel : ", this);
         },
-        /*format : function (value) {
-         return value + '%';
-         },*/
+        //format : function (value) {
+        // return value + '%';
+        // },
         draw: function () {
 
             // "tron" case

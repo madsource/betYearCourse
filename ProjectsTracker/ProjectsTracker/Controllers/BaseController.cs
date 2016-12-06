@@ -9,10 +9,11 @@ namespace ProjectsTracker.Controllers
 {
     public class BaseController : Controller
     {
-        protected ProjectsTrackerDbContext ProjectsTrackerDbContext { get; private set; }
-        public BaseController()
-        {
-            this.ProjectsTrackerDbContext = new ProjectsTrackerDbContext();
+        protected static object ProjectId; 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {          
+
+            base.OnActionExecuting(filterContext);
         }
     }
 }
