@@ -15,7 +15,7 @@ using ProjectsTracker.Services.Contracts;
 
 namespace ProjectsTracker.Controllers
 {
-    
+    [Authorize]
     public class ProjectController : Controller
     {
         private IProjectService projectService;

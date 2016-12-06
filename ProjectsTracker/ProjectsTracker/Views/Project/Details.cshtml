@@ -452,82 +452,24 @@
     <script>
         $('#updateModal').on('show.bs.modal', function (event) {
 
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var taskId = button.data('taskid') // Extract info from data-* attributes
-            var taskTitle = button.data('tasktitle') // Extract info from data-* attributes
+            var button = $(event.relatedTarget);
+            var taskId = button.data('taskid');
+            var taskTitle = button.data('tasktitle');
+            var taskNumber = button.data('tasknumber');
             var modal = $(this);
 
-            modal.find(".modal-body").load("/PTask/Update/" + taskId + " form");
             modal.find(".modal-title").text("Edit: " + taskTitle);
-
-            //$.get("/PTask/Update/" + taskId, function (r) {
-
-            //    modal.find(".modal-title").html(r.find("h2")[0].html());
-            //    modal.find(".modal-body").html(r.find("form")[0].html());
-            //});
-
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            //var modal = $(this)
-            //modal.find('.modal-title').text('New message to ' + recipient)
-            //modal.find('.modal-body input').val(recipient)
-        })
-    </script>
-
-    <script>
-        $(function ($) {
-
-            $(".knob").knob({
-                change: function (value) {
-                    //console.log("change : " + value);
-                },
-                release: function (value) {
-                    //console.log(this.$.attr('value'));
-                    console.log("release : " + value);
-                },
-                cancel: function () {
-                    console.log("cancel : ", this);
-                },
-                /*format : function (value) {
-                 return value + '%';
-                 },*/
-                draw: function () {
-
-                    // "tron" case
-                    if (this.$.data('skin') == 'tron') {
-
-                        this.cursorExt = 0.3;
-
-                        var a = this.arc(this.cv) // Arc
-                          ,
-                          pa // Previous arc
-                          , r = 1;
-
-                        this.g.lineWidth = this.lineWidth;
-
-                        if (this.o.displayPrevious) {
-                            pa = this.arc(this.v);
-                            this.g.beginPath();
-                            this.g.strokeStyle = this.pColor;
-                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
-                            this.g.stroke();
-                        }
-
-                        this.g.beginPath();
-                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
-                        this.g.stroke();
-
-                        this.g.lineWidth = 2;
-                        this.g.beginPath();
-                        this.g.strokeStyle = this.o.fgColor;
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-                        this.g.stroke();
-
-                        return false;
-                    }
-                }
-            });
+            modal.find(".modal-body")
+                .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
+                    activateKnobs();
+                });         
+            
         });
+
+        function onEditFormSuccess(data) {
+            $('#updateModal').modal('hide');
+            refreshProgressBars();
+        }
     </script>
+
 }

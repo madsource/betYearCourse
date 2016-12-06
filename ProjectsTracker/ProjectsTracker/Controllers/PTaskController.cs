@@ -101,11 +101,16 @@ namespace ProjectsTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult Update(int? Id)
+        public ActionResult Update(int? Id, int? taskNumber)
         {
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (taskNumber != null)
+            {
+                ViewData["counter"] = taskNumber;
             }
 
             PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
@@ -121,23 +126,30 @@ namespace ProjectsTracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(PTaskViewModel pTaskVm, int? projectId)
+        public ActionResult Update(PTaskViewModel pTaskVm, int? taskNumber)
         {
-            if(projectId == null)
+            if (taskNumber != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewData["counter"] = taskNumber;
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 PTask pTask = Mapper.Map<PTask>(pTaskVm);
 
                 this.ptaskService.Update(pTask, pTaskVm.OwnerId, User.Identity.GetUserId());
 
-                return RedirectToAction("Details", "Project", new { Id = projectId });
-            }
+                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(pTask);
 
-            ViewData["projectId"] = projectId;
+                if(Request.IsAjaxRequest())
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    
+                    
+                    return PartialView("_Task", updatedTaskVm);
+                }
+            }            
+
             ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", pTaskVm.OwnerId);
 
             return View(pTaskVm);            
