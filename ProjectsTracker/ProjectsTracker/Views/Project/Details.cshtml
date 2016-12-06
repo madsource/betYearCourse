@@ -451,19 +451,28 @@
     <!-- /ECharts -->
     <script>
         $(document).on('show.bs.modal', '#updateModal', function (event) {
-            console.log("on modal show");
             var button = $(event.relatedTarget);
+            var action = button.data('action');
             var taskId = button.data('taskid');
             var taskTitle = button.data('tasktitle');
             var taskNumber = button.data('tasknumber');
             var modal = $(this);
 
-            modal.find(".modal-title").text("Edit: " + taskTitle);
-            modal.find(".modal-body")
-                .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
-                    activateKnobs();
-                });
-        });                
+            modal.find(".modal-title").empty();
+            modal.find(".modal-body").empty();
+
+            if (action === "edit") {
+                modal.find(".modal-title").text("Edit: " + taskTitle);
+                modal.find(".modal-body")
+                    .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form");
+            } else if (action === "report") {
+                modal.find(".modal-title").text("Report time: " + taskTitle);
+                modal.find(".modal-body")
+                    .load("/PTask/Report/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
+                        activateKnobs();
+                    });
+            }            
+        });
 
         function onEditFormSuccess(data) {
             $('#updateModal').modal('hide');

@@ -4,10 +4,9 @@
     var task = Model;
 }
 
-
 <th scope="row">@ViewData["counter"]</th>
 <td>
-    <a href="#" data-toggle="modal" data-target="#updateModal" data-taskId="@task.Id" data-tasktitle="@task.Title" data-tasknumber="@ViewData["counter"]">
+    <a href="#" data-toggle="modal" data-target="#updateModal" data-action="report" data-taskId="@task.Id" data-tasktitle="@task.Title" data-tasknumber="@ViewData["counter"]">
         @Html.DisplayFor(modelItem => task.Title)
     </a>
 </td>
@@ -33,5 +32,6 @@
                     OnFailure = "alert('Something went wrong!')"
                 },
                 new { @class = "btn btn-danger btn-xs" })
+        <button class="btn btn-xs btn-default" data-toggle="modal" data-action="edit" data-target="#updateModal" data-taskId="@task.Id" data-tasktitle="@task.Title" data-tasknumber="@ViewData["counter"]" >Edit</button>
     </td>
 }

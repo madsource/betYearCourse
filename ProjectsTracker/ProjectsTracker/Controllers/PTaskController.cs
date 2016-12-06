@@ -150,7 +150,7 @@ namespace ProjectsTracker.Controllers
 
             ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", pTaskVm.OwnerId);
 
-            return PartialView("_Task", pTaskVm);            
+            return PartialView("_UpdateTask", pTaskVm);            
         }
 
         [HttpGet]
@@ -191,6 +191,63 @@ namespace ProjectsTracker.Controllers
                 .ToList();
            
             return PartialView("_TasksList", tasks);           
+        }
+
+        [HttpGet]
+        public ActionResult Report(int? Id, int? taskNumber)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (taskNumber != null)
+            {
+                ViewData["counter"] = taskNumber;
+            }
+
+            PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
+
+            if (taskVm == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_ReportTime", taskVm);
+        }
+
+        [HttpPost]
+        public ActionResult Report(PTaskViewModel pTaskVm, int? taskNumber)
+        {
+            if (taskNumber != null)
+            {
+                ViewData["counter"] = taskNumber;
+            }
+
+            if (ModelState.IsValid)
+            {
+                //PTask pTask = Mapper.Map<PTask>(pTaskVm);               
+                PTask pTask = this.ptaskService.Find(pTaskVm.Id);
+                pTask.ProgressPercent = pTaskVm.ProgressPercent;
+
+                TimeReportItem report = new TimeReportItem()
+                {
+                    HoursSpend = pTaskVm.HoursSpend
+                };
+
+                this.ptaskService.AddReport(pTask, report);
+
+                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(pTaskVm.Id));
+
+                if (Request.IsAjaxRequest())
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+
+                    return PartialView("_Task", updatedTaskVm);
+                }
+            }
+
+            return PartialView("_ReportTime", pTaskVm);
         }
     }
 }

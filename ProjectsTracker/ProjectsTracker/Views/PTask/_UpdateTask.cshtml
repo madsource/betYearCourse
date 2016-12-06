@@ -19,6 +19,7 @@
         @Html.HiddenFor(model => model.CreatedOn)
         @Html.HiddenFor(model => model.AuthorId)
         @Html.HiddenFor(model => model.Author.Id)
+        @Html.HiddenFor(model => model.ProgressPercent)
     
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -52,13 +53,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProgressPercent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProgressPercent, new { htmlAttributes = new { @class = "knob", @data_width = "110", data_height = "120", data_displayPrevious = true, data_fgColor = "#26B99A", data_skin = "tron", data_thickness = ".2" } })
-                @Html.ValidationMessageFor(model => model.ProgressPercent, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

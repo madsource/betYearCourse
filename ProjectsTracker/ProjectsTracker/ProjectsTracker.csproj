@@ -332,6 +332,7 @@
     <Content Include="Views\PTask\Update.cshtml" />
     <Content Include="Views\PTask\_UpdateTask.cshtml" />
     <Content Include="Views\PTask\_Task.cshtml" />
+    <Content Include="Views\PTask\_ReportTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

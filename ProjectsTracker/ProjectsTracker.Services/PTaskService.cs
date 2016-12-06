@@ -37,22 +37,8 @@ namespace ProjectsTracker.Services
             base.SaveChanges();
         }
 
-        public void Update(PTask entity, string ownerId = null, string authorId = null)
-        {
-            entity.UpdatedOn = DateTime.Now;
-
-            if(ownerId != null && entity.Owner != null)
-            {
-                entity.Owner = base.Data.Users.Find(ownerId);
-                entity.Owner.Id = ownerId;
-            }
-
-            if (authorId != null && entity.Author != null)
-            {
-                entity.Author = base.Data.Users.Find(authorId);
-                entity.Author.Id = authorId;
-            }
-
+        public override void Update(PTask entity)
+        {            
             base.Update(entity);
             base.SaveChanges();
         }
@@ -64,6 +50,20 @@ namespace ProjectsTracker.Services
             base.Update(entity);
             base.SaveChanges();
         }
-           
+
+        public PTask AddReport(PTask task, TimeReportItem report)
+        {
+            task.UpdatedOn = DateTime.Now;
+
+            if (report != null)
+            {
+                report.CreatedOn = DateTime.Now;
+                task.TimeReportList.Add(report);
+            }
+
+            base.Update(task);
+            base.SaveChanges();
+            return task;
+        }
     }
 }

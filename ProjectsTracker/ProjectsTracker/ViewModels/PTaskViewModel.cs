@@ -38,6 +38,8 @@ namespace ProjectsTracker.ViewModels
         [Display(Name = "Estimated hours")]
         public float EstimatedHours { get; set; }
 
+        [Display(Name = "Hours spend on task")]
+        public float HoursSpend { get; set; }
         public ICollection<TimeReportItemViewModel> TimeReportList { get; set; }
 
         [Display(Name = "Progress")]
