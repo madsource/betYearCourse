@@ -31,11 +31,11 @@
                                 <ul class="stats-overview">
                                     <li>
                                         <span class="name"> @ProjectDetailsConstants.EstimatedBudget</span>
-                                        <span class="value text-success"> @Model.EstimatedBudget</span>
+                                        <span class="value text-success">@String.Format("{0:C}", Model.EstimatedBudget)</span>
                                     </li>
                                     <li>
                                         <span class="name"> @ProjectDetailsConstants.TotalAmountSpend</span>
-                                        <span class="value text-success"> 2000 </span>
+                                        <span class="value text-success"> @String.Format("{0:C}", Model.GetTotalTimeSpend() * PtConstants.RatePerHour) </span>
                                     </li>
                                     <li class="hidden-phone">
                                         <span class="name"> @ProjectDetailsConstants.EstimatedDaysToFinish</span>
@@ -44,7 +44,7 @@
                                 </ul>
                                 <br />
 
-                                <div id="mainb" style="height:350px;"></div>
+                                <div id = "mainb" style="height:350px;"></div>
                             }
 
 
@@ -465,7 +465,9 @@
 
                 modal.find(".modal-title").text("Edit: " + taskTitle);
                 modal.find(".modal-body")
-                    .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form");
+                    .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
+                        validateAjaxForm('#UpdateTaskForm');
+                    });
 
             } else if (action === "report") {
 
@@ -474,6 +476,7 @@
                     .load("/PTask/Report/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
 
                         activateKnobs();
+                        validateAjaxForm('#ReportTimeForm')
 
                         var input = $("input#ProgressPercent");
                         input.after("<span id='percent-sign'>%</span>");
@@ -506,11 +509,7 @@
             refreshProgressBars();
         }
 
-        function onSubmitTimeReport(data) {
-            var percent = $("#ReportTimeForm").find("input#ProgressPercent").val();
-            percent = percent.replace(/%/g,"");
-            $("#ReportTimeForm").find("input#ProgressPercent").val(percent);        
-        };
+        
     </script>
 
 }

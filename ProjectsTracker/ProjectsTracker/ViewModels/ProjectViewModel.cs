@@ -136,5 +136,20 @@ namespace ProjectsTracker.ViewModels
 
             return users;
         }
+
+        public float GetTotalTimeSpend()
+        {
+            float time = 0;
+
+            if(this.Tasks.Any())
+            {
+                foreach (var task in this.Tasks)
+                {
+                    time += task.GetTimeSpend();
+                }
+            }
+
+            return time;
+        }
     }
 }

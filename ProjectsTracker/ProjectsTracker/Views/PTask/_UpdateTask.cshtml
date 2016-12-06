@@ -6,8 +6,10 @@
     new AjaxOptions {
         HttpMethod = "Post",
         UpdateTargetId = "task-" + Model.Id,
-        OnSuccess = "onEditFormSuccess" },
-    new {@class= "form-horizontal form-label-left" }
+        OnSuccess = "onEditFormSuccess",
+        OnBegin = "validateAjaxForm('#UpdateTaskForm')"
+    },
+    new {@class= "form-horizontal form-label-left", id = "UpdateTaskForm" }
     ))
 {
     @Html.AntiForgeryToken()
@@ -19,6 +21,7 @@
         @Html.HiddenFor(model => model.CreatedOn)
         @Html.HiddenFor(model => model.AuthorId)
         @Html.HiddenFor(model => model.Author.Id)
+        @Html.HiddenFor(model => model.HoursSpend)
         @Html.HiddenFor(model => model.ProgressPercent)
     
         <div class="form-group">

@@ -367,3 +367,17 @@ function activateKnobs() {
         }
     });
 }
+
+// Trigger Jquery validate manually
+function validateAjaxForm(formId) {
+    console.log("in validation");
+    var form = $(formId)
+    .removeData("validator") /* added by the raw jquery.validate plugin */
+    .removeData("unobtrusiveValidation");  /* added by the jquery unobtrusive plugin */
+
+    $.validator.unobtrusive.parse(form);
+
+    if (!form.valid()) {
+        return false;
+    }
+};

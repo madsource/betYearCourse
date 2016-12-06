@@ -137,15 +137,14 @@ namespace ProjectsTracker.Controllers
                 PTask pTask = Mapper.Map<PTask>(pTaskVm);
                 this.ptaskService.Update(pTask);
 
-                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(pTaskVm.Id));
+                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(pTaskVm.Id));                
                 
-                if (Request.IsAjaxRequest())
-                {
-                    Response.StatusCode = (int)HttpStatusCode.OK;                   
-                    
-                    return PartialView("_Task", updatedTaskVm);
-                }
-            }            
+                Response.StatusCode = (int)HttpStatusCode.OK;               
+                return PartialView("_Task", updatedTaskVm);
+                
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", pTaskVm.OwnerId);
 
@@ -243,7 +242,9 @@ namespace ProjectsTracker.Controllers
                 }
             }
 
-            return PartialView("_ReportTime", pTaskVm);
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return PartialView("_ReportTime", pTaskVm);                    
+            
         }
     }
 }

@@ -39,6 +39,7 @@ namespace ProjectsTracker.ViewModels
         public float EstimatedHours { get; set; }
 
         [Display(Name = "Hours spend")]
+        [Range(1, 100)]
         public float HoursSpend { get; set; }
         public ICollection<TimeReportItemViewModel> TimeReportList { get; set; }
 
@@ -48,6 +49,22 @@ namespace ProjectsTracker.ViewModels
         public PTaskViewModel()
         {
             TimeReportList = new HashSet<TimeReportItemViewModel>();
+            HoursSpend = 1;
+        }
+
+        public float GetTimeSpend()
+        {
+            float time = 0;
+
+            if(this.TimeReportList.Any())
+            {
+                foreach (var report in this.TimeReportList)
+                {
+                    time += report.HoursSpend;
+                }
+            }
+
+            return time;
         }
     }
 }
