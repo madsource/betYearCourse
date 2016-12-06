@@ -12,10 +12,10 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < Model.OrderBy(t => t.CreatedOn).Count(); i++)
+            @for (int i = 0; i < Model.Count(); i++)
             {
                 var task = Model.OrderBy(t => t.CreatedOn).ElementAt(i);
-                <tr id="task-@task.Id">
+                <tr id="task-@task.Id" class="@(task.ProgressPercent == 100 ? "well" : "")">
                     @Html.Partial("~/Views/PTask/_Task.cshtml", task, new ViewDataDictionary { { "counter", i + 1 } })
                 </tr>
             }
@@ -27,13 +27,12 @@ else
     <p class="well">@ProjectDetailsConstants.NoTasks</p>
 }
 
-@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>*@
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel"></h4>
+                <h2 class="modal-title" id="updateModalLabel"></h2>
             </div>
             <div class="modal-body"></div>
         </div>

@@ -3,7 +3,10 @@
 <h2>Task: @Model.Title</h2>
 
 @using (Ajax.BeginForm("Update", "PTask", new { taskNumber = ViewData["counter"]},
-    new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "task-" + Model.Id, OnSuccess = "onEditFormSuccess" },
+    new AjaxOptions {
+        HttpMethod = "Post",
+        UpdateTargetId = "task-" + Model.Id,
+        OnSuccess = "onEditFormSuccess" },
     new {@class= "form-horizontal form-label-left" }
     ))
 {
@@ -14,8 +17,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreatedOn)
+        @Html.HiddenFor(model => model.AuthorId)
         @Html.HiddenFor(model => model.Author.Id)
-
+    
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -58,7 +62,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save task" class="btn btn-primary" />
             </div>
         </div>
 }

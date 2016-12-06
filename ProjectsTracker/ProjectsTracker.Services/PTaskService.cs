@@ -25,8 +25,8 @@ namespace ProjectsTracker.Services
         public override PTask Find(object Id)
         {
             PTask pTask = base.Find(Id);
-            pTask.Owner = base.Data.Users.Find(pTask.Owner.Id);
-            pTask.Author = base.Data.Users.Find(pTask.Author.Id);
+            pTask.Owner = base.Data.Users.Find(pTask.OwnerId);
+            pTask.Author = base.Data.Users.Find(pTask.AuthorId);
             return pTask;
         }
 
@@ -41,14 +41,16 @@ namespace ProjectsTracker.Services
         {
             entity.UpdatedOn = DateTime.Now;
 
-            if(ownerId != null)
+            if(ownerId != null && entity.Owner != null)
             {
                 entity.Owner = base.Data.Users.Find(ownerId);
+                entity.Owner.Id = ownerId;
             }
 
-            if (authorId != null)
+            if (authorId != null && entity.Author != null)
             {
                 entity.Author = base.Data.Users.Find(authorId);
+                entity.Author.Id = authorId;
             }
 
             base.Update(entity);

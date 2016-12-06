@@ -136,15 +136,13 @@ namespace ProjectsTracker.Controllers
             if (ModelState.IsValid)
             {
                 PTask pTask = Mapper.Map<PTask>(pTaskVm);
+                this.ptaskService.Update(pTask);
 
-                this.ptaskService.Update(pTask, pTaskVm.OwnerId, User.Identity.GetUserId());
-
-                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(pTask);
-
-                if(Request.IsAjaxRequest())
+                PTaskViewModel updatedTaskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(pTaskVm.Id));
+                
+                if (Request.IsAjaxRequest())
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    
+                    Response.StatusCode = (int)HttpStatusCode.OK;                   
                     
                     return PartialView("_Task", updatedTaskVm);
                 }
@@ -152,7 +150,7 @@ namespace ProjectsTracker.Controllers
 
             ViewData["Users"] = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName", pTaskVm.OwnerId);
 
-            return View(pTaskVm);            
+            return PartialView("_Task", pTaskVm);            
         }
 
         [HttpGet]

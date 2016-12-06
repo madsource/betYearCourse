@@ -89,6 +89,18 @@
     <Compile Include="Migrations\201612041203307_TimeReportItem_added.Designer.cs">
       <DependentUpon>201612041203307_TimeReportItem_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061314157_PTask_addedOwnerID_AuthotID.cs" />
+    <Compile Include="Migrations\201612061314157_PTask_addedOwnerID_AuthotID.Designer.cs">
+      <DependentUpon>201612061314157_PTask_addedOwnerID_AuthotID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612061321153_PTask_deleted_OwnerID_AuthorID.cs" />
+    <Compile Include="Migrations\201612061321153_PTask_deleted_OwnerID_AuthorID.Designer.cs">
+      <DependentUpon>201612061321153_PTask_deleted_OwnerID_AuthorID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612061340204_PTask_addedOwnerID_AuthotID1.cs" />
+    <Compile Include="Migrations\201612061340204_PTask_addedOwnerID_AuthotID1.Designer.cs">
+      <DependentUpon>201612061340204_PTask_addedOwnerID_AuthotID1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectsTrackerData.cs" />
     <Compile Include="IProjectsTrackerData.cs" />
@@ -141,6 +153,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612041203307_TimeReportItem_added.resx">
       <DependentUpon>201612041203307_TimeReportItem_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061314157_PTask_addedOwnerID_AuthotID.resx">
+      <DependentUpon>201612061314157_PTask_addedOwnerID_AuthotID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061321153_PTask_deleted_OwnerID_AuthorID.resx">
+      <DependentUpon>201612061321153_PTask_deleted_OwnerID_AuthorID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061340204_PTask_addedOwnerID_AuthotID1.resx">
+      <DependentUpon>201612061340204_PTask_addedOwnerID_AuthotID1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

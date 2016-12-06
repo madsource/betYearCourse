@@ -26,6 +26,7 @@ namespace ProjectsTracker.ViewModels
         public ApplicationUserViewModel Author { get; set; }
 
         public string OwnerId { get; set; }
+        public string AuthorId { get; set; }
         public ApplicationUserViewModel Owner { get; set; }        
 
         public string Description { get; set; }

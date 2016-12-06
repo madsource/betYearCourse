@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectsTracker.Models
 {
@@ -10,6 +11,9 @@ namespace ProjectsTracker.Models
         public virtual ApplicationUser Author { get; set; }
 
         public virtual ApplicationUser Owner { get; set; }
+
+        public string AuthorId { get; set; }
+        public string OwnerId { get; set; }
 
         public string Description { get; set; }
 

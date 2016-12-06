@@ -6,7 +6,8 @@
         HttpMethod = "Post",
         UpdateTargetId = "tasks-holder",
         OnSuccess = "refreshProgressBars",
-        OnFailure = "alert('Something went wrong!')"
+        OnFailure = "alert('Something went wrong!')",
+        OnComplete = "attachModalShowEvent"
     },
     new { @class = "form-horizontal form-label-left" }))
 {

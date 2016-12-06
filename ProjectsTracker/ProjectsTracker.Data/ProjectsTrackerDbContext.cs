@@ -27,6 +27,31 @@
             set;
         }
 
+        public IDbSet<PTask> PTasks
+        {
+            get;
+            set;
+        }
+
+        public IDbSet<Comment> Comments
+        {
+            get;
+            set;
+        }
+
+        public IDbSet<Metric> Metrics
+        {
+            get;
+            set;
+        }
+
+        public IDbSet<TimeReportItem> TimeReportItems
+        {
+            get;
+            set;
+        }
+
+
         public static ProjectsTrackerDbContext Create()
         {
             return new ProjectsTrackerDbContext();

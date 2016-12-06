@@ -450,8 +450,8 @@
     </script>
     <!-- /ECharts -->
     <script>
-        $('#updateModal').on('show.bs.modal', function (event) {
-
+        $(document).on('show.bs.modal', '#updateModal', function (event) {
+            console.log("on modal show");
             var button = $(event.relatedTarget);
             var taskId = button.data('taskid');
             var taskTitle = button.data('tasktitle');
@@ -462,9 +462,8 @@
             modal.find(".modal-body")
                 .load("/PTask/Update/" + taskId + "?taskNumber=" + taskNumber + " form", function () {
                     activateKnobs();
-                });         
-            
-        });
+                });
+        });                
 
         function onEditFormSuccess(data) {
             $('#updateModal').modal('hide');
