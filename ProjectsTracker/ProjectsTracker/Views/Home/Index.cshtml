@@ -76,6 +76,20 @@
             </div>
         </div>
 
+        <div class="col-md-3 tile">
+            <span>Total Amount Spend</span>
+            <h2>@String.Format("{0:c}", Model.TotalAmountSpend)</h2>
+            <span class="sparkline_one" style="height: 160px;">
+                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+
+        <div class="col-md-3 tile">
+            <span>Total Revenue</span>
+            <h2>@String.Format("{0:c}", (Model.TotalBudget - Model.TotalAmountSpend))</h2>
+            <span class="sparkline_two" style="height: 160px;"><canvas width="200" height="40" style="display: inline-block; width: 200px; height: 40px; vertical-align: top;"></canvas></span>
+        </div>
+
     </div>
 
     <div class="row">
@@ -136,6 +150,30 @@
           },
           options: options
         });
+
+          
+        $(".sparkline_one").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
+            type: 'bar',
+            height: '40',
+            barWidth: 9,
+            colorMap: {
+                '7': '#a1a1a1'
+            },
+            barSpacing: 2,
+            barColor: '#26B99A'
+        });
+
+        $(".sparkline_two").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
+            type: 'line',
+            width: '200',
+            height: '40',
+            lineColor: '#26B99A',
+            fillColor: 'rgba(223, 223, 223, 0.57)',
+            lineWidth: 2,
+            spotColor: '#26B99A',
+            minSpotColor: '#26B99A'
+        });
+          
       });
 </script>
 <!-- /Doughnut Chart -->
