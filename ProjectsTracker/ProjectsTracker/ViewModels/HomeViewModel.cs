@@ -11,6 +11,7 @@ namespace ProjectsTracker.ViewModels
         public int NumberOfTasksInProgress { get; private set; }
         public int NumberOfTasksFinished { get; private set; }
         public int NumberOfTasksNotStarted { get; private set; }
+        public int NumberOfAllTasks { get; private set; }
         public double TotalAmountSpend { get; private set; }
         public double TotalBudget { get; private set; }
 
@@ -20,9 +21,11 @@ namespace ProjectsTracker.ViewModels
 
         public List<ProjectViewModel> Projects { get; set; }
 
-        public HomeViewModel()
+        public HomeViewModel( List<ProjectViewModel> projects)
         {
-            if(this.Projects != null)
+            this.Projects = projects;
+
+            if(this.Projects != null && this.Projects.Any())
             {
                 this.NumberOfTasksFinished = this.Projects.Sum(p => p.GetNumberOfTasksFinished());
                 this.NumberOfTasksInProgress = this.Projects.Sum(p => p.GetNumberOfTasksInProgress());
@@ -36,6 +39,8 @@ namespace ProjectsTracker.ViewModels
                 this.ProjectsInProgress = this.Projects
                     .Where(p => p.isActive == true && p.Tasks.Where(t => t.ProgressPercent == 100).Count() == p.Tasks.Count())
                     .Count();
+
+                this.NumberOfAllTasks = this.Projects.Sum(p => p.Tasks.Count());
             }            
         }
     }

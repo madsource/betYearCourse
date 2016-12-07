@@ -26,10 +26,9 @@ namespace ProjectsTracker.Controllers
 
         public ActionResult Index(string search)
         {
-            HomeViewModel homeVm = new HomeViewModel()
-            {
-                Projects = this.GetActiveProjects(search)
-            };
+            var projects = this.GetActiveProjects(search);
+
+            HomeViewModel homeVm = new HomeViewModel(projects);
 
             if(Request.IsAjaxRequest() && search != null)
             {

@@ -41,9 +41,9 @@
                 </td>
                 <td class="project_progress">
                     <div class="progress progress_sm">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="@project.Progress"></div>
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="@String.Format("{0:n2}",project.Progress)"></div>
                     </div>
-                    <small>@project.Progress% Complete</small>
+                    <small>@String.Format("{0:n2}", project.Progress)% Complete</small>
                 </td>
                 <td class="project-status">
                     <button type="button" class="btn status-@project.GetProjectStatus().ToLower() btn-xs">@project.GetProjectStatus()</button>
