@@ -10,27 +10,51 @@ using ProjectsTracker.ViewModels;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Ajax.Utilities;
 using ProjectsTracker.Common;
+using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace ProjectsTracker.Controllers
 {
     [Authorize]
     public class HomeController : BaseController
     {
-        private IProjectService projectService; 
-
+        private IProjectService projectService;
+        private int itemsPerPage;
 
         public HomeController(IProjectService projectService)
         {
             this.projectService = projectService;
+            this.itemsPerPage = PtConstants.itemsPerPage;
         }
 
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, int? page)
         {
             var projects = this.GetActiveProjects(search);
+            int pageNumber = page ?? 1;
 
-            HomeViewModel homeVm = new HomeViewModel(projects);
+            var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
+
+            HomeViewModel homeVm = new HomeViewModel(pagedProjects);
 
             if(Request.IsAjaxRequest() && search != null)
+            {
+                return PartialView("_ProjectsList", homeVm.Projects);
+            }           
+       
+            return View(homeVm);
+        }
+
+        public ActionResult MyProjects(string search, int? page)
+        {
+            var projects = this.GetActiveProjects(search).Where(p => p.Owner.Id == User.Identity.GetUserId()).ToList();
+
+            int pageNumber = page ?? 1;
+
+            var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
+
+            HomeViewModel homeVm = new HomeViewModel(pagedProjects);
+
+            if (Request.IsAjaxRequest() && search != null)
             {
                 return PartialView("_ProjectsList", homeVm.Projects);
             }

@@ -1,4 +1,5 @@
-﻿using ProjectsTracker.Common;
+﻿using PagedList;
+using ProjectsTracker.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,9 @@ namespace ProjectsTracker.ViewModels
         public int ProjectsInProgress { get; private set; }
         public int ProjectsFinished { get; private set; }
 
-        public List<ProjectViewModel> Projects { get; set; }
+        public IPagedList<ProjectViewModel> Projects { get; set; }
 
-        public HomeViewModel( List<ProjectViewModel> projects)
+        public HomeViewModel( IPagedList<ProjectViewModel> projects)
         {
             this.Projects = projects;
 

@@ -49,8 +49,11 @@
                                     <li class="active">
                                         <a><i class="fa fa-home"></i> @PtConstants.General <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu" style="display: block;">
-                                            <li><a href="/">@PtConstants.Projects</a></li>
-                                            <li><a href="#">@PtConstants.Tasks</a></li>
+                                            <li><a href="/">@PtConstants.Dashboard</a></li>
+                                            @if (User.IsInRole(RoleConstants.AdmminRole) || User.IsInRole(RoleConstants.ManagerRole))
+                                            {
+                                                <li><a href="/Home/MyProjects">@PtConstants.MyProjects</a></li>
+                                            }                                            
                                         </ul>
                                     </li>
                                 </ul>

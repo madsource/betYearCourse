@@ -1,0 +1,43 @@
+﻿@model ProjectsTracker.ViewModels.HomeViewModel
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>
+                My Projects
+            </h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input id="livesearch"  type="text" class="form-control" placeholder="Search for...">                 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Projects</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @if (User.IsInRole(RoleConstants.AdmminRole) || User.IsInRole(RoleConstants.ManagerRole))
+                    {
+                        @Html.ActionLink("Create project", "Create", "Project", null, new {@class = "btn btn-default btn-lg"})
+                    }
+                    <!-- start project list -->
+                    <div id="projects-holder" class="projects-holder">
+                        @Html.Partial("_ProjectsList", Model.Projects)
+                    </div>
+                    <!-- end project list -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
