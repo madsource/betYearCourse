@@ -4,7 +4,7 @@
     <div class="page-title">
         <div class="title_left">
             <h3>
-                Projects <small>active</small>
+                Dashboard
             </h3>
         </div>
         <div class="title_right">
@@ -20,6 +20,25 @@
     </div>
 
     <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-3 tile">
+            <span>Total Amount Spend</span>
+            <h2>@String.Format("{0:c}", Model.TotalAmountSpend)</h2>
+            <span class="sparkline_one" style="height: 160px;">
+                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+
+        <div class="col-md-3 tile">
+            <span>Total Revenue</span>
+            <h2>@String.Format("{0:c}", (Model.TotalBudget - Model.TotalAmountSpend))</h2>
+            <span class="sparkline_two" style="height: 160px;"><canvas width="200" height="40" style="display: inline-block; width: 200px; height: 40px; vertical-align: top;"></canvas></span>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div><br />
 
     <div class="row">
 
@@ -46,7 +65,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                                <canvas id="tasksOverall" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
                             </td>
                             <td>
                                 <table class="tile_info">
@@ -76,21 +95,62 @@
             </div>
         </div>
 
-        <div class="col-md-3 tile">
-            <span>Total Amount Spend</span>
-            <h2>@String.Format("{0:c}", Model.TotalAmountSpend)</h2>
-            <span class="sparkline_one" style="height: 160px;">
-                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-            </span>
-        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel fixed_height_320">
+                <div class="x_title">
+                    <h2>Overall Projects <small>Status</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="" style="width:100%">
+                        <tr>
+                            <th style="width:33%;">
+                                <p>Projects</p>
+                            </th>
+                            <th>
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                    <p class="">Status</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                    <p class="">Percent</p>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <canvas id="projectsOverall" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                            </td>
+                            <td>
+                                <table class="tile_info">
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square green"></i>Projects in progress </p>
+                                        </td>
+                                        <td>@String.Format("{0:n2}", ((float)Model.ProjectsInProgress / (float)Model.Projects.Count) * 100)%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square red"></i>Projects not started </p>
+                                        </td>
+                                        <td>@String.Format("{0:n2}", ((float)(Model.Projects.Count - (Model.ProjectsFinished + Model.ProjectsInProgress)) / (float)Model.Projects.Count) * 100)%</td>
+                                    </tr>
 
-        <div class="col-md-3 tile">
-            <span>Total Revenue</span>
-            <h2>@String.Format("{0:c}", (Model.TotalBudget - Model.TotalAmountSpend))</h2>
-            <span class="sparkline_two" style="height: 160px;"><canvas width="200" height="40" style="display: inline-block; width: 200px; height: 40px; vertical-align: top;"></canvas></span>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square blue"></i>Projects Finished </p>
+                                        </td>
+                                        <td>@String.Format("{0:n2}", ((float)Model.ProjectsFinished / (float)Model.Projects.Count) * 100)%</td>
+                                    </tr>                               
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
     </div>
+
 
     <div class="row">
         <div class="col-md-12">
@@ -125,7 +185,7 @@
           responsive: false
         };
 
-        new Chart(document.getElementById("canvas1"), {
+        new Chart(document.getElementById("tasksOverall"), {
           type: 'doughnut',
           tooltipFillColor: "rgba(51, 51, 51, 0.55)",
           data: {
@@ -151,7 +211,33 @@
           options: options
         });
 
-          
+          new Chart(document.getElementById("projectsOverall"), {
+              type: 'doughnut',
+              tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+              data: {
+                  labels: [
+                    "In progress",
+                    "Not started",
+                    "Finished"
+                  ],
+                  datasets: [{
+                      data: [@Model.ProjectsInProgress, @(Model.Projects.Count - (Model.ProjectsFinished + Model.ProjectsInProgress)) , @Model.ProjectsFinished],
+                      backgroundColor: [
+                       "#1ABB9C",
+                       "#E74C3C",
+                       "#3498DB"
+                      ],
+                      hoverBackgroundColor: [
+                        "#38efcb",
+                        "#f16658",
+                        "#5ab5f3"
+                      ]
+                  }]
+              },
+              options: options
+          });
+
+
         $(".sparkline_one").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
             type: 'bar',
             height: '40',
@@ -173,7 +259,7 @@
             spotColor: '#26B99A',
             minSpotColor: '#26B99A'
         });
-          
+
       });
 </script>
 <!-- /Doughnut Chart -->

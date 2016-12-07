@@ -36,8 +36,9 @@ namespace ProjectsTracker.ViewModels
                 this.ProjectsInProgress = this.Projects
                     .Where(p => p.isActive == true && p.Tasks.Where(t => t.ProgressPercent < 100).Count() > 0)
                     .Count();
-                this.ProjectsInProgress = this.Projects
-                    .Where(p => p.isActive == true && p.Tasks.Where(t => t.ProgressPercent == 100).Count() == p.Tasks.Count())
+                this.ProjectsFinished = this.Projects
+                    .Where(p => p.isActive == true && p.Tasks
+                          .Where(t => t.ProgressPercent == 100).Count() == p.Tasks.Count() && p.Tasks.Count() > 0)
                     .Count();
 
                 this.NumberOfAllTasks = this.Projects.Sum(p => p.Tasks.Count());
