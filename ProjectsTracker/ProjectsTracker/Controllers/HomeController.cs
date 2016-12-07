@@ -23,25 +23,41 @@ namespace ProjectsTracker.Controllers
         {
             this.projectService = projectService;
         }
+
         public ActionResult Index(string search)
-        {    
+        {
+            HomeViewModel homeVm = new HomeViewModel()
+            {
+                Projects = this.GetActiveProjects(search)
+            };
+
+            if(Request.IsAjaxRequest() && search != null)
+            {
+                return PartialView("_ProjectsList", homeVm.Projects);
+            }
+
+            return View(homeVm);
+        }
+
+        private List<ProjectViewModel> GetActiveProjects(string search)
+        {
             var projectsInDb = this.projectService.GetAll();
 
-            IEnumerable<ProjectViewModel> projects = this.ConvertDbToVmList(projectsInDb);           
+            List<ProjectViewModel> projects = this.ConvertDbToVmList(projectsInDb).ToList();
 
-            if (Request.IsAjaxRequest() && search != null)
+            if (search != null)
             {
                 var filteredDbProjects = projectsInDb.Where(p => p.Title.Contains(search) ||
                                     p.Content.Contains(search) ||
                                     p.ClientName.Contains(search) ||
                                     (p.Owner.FirstName + p.Owner.LastName).Contains(search));
 
-                IEnumerable<ProjectViewModel> filteredProjects = this.ConvertDbToVmList(filteredDbProjects);             
+                List<ProjectViewModel> filteredProjects = this.ConvertDbToVmList(filteredDbProjects).ToList();
 
-                return PartialView("_ProjectsList", filteredProjects);
+                return filteredProjects;
             }
 
-            return View(projects);
+            return projects;
         }
 
         private IEnumerable<ProjectViewModel> ConvertDbToVmList(IQueryable<Project> projects)

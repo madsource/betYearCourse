@@ -151,5 +151,23 @@ namespace ProjectsTracker.ViewModels
 
             return time;
         }
+
+        public int GetNumberOfTasksInProgress()
+        {
+            int number = this.Tasks.Where(t => t.ProgressPercent > 0).Count();
+            return number;
+        }
+
+        public int GetNumberOfTasksNotStarted()
+        {
+            int number = this.Tasks.Where(t => t.ProgressPercent == 0).Count();
+            return number;
+        }
+
+        public int GetNumberOfTasksFinished()
+        {
+            int number = this.Tasks.Where(t => t.ProgressPercent == 100).Count();
+            return number;
+        }
     }
 }

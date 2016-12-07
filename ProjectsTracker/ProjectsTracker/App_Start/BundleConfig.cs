@@ -17,6 +17,7 @@ namespace ProjectsTracker
                         "~/Content/vendors/nprogress/nprogress.js",
                         "~/Content/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js",
                         "~/Content/vendors/echarts/dist/echarts.min.js",
+                        "~/Content/vendors/Chart.js/dist/Chart.min.js",                        
                         "~/Scripts/theme.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

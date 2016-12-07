@@ -7,6 +7,10 @@
 <th scope="row">@ViewData["counter"]</th>
 <td>
     <a href="#" data-toggle="modal" data-target="#updateModal" data-action="report" data-taskId="@task.Id" data-tasktitle="@task.Title" data-tasknumber="@ViewData["counter"]">
+        @if (task.ProgressPercent == 100)
+        {
+            <i class="glyphicon glyphicon-ok green"></i>
+        }        
         @Html.DisplayFor(modelItem => task.Title)
     </a>
 </td>
