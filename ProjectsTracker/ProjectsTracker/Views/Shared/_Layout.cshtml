@@ -52,7 +52,7 @@
                                             <li><a href="/">@PtConstants.Dashboard</a></li>
                                             @if (User.IsInRole(RoleConstants.AdmminRole) || User.IsInRole(RoleConstants.ManagerRole))
                                             {
-                                                <li><a href="/Home/MyProjects">@PtConstants.MyProjects</a></li>
+                                                <li><a href="/Home/index?mine=true">@PtConstants.MyProjects</a></li>
                                             }                                            
                                         </ul>
                                     </li>

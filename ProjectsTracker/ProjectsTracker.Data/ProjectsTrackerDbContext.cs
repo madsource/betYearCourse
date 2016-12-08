@@ -72,11 +72,6 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Project>()
-            //       .HasMany(p => p.Tasks)
-            //       .WithOptional()
-            //       .WillCascadeOnDelete(true);
-
             modelBuilder.Entity<PTask>()
                    .HasMany(t => t.TimeReportList)
                    .WithOptional()

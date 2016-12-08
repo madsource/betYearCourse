@@ -23,7 +23,7 @@ namespace ProjectsTracker.Controllers
         private IStatisticsService statisticsService;
         private IUsersService usersService;
         private int itemsPerPage;
-        private IDictionary<string, object> statistics;
+        private IDictionary<string, double> statistics;
 
         public HomeController(IProjectService projectService, IStatisticsService statisticsService, IUsersService usersService)
         {
@@ -32,9 +32,15 @@ namespace ProjectsTracker.Controllers
             this.itemsPerPage = PtConstants.itemsPerPage;
         }
 
-        public ActionResult Index(string search, int? page)
+        public ActionResult Index(string search, int? page, string mine)
         {
             var projects = this.GetActiveProjects(search);
+            
+            if(mine == "true")
+            {
+                projects = projects.Where(p => p.Owner.Id == User.Identity.GetUserId()).ToList();
+            }
+
             int pageNumber = page ?? 1;
             var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
 
@@ -50,25 +56,9 @@ namespace ProjectsTracker.Controllers
                 return PartialView("_ProjectsList", homeVm.Projects);
             }
 
-            return View(homeVm);
-        }
-
-        public ActionResult MyProjects(string search, int? page)
-        {
-            var projects = this.GetActiveProjects(search).Where(p => p.Owner.Id == User.Identity.GetUserId()).ToList();
-            int pageNumber = page ?? 1;
-            var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
-
-            if (this.statistics == null)
+            if(mine == "true")
             {
-                this.statistics = this.statisticsService.GetStatisticsForProjects();
-            }
-
-            HomeViewModel homeVm = new HomeViewModel(pagedProjects, this.statistics);
-
-            if (Request.IsAjaxRequest() && search != null)
-            {
-                return PartialView("_ProjectsList", homeVm.Projects);
+                return View("MyProjects", homeVm);
             }
 
             return View(homeVm);

@@ -44,7 +44,7 @@ namespace ProjectsTracker.Controllers
 
             this.projectService.Add(project);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Home", new { mine = "true" });
         }
 
         [HttpGet]

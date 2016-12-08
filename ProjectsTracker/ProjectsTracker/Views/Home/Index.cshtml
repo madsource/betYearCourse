@@ -10,7 +10,7 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                    <input id="livesearch"  type="text" class="form-control" placeholder="Search for...">
+                    <input id="livesearch" data-mine="false"  type="text" class="form-control" placeholder="Search for...">
                     @*<span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                     </span>*@
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-3 tile">
             <span>Total Amount Spend</span>
-            <h2>@String.Format("{0:c}", (double)Model.Statistics["TotalAmountSpend"])</h2>
+            <h2>@String.Format("{0:c}", Model.Statistics["TotalAmountSpend"])</h2>
             <span class="sparkline_one" style="height: 160px;">
                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
             </span>
@@ -32,7 +32,7 @@
 
         <div class="col-md-3 tile">
             <span>Total Revenue</span>
-            <h2>@String.Format("{0:c}", ((double)Model.Statistics["TotalBudget"] - (double)Model.Statistics["TotalAmountSpend"]))</h2>
+            <h2>@String.Format("{0:c}", (Model.Statistics["TotalBudget"] - Model.Statistics["TotalAmountSpend"]))</h2>
             <span class="sparkline_two" style="height: 160px;"><canvas width="200" height="40" style="display: inline-block; width: 200px; height: 40px; vertical-align: top;"></canvas></span>
         </div>
 
@@ -73,19 +73,19 @@
                                         <td>
                                             <p><i class="fa fa-square blue"></i>Tasks in progress </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksInProgress"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", (Model.Statistics["NumberOfTasksInProgress"] / Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square green"></i>Tasks not started </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksNotStarted"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", (Model.Statistics["NumberOfTasksNotStarted"] / Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square purple"></i>Tasks finished </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksFinished"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", (Model.Statistics["NumberOfTasksFinished"] / Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>                                    
                                 </table>
                             </td>
@@ -126,20 +126,21 @@
                                         <td>
                                             <p><i class="fa fa-square green"></i>Projects in progress </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["ProjectsInProgress"] / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", (Model.Statistics["ProjectsInProgress"] / Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square red"></i>Projects not started </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", (((int)Model.Statistics["NumberOfAllProjects"] - ((int)Model.Statistics["ProjectsFinished"] + (int)Model.Statistics["ProjectsInProgress"])) / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", ((Model.Statistics["NumberOfAllProjects"] - (Model.Statistics["ProjectsFinished"] + Model.Statistics["ProjectsInProgress"])) 
+                                           / Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>
 
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square blue"></i>Projects finished </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["ProjectsFinished"] / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", (Model.Statistics["ProjectsFinished"] / Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>                               
                                 </table>
                             </td>

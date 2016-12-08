@@ -300,9 +300,10 @@ $(function () {
     $("#livesearch").keyup(function (e) {
 
         var searchText = $(this).val();
+        var isMine = $(this).data("mine");
 
         if (searchText.length >= 3 || searchText == "") {
-            $.get("/Home/Index?search=" + searchText, function (r) {
+            $.get("/Home/Index?search=" + searchText + "&mine=" + isMine, function (r) {
                 $(".projects-holder").html(r);
                 refreshProgressBars();
             });

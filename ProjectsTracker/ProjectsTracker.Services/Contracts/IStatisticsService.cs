@@ -5,7 +5,7 @@ namespace ProjectsTracker.Services.Contracts
 {
     public interface IStatisticsService : IService<Project>
     {
-        IDictionary<string, object> GetStatisticsForProjects();
+        IDictionary<string, double> GetStatisticsForProjects();
         ICollection<ApplicationUser> GetProjectUsers(Project project);
     }
 }

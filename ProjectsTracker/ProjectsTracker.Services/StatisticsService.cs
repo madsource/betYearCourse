@@ -18,21 +18,21 @@ namespace ProjectsTracker.Services
             
         }
 
-        public IDictionary<string, object> GetStatisticsForProjects()
+        public IDictionary<string, double> GetStatisticsForProjects()
         {
-            Dictionary<string, object> projectsStatsDictionary = new Dictionary<string, object>();
+            Dictionary<string, double> projectsStatsDictionary = new Dictionary<string, double>();
 
             var projects = base.GetAll().ToList();
 
             if (projects != null && projects.Any())
             {               
-                int NumberOfTasksFinished = projects.Sum(p => GetNumberOfTasksFinished(p));
+                double NumberOfTasksFinished = projects.Sum(p => GetNumberOfTasksFinished(p));
                 projectsStatsDictionary.Add("NumberOfTasksFinished", NumberOfTasksFinished);
 
-                int NumberOfTasksInProgress = projects.Sum(p => GetNumberOfTasksInProgress(p));
+                double NumberOfTasksInProgress = projects.Sum(p => GetNumberOfTasksInProgress(p));
                 projectsStatsDictionary.Add("NumberOfTasksInProgress", NumberOfTasksInProgress);
 
-                int NumberOfTasksNotStarted = projects.Sum(p => GetNumberOfTasksNotStarted(p));
+                double NumberOfTasksNotStarted = projects.Sum(p => GetNumberOfTasksNotStarted(p));
                 projectsStatsDictionary.Add("NumberOfTasksNotStarted", NumberOfTasksNotStarted);
 
                 double TotalAmountSpend = projects.Sum(p => GetTotalTimeSpend(p) * (double)PtConstants.RatePerHour);
@@ -41,24 +41,24 @@ namespace ProjectsTracker.Services
                 double TotalBudget = projects.Sum(p => (double)p.EstimatedBudget);
                 projectsStatsDictionary.Add("TotalBudget", TotalBudget);
 
-                int projectsActive = projects.Where(p => p.isActive == true).Count();
+                double projectsActive = projects.Where(p => p.isActive == true).Count();
                 projectsStatsDictionary.Add("ProjectsActive", projectsActive);
 
-                int projectsInProgress = projects
+                double projectsInProgress = projects
                     .Where(p => p.isActive == true && p.Tasks.Where(t => t.ProgressPercent < 100).Count() > 0)
                     .Count();
                 projectsStatsDictionary.Add("ProjectsInProgress", projectsInProgress);
 
-                int projectsFinished = projects
+                double projectsFinished = projects
                     .Where(p => p.isActive == true && p.Tasks
                           .Where(t => t.ProgressPercent == 100).Count() == p.Tasks.Count() && p.Tasks.Count() > 0)
                     .Count();
                 projectsStatsDictionary.Add("ProjectsFinished", projectsFinished);
 
-                int NumberOfAllTasks = projects.Sum(p => p.Tasks.Count());
+                double NumberOfAllTasks = projects.Sum(p => p.Tasks.Count());
                 projectsStatsDictionary.Add("NumberOfAllTasks", NumberOfAllTasks);
 
-                int NumberOfAllProjects = projects.Count;
+                double NumberOfAllProjects = projects.Count;
                 projectsStatsDictionary.Add("NumberOfAllProjects", NumberOfAllProjects);
             }
 
