@@ -35,7 +35,7 @@ namespace ProjectsTracker.Services
                 double NumberOfTasksNotStarted = projects.Sum(p => GetNumberOfTasksNotStarted(p));
                 projectsStatsDictionary.Add("NumberOfTasksNotStarted", NumberOfTasksNotStarted);
 
-                double TotalAmountSpend = projects.Sum(p => GetTotalTimeSpend(p) * (double)PtConstants.RatePerHour);
+                double TotalAmountSpend = projects.Sum(p => GetProjectTotalTimeSpend(p) * (double)PtConstants.RatePerHour);
                 projectsStatsDictionary.Add("TotalAmountSpend", TotalAmountSpend);
 
                 double TotalBudget = projects.Sum(p => (double)p.EstimatedBudget);
@@ -84,7 +84,7 @@ namespace ProjectsTracker.Services
             return users;
         }
 
-        public float GetTotalTimeSpend(Project project)
+        public float GetProjectTotalTimeSpend(Project project)
         {
             float time = 0;
 

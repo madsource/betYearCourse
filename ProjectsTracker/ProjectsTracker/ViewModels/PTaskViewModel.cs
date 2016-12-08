@@ -52,6 +52,8 @@ namespace ProjectsTracker.ViewModels
             HoursSpend = 1;
         }
 
+        public float TotalTimeSpend { get; set; }
+
         //public float GetTimeSpend()
         //{
         //    float time = 0;

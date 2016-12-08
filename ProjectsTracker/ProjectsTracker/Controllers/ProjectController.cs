@@ -20,11 +20,13 @@ namespace ProjectsTracker.Controllers
     {
         private IProjectService projectService;
         private IUsersService usersService;
+        private IStatisticsService statisticsService;
 
-        public ProjectController(IProjectService projectService, IUsersService usersService)
+        public ProjectController(IProjectService projectService, IUsersService usersService, IStatisticsService statisticsService)
         {
             this.projectService = projectService;
             this.usersService = usersService;
+            this.statisticsService = statisticsService;
         }
         
         [HttpGet]
@@ -152,6 +154,9 @@ namespace ProjectsTracker.Controllers
                 return HttpNotFound();
             }
 
+            Project project = Mapper.Map<Project>(projectVm);
+
+            projectVm.TotalTimeSpend = this.statisticsService.GetProjectTotalTimeSpend(project);
             projectVm.Users = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
 
             ProjectId = projectVm.Id;

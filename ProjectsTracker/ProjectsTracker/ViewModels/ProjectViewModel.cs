@@ -71,6 +71,8 @@ namespace ProjectsTracker.ViewModels
         [DisplayFormat(DataFormatString = "{0:00,00}")]
         public float Progress { get; set; }
 
+        public float TotalTimeSpend { get; set; }
+
         public ProjectViewModel()
         {
             this.Tasks = new HashSet<PTaskViewModel>();

@@ -21,12 +21,14 @@ namespace ProjectsTracker.Controllers
         private IUsersService usersService;
         private IPTaskService ptaskService;
         private IProjectService projectService;
+        private IStatisticsService statisticsService;
 
-        public PTaskController(IUsersService usersService, IPTaskService ptaskService, IProjectService projectService)
+        public PTaskController(IUsersService usersService, IPTaskService ptaskService, IProjectService projectService, IStatisticsService statisticsService)
         {
             this.usersService = usersService;
             this.ptaskService = ptaskService;
             this.projectService = projectService;
+            this.statisticsService = statisticsService;
         }
              
 
@@ -203,6 +205,8 @@ namespace ProjectsTracker.Controllers
             }
 
             PTaskViewModel taskVm = Mapper.Map<PTaskViewModel>(ptaskService.Find(Id));
+
+            taskVm.TotalTimeSpend = this.statisticsService.GetTaskTimeSpend(Mapper.Map<PTask>(taskVm));
 
             if (taskVm == null)
             {

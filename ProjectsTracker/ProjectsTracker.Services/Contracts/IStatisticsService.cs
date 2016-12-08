@@ -7,5 +7,7 @@ namespace ProjectsTracker.Services.Contracts
     {
         IDictionary<string, double> GetStatisticsForProjects();
         ICollection<ApplicationUser> GetProjectUsers(Project project);
+        float GetProjectTotalTimeSpend(Project project);
+        float GetTaskTimeSpend(PTask task);
     }
 }
