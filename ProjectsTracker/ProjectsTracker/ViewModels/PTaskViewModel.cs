@@ -53,20 +53,5 @@ namespace ProjectsTracker.ViewModels
         }
 
         public float TotalTimeSpend { get; set; }
-
-        //public float GetTimeSpend()
-        //{
-        //    float time = 0;
-
-        //    if(this.TimeReportList.Any())
-        //    {
-        //        foreach (var report in this.TimeReportList)
-        //        {
-        //            time += report.HoursSpend;
-        //        }
-        //    }
-
-        //    return time;
-        //}
     }
 }

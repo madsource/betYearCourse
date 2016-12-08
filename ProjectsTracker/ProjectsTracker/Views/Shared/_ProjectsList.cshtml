@@ -49,7 +49,7 @@
                         <small>@String.Format("{0:n0}", project.Progress)% Complete</small>
                     </td>
                     <td class="project-status">
-                        <button type="button" class="btn status-@project.GetProjectStatus().ToLower() btn-xs">@project.GetProjectStatus()</button>
+                        <button type="button" class="btn status-@project.Status.ToLower() btn-xs">@project.Status</button>
                     </td>
 
                     <td>

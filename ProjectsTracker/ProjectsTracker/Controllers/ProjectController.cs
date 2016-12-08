@@ -157,6 +157,7 @@ namespace ProjectsTracker.Controllers
             Project project = Mapper.Map<Project>(projectVm);
 
             projectVm.TotalTimeSpend = this.statisticsService.GetProjectTotalTimeSpend(project);
+            projectVm.Status = this.statisticsService.GetProjectStatus(project);
             projectVm.Users = new SelectList(this.usersService.GetAll().Where(u => u.UserName != PtConstants.AdminUsername).ToList(), "Id", "UserName");
 
             ProjectId = projectVm.Id;

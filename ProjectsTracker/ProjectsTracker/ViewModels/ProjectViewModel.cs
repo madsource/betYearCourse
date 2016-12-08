@@ -73,12 +73,14 @@ namespace ProjectsTracker.ViewModels
 
         public float TotalTimeSpend { get; set; }
 
+        public string Status { get; set; }
+
         public ProjectViewModel()
         {
             this.Tasks = new HashSet<PTaskViewModel>();
             this.Comments = new HashSet<Comment>();
             this.Metrics = new HashSet<Metric>();
-            this.WorkingUsers = new HashSet<ApplicationUserViewModel>();
+            this.WorkingUsers = new List<ApplicationUserViewModel>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -97,81 +99,5 @@ namespace ProjectsTracker.ViewModels
                                        memberNames: new[] { "DateFinished" });
             }
         }
-
-        public string GetProjectStatus()
-        {
-            double actualCost = 0;
-
-            foreach (var task in this.Tasks)
-            {
-                actualCost += ((task.ProgressPercent / 100) * task.EstimatedHours) * PtConstants.RatePerHour;
-            }
-
-            if (actualCost > (double)this.EstimatedBudget + (double)this.EstimatedBudget * PtConstants.BudgetToleranceInPercents)
-            {
-                return "Red";
-            }
-            else if (((double)this.EstimatedBudget + (double)this.EstimatedBudget * PtConstants.BudgetToleranceInPercents) > actualCost 
-                && actualCost > (double)this.EstimatedBudget)
-            {
-                return "Amber";
-            }
-            else
-            {
-                return "Green";
-            }
-        }
-
-        //public ICollection<ApplicationUserViewModel> GetProjectUsers()
-        //{
-        //    ICollection<ApplicationUserViewModel> users = new HashSet<ApplicationUserViewModel>();
-
-        //    if (Tasks.Any())
-        //    {
-        //        foreach (var task in this.Tasks)
-        //        {
-        //            if (users.FirstOrDefault(u => u.Id == task.Owner.Id) == null)
-        //            {
-        //                // user not added, so add it
-        //                users.Add(task.Owner);
-        //            }
-        //        }
-        //    }
-
-        //    return users;
-        //}
-
-        //public float GetTotalTimeSpend()
-        //{
-        //    float time = 0;
-
-        //    if(this.Tasks.Any())
-        //    {
-        //        foreach (var task in this.Tasks)
-        //        {
-        //            time += task.GetTimeSpend();
-        //        }
-        //    }
-
-        //    return time;
-        //}
-
-        //public int GetNumberOfTasksInProgress()
-        //{
-        //    int number = this.Tasks.Where(t => t.ProgressPercent > 0).Count();
-        //    return number;
-        //}
-
-        //public int GetNumberOfTasksNotStarted()
-        //{
-        //    int number = this.Tasks.Where(t => t.ProgressPercent == 0).Count();
-        //    return number;
-        //}
-
-        //public int GetNumberOfTasksFinished()
-        //{
-        //    int number = this.Tasks.Where(t => t.ProgressPercent == 100).Count();
-        //    return number;
-        //}
     }
 }

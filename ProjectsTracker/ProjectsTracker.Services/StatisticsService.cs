@@ -65,9 +65,9 @@ namespace ProjectsTracker.Services
             return projectsStatsDictionary;
         }
 
-        public ICollection<ApplicationUser> GetProjectUsers(Project project)
+        public List<ApplicationUser> GetProjectUsers(Project project)
         {
-            ICollection<ApplicationUser> users = new HashSet<ApplicationUser>();
+            List<ApplicationUser> users = new List<ApplicationUser>();
 
             if (project.Tasks.Any())
             {
@@ -130,6 +130,30 @@ namespace ProjectsTracker.Services
             }
 
             return time;
+        }
+
+        public string GetProjectStatus(Project project)
+        {
+            double actualCost = 0;
+
+            foreach (var task in project.Tasks)
+            {
+                actualCost += ((task.ProgressPercent / 100) * task.EstimatedHours) * PtConstants.RatePerHour;
+            }
+
+            if (actualCost > (double)project.EstimatedBudget + (double)project.EstimatedBudget * PtConstants.BudgetToleranceInPercents)
+            {
+                return "Red";
+            }
+            else if (((double)project.EstimatedBudget + (double)project.EstimatedBudget * PtConstants.BudgetToleranceInPercents) > actualCost
+                && actualCost > (double)project.EstimatedBudget)
+            {
+                return "Amber";
+            }
+            else
+            {
+                return "Green";
+            }
         }
     }
 }

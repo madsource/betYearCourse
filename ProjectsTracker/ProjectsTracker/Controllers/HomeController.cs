@@ -93,7 +93,8 @@ namespace ProjectsTracker.Controllers
                 .Select(p =>
                 {
                     p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0);
-                    //p.workingUsers = this.GetVmUsersList(this.statisticsService.GetProjectUsers(this.GetProject(p)));
+                    //p.WorkingUsers = this.GetVmUsersList(this.statisticsService.GetProjectUsers(this.GetProject(p)));
+                    p.Status = this.statisticsService.GetProjectStatus(this.GetProject(p));
                     return p;
                 })
                 .ToList();
@@ -105,12 +106,14 @@ namespace ProjectsTracker.Controllers
             return project;
         }
 
-        private List<ApplicationUserViewModel> GetVmUsersList(ICollection<ApplicationUser> users)
+        private ICollection<ApplicationUserViewModel> GetVmUsersList(ICollection<ApplicationUser> users)
         {
-            return users.AsQueryable()
-            .ProjectTo<ApplicationUserViewModel>()
-            .ToList();
+            var usersVm = users
+                .AsQueryable<ApplicationUser>()
+                .ProjectTo<ApplicationUserViewModel>()
+                .ToList();
 
+            return usersVm;
         }
     }
 }

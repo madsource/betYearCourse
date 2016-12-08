@@ -9,5 +9,6 @@ namespace ProjectsTracker.Services.Contracts
         ICollection<ApplicationUser> GetProjectUsers(Project project);
         float GetProjectTotalTimeSpend(Project project);
         float GetTaskTimeSpend(PTask task);
+        string GetProjectStatus(Project project);
     }
 }

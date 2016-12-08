@@ -18,7 +18,8 @@ namespace ProjectsTracker
             {
                 //Application user
                 config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
-                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(s => s.Roles.FirstOrDefault().RoleId));
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(s => s.Roles.FirstOrDefault().RoleId))
+                .ForMember(dest => dest.userRoles, opt => opt.Ignore());
 
                 config.CreateMap<ApplicationUserViewModel, ApplicationUser>()
                 .ForMember(dest => dest.Roles, opt => opt.Ignore());
