@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-3 tile">
             <span>Total Amount Spend</span>
-            <h2>@String.Format("{0:c}", Model.TotalAmountSpend)</h2>
+            <h2>@String.Format("{0:c}", (double)Model.Statistics["TotalAmountSpend"])</h2>
             <span class="sparkline_one" style="height: 160px;">
                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
             </span>
@@ -32,7 +32,7 @@
 
         <div class="col-md-3 tile">
             <span>Total Revenue</span>
-            <h2>@String.Format("{0:c}", (Model.TotalBudget - Model.TotalAmountSpend))</h2>
+            <h2>@String.Format("{0:c}", ((double)Model.Statistics["TotalBudget"] - (double)Model.Statistics["TotalAmountSpend"]))</h2>
             <span class="sparkline_two" style="height: 160px;"><canvas width="200" height="40" style="display: inline-block; width: 200px; height: 40px; vertical-align: top;"></canvas></span>
         </div>
 
@@ -73,19 +73,19 @@
                                         <td>
                                             <p><i class="fa fa-square blue"></i>Tasks in progress </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)Model.NumberOfTasksInProgress / (float)Model.NumberOfAllTasks) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksInProgress"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square green"></i>Tasks not started </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)Model.NumberOfTasksNotStarted / (float)Model.NumberOfAllTasks) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksNotStarted"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square purple"></i>Tasks finished </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)Model.NumberOfTasksFinished / (float)Model.NumberOfAllTasks) * 100 )%</td>
+                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["NumberOfTasksFinished"] / (int)Model.Statistics["NumberOfAllTasks"]) * 100 )%</td>
                                     </tr>                                    
                                 </table>
                             </td>
@@ -126,20 +126,20 @@
                                         <td>
                                             <p><i class="fa fa-square green"></i>Projects in progress </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)Model.ProjectsInProgress / (float)Model.Projects.Count) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["ProjectsInProgress"] / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square red"></i>Projects not started </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)(Model.Projects.Count - (Model.ProjectsFinished + Model.ProjectsInProgress)) / (float)Model.Projects.Count) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", (((int)Model.Statistics["NumberOfAllProjects"] - ((int)Model.Statistics["ProjectsFinished"] + (int)Model.Statistics["ProjectsInProgress"])) / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>
 
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square blue"></i>Projects finished </p>
                                         </td>
-                                        <td>@String.Format("{0:n2}", ((float)Model.ProjectsFinished / (float)Model.Projects.Count) * 100)%</td>
+                                        <td>@String.Format("{0:n2}", ((int)Model.Statistics["ProjectsFinished"] / (int)Model.Statistics["NumberOfAllProjects"]) * 100)%</td>
                                     </tr>                               
                                 </table>
                             </td>
@@ -195,7 +195,7 @@
               "Finished"
             ],
             datasets: [{
-                data: [@Model.NumberOfTasksInProgress, @Model.NumberOfTasksNotStarted, @Model.NumberOfTasksFinished],
+                data: [@Model.Statistics["NumberOfTasksInProgress"], @Model.Statistics["NumberOfTasksNotStarted"], @Model.Statistics["NumberOfTasksFinished"]],
                 backgroundColor: [
                 "#3498DB",
                 "#1ABB9C",
@@ -221,7 +221,7 @@
                     "Finished"
                   ],
                   datasets: [{
-                      data: [@Model.ProjectsInProgress, @(Model.Projects.Count - (Model.ProjectsFinished + Model.ProjectsInProgress)) , @Model.ProjectsFinished],
+                      data: [@Model.Statistics["ProjectsInProgress"], @((int)Model.Statistics["NumberOfAllProjects"] - ((int)Model.Statistics["ProjectsFinished"] + (int)Model.Statistics["ProjectsInProgress"])) , @Model.Statistics["ProjectsFinished"]],
                       backgroundColor: [
                        "#1ABB9C",
                        "#E74C3C",

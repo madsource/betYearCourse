@@ -34,7 +34,7 @@
                     </td>
                     <td>
                         <ul class="list-inline">
-                            @foreach (var user in project.GetProjectUsers())
+                            @foreach (var user in project.WorkingUsers)
                             {
                                 <li>
                                     <img src="~/Content/images/avatars/@(user.UserName).png" class="avatar" alt="@user.FirstName @user.LastName" title="@user.FirstName @user.LastName">

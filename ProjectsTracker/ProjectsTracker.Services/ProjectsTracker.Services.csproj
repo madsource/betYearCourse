@@ -62,12 +62,18 @@
     <Compile Include="Contracts\IProjectService.cs" />
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="Contracts\IUsersService.cs" />
+    <Compile Include="Contracts\IStatisticsService.cs" />
     <Compile Include="ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PTaskService.cs" />
+    <Compile Include="StatisticsService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProjectsTracker.Common\ProjectsTracker.Common.csproj">
+      <Project>{260F5762-FE72-42E8-BC16-1D9FD96EB8F0}</Project>
+      <Name>ProjectsTracker.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectsTracker.Data\ProjectsTracker.Data.csproj">
       <Project>{a9e35768-6930-4746-9303-ee735856be4c}</Project>
       <Name>ProjectsTracker.Data</Name>

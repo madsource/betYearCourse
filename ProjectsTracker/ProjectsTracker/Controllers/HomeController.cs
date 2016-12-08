@@ -12,6 +12,7 @@ using Microsoft.Ajax.Utilities;
 using ProjectsTracker.Common;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using AutoMapper;
 
 namespace ProjectsTracker.Controllers
 {
@@ -19,11 +20,15 @@ namespace ProjectsTracker.Controllers
     public class HomeController : BaseController
     {
         private IProjectService projectService;
+        private IStatisticsService statisticsService;
+        private IUsersService usersService;
         private int itemsPerPage;
+        private IDictionary<string, object> statistics;
 
-        public HomeController(IProjectService projectService)
+        public HomeController(IProjectService projectService, IStatisticsService statisticsService, IUsersService usersService)
         {
             this.projectService = projectService;
+            this.statisticsService = statisticsService;
             this.itemsPerPage = PtConstants.itemsPerPage;
         }
 
@@ -31,28 +36,35 @@ namespace ProjectsTracker.Controllers
         {
             var projects = this.GetActiveProjects(search);
             int pageNumber = page ?? 1;
-
             var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
 
-            HomeViewModel homeVm = new HomeViewModel(pagedProjects);
+            if (this.statistics == null)
+            {
+                this.statistics = this.statisticsService.GetStatisticsForProjects();
+            }
 
-            if(Request.IsAjaxRequest() && search != null)
+            HomeViewModel homeVm = new HomeViewModel(pagedProjects, this.statistics);
+
+            if (Request.IsAjaxRequest() && search != null)
             {
                 return PartialView("_ProjectsList", homeVm.Projects);
-            }           
-       
+            }
+
             return View(homeVm);
         }
 
         public ActionResult MyProjects(string search, int? page)
         {
             var projects = this.GetActiveProjects(search).Where(p => p.Owner.Id == User.Identity.GetUserId()).ToList();
-
             int pageNumber = page ?? 1;
-
             var pagedProjects = projects.ToPagedList(pageNumber, this.itemsPerPage);
 
-            HomeViewModel homeVm = new HomeViewModel(pagedProjects);
+            if (this.statistics == null)
+            {
+                this.statistics = this.statisticsService.GetStatisticsForProjects();
+            }
+
+            HomeViewModel homeVm = new HomeViewModel(pagedProjects, this.statistics);
 
             if (Request.IsAjaxRequest() && search != null)
             {
@@ -66,7 +78,7 @@ namespace ProjectsTracker.Controllers
         {
             var projectsInDb = this.projectService.GetAll();
 
-            List<ProjectViewModel> projects = this.ConvertDbToVmList(projectsInDb).ToList();
+            List<ProjectViewModel> projects = this.ConvertDbToVmList(projectsInDb);
 
             if (search != null)
             {
@@ -83,13 +95,33 @@ namespace ProjectsTracker.Controllers
             return projects;
         }
 
-        private IEnumerable<ProjectViewModel> ConvertDbToVmList(IQueryable<Project> projects)
+        private List<ProjectViewModel> ConvertDbToVmList(IQueryable<Project> projects)
         {
             return projects.OrderByDescending(p => p.CreatedOn)
                 .ProjectTo<ProjectViewModel>()
                 .ToList()
-                .Select(p => { p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0); return p; });                
+                .Select(p =>
+                {
+                    p.Progress = ((p.Tasks.Any()) ? p.Tasks.Sum(t => t.ProgressPercent) / p.Tasks.Count : 0);
+                    //p.workingUsers = this.GetVmUsersList(this.statisticsService.GetProjectUsers(this.GetProject(p)));
+                    return p;
+                })
+                .ToList();
         }
 
+        private Project GetProject(ProjectViewModel projectVm)
+        {
+            var project = Mapper.Map<Project>(projectVm);
+            return project;
+        }
+
+        private List<ApplicationUserViewModel> GetVmUsersList(ICollection<ApplicationUser> users)
+        {
+            return users.AsQueryable()
+            .ProjectTo<ApplicationUserViewModel>()
+            .ToList();
+
+        }
     }
 }
+

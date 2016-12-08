@@ -52,19 +52,19 @@ namespace ProjectsTracker.ViewModels
             HoursSpend = 1;
         }
 
-        public float GetTimeSpend()
-        {
-            float time = 0;
+        //public float GetTimeSpend()
+        //{
+        //    float time = 0;
 
-            if(this.TimeReportList.Any())
-            {
-                foreach (var report in this.TimeReportList)
-                {
-                    time += report.HoursSpend;
-                }
-            }
+        //    if(this.TimeReportList.Any())
+        //    {
+        //        foreach (var report in this.TimeReportList)
+        //        {
+        //            time += report.HoursSpend;
+        //        }
+        //    }
 
-            return time;
-        }
+        //    return time;
+        //}
     }
 }
