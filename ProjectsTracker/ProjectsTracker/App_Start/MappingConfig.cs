@@ -18,19 +18,17 @@ namespace ProjectsTracker
             {
                 //Application user
                 config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
-                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(s => s.Roles.FirstOrDefault().RoleId))
                 .ForMember(dest => dest.userRoles, opt => opt.Ignore());
+                config.CreateMap<ApplicationUserViewModel, ApplicationUser>();
 
-                config.CreateMap<ApplicationUserViewModel, ApplicationUser>()
-                .ForMember(dest => dest.Roles, opt => opt.Ignore());
                 //Project
                 config.CreateMap<Project, ProjectViewModel>().ReverseMap();
+
                 //PTask
-                config.CreateMap<PTask, PTaskViewModel>();      
-
+                config.CreateMap<PTask, PTaskViewModel>();     
                 config.CreateMap<PTaskViewModel, PTask>();
-                //.ForMember(dest => dest.Owner, opt => opt.Ignore());
 
+                // TimeReportItem
                 config.CreateMap<TimeReportItem, TimeReportItemViewModel>().ReverseMap();
 
             });

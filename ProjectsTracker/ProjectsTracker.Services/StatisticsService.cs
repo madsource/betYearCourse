@@ -65,7 +65,7 @@ namespace ProjectsTracker.Services
             return projectsStatsDictionary;
         }
 
-        public List<ApplicationUser> GetProjectUsers(Project project)
+        public ICollection<ApplicationUser> GetProjectUsers(Project project)
         {
             List<ApplicationUser> users = new List<ApplicationUser>();
 
